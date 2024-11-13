@@ -1,2 +1,0 @@
-auth required pam_mysql.so user=${MARIADB_USER} passwd=${MARIADB_PASSWORD} host=mariadb db=${MARIADB_DATABASE} table=ftp_users usercolumn=username passwdcolumn=password homecolumn=home_directory crypt=1
-account required pam_mysql.so user=${MARIADB_USER} passwd=${MARIADB_PASSWORD} host=mariadb db=${MARIADB_DATABASE} table=ftp_users usercolumn=username passwdcolumn=password homecolumn=home_directory crypt=1
