@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('anuncios', function (Blueprint $table) {
             $table->id();
             $table->string ('titulo');
-            $table->double ('precio'); //cobro o pago para futuras estadisticas
-            $table->string ('descripción');
+            $table->double ('precio');
+            $table->string ('descripcion');
 
 
             //tipo de genero músical: house, regueton, etc
             $table->unsignedBigInteger('genero_id')->nullable();
-            $table->foreign('genero_id')->references('id')->on('genero')->onDelete('set null');
+            $table->foreign('genero_id')->references('id')->on('generos')->onDelete('set null');
 
 
             $table->timestamps();

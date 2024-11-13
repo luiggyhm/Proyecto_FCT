@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->int('telefono');
+            $table->integer('telefono');
             $table->string('password');
             $table->rememberToken();
 
             $table->unsignedBigInteger('suscripcion_id')->nullable();
-            $table->foreign('suscripcion_id')->references('id')->on('suscripcion')->onDelete('set null');
+            $table->foreign('suscripcion_id')->references('id')->on('suscripcions')->onDelete('set null');
             
             $table->timestamps();
         });

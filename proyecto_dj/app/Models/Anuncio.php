@@ -11,9 +11,9 @@ class Anuncio extends Model
 
     protected $fillable = [
         'titulo',
-        'genero',
         'precio',
         'descripcion',
+        'genero',
     ];
 
     public function genero()

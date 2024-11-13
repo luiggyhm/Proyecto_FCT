@@ -8,62 +8,87 @@ use Illuminate\Http\Request;
 
 class AnuncioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        $anuncios = Anuncio:: all();
         $generos = Genero::all();
-        $titulo = "Todos los anuncios";
-        return view('anuncios.index', compact('anuncios', 'generos', 'request', 'titulo'));
+        $anuncios = Anuncio:: all();
+        $titulo_view = "Todos los anuncios";
+        return view('anuncios.index', compact('anuncios', 'generos', 'request', 'titulo_view'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    public function generos(Genero $genero,Request $request){
+
+        $generos = Genero::all();
+        $anuncios = Anuncio::where('genero_id', $genero->id)->get();
+        $nombre = $genero->titulo;
+
+        return view('anuncios.genero', compact('anuncios','generos', 'titulo','request'));
+    }
+
+
+
+
     public function create()
     {
-        //
+        $generos = Genero::all();
+        return view('anuncios.create',compact('generos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+
+
     public function store(Request $request)
     {
-        //
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+
+    //crear un nuevo anuncio
+    public function show(Request $request)
     {
-        //
+        $a = new Anuncio();
+        $a->titulo = $request->titulo;
+        $a->precio = $request->precio;
+        $a->descripcion = $request->descripcion;
+        $a->genero = $request->genero;
+
+        $a->save();
+        return redirect()->back()->with('status', 'Anuncio creado');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+
+
+    public function edit(Anuncio $anuncio)
     {
-        //
+        $generos = Genero::all();
+        $generoActual = Genero::where('id', $anuncio->genero_id)->get()->first();
+
+
+        return view('anuncios.edit', compact('anuncio','generos','generoActual'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+
+    //Actualizar anuncio
+    public function update(Request $request, Anuncio $anuncio)
     {
-        //
+        $anuncio->titulo = $request->nombre;
+        $anuncio->precio = $request->precio;
+        $anuncio->descripcion = $request->descripcion;
+        $anuncio->genero_id = $request->genero;
+        $anuncio->save();
+
+        return redirect()->back()->with('status', 'Anuncio Modificado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+    //eliminar un anuncio
+    public function destroy(Anuncio $anuncio)
     {
-        //
+        $anuncio->delete();
+        return redirect()->back()->with('status', 'Anuncio eliminado');
     }
 }
