@@ -1,0 +1,60 @@
+version: '2'
+
+services:
+#base de datos maríadb
+  mariadb:
+    image: docker.io/bitnami/mariadb:11.2
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    env_file:
+      - ".env"
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+  
+  #framework laravel
+  myapp:
+    tty: true
+    image: docker.io/bitnami/laravel:10
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '8000:8000'
+    env_file:
+      - ".env"
+    environment:
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_USERNAME=${MARIADB_USER}
+      - DB_DATABASE=${MARIADB_DATABASE}
+      - DB_PASSWORD=${MARIADB_PASSWORD}
+    volumes:
+      - './proyecto_dj:/app'
+    depends_on:
+      - mariadb
+
+#servidor ftp
+  ftp:
+    image: fauria/vsftpd
+    ports:
+      - "21:21"
+      - "21100-21110:21100-21110"
+    environment:
+      - PASV_ADDRESS=0.0.0.0
+      - PASV_MIN_PORT=21100
+      - PASV_MAX_PORT=21110
+      - FTP_USER=admin
+      - FTP_PASSWORD=admin
+
+    volumes:
+      - ./ftp-data:/home/vsftpd  # Carpeta para archivos FTP
+      - ./vsftpd:/etc/vsftpd/    # Configuración del servidor FTP
+      - ./pam_mysql:/etc/pam.d/   # Configuración de autenticación PAM
+    restart: always
+    depends_on:
+      - mariadb
