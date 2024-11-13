@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+use App\Http\Controllers\AnuncioController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,3 +23,6 @@ Route::get('/', function () {
 
 
 
+//Route::get('/', 'index')->name('anuncios.index');
+//Route::get('/anuncios/categoria/{categoria}', 'categoria')->name('anuncios.categoria');
+//Route::get('/pago', 'pagar')->name('cliente.pago'); //para autorizzaciones despues->middleware(['auth'])->middleware(['role:cliente']);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('generos', function (Blueprint $table) {
             $table->id();
             $table->string ('genero');
-            $table->string ('posicion');
+            $table->string ('posicion') -> unique();
             $table->timestamps();
         });
     }

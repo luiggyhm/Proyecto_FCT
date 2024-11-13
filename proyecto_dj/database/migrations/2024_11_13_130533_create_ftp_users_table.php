@@ -15,8 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string ('alias')->unique();
             $table->string ('password');
+
+
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+
+
             $table->timestamps();
         });
+        
     }
 
     /**

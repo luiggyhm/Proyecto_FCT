@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class TipoNegocio extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'tipo',  //local, bar, restaurante, etc
+        'nombre',
+        'tipo_negocio',
+        'aforo',
     ];
+
+
 
 }

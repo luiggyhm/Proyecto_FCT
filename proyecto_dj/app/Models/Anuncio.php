@@ -11,10 +11,14 @@ class Anuncio extends Model
 
     protected $fillable = [
         'titulo',
-        'categoria',
         'genero',
         'precio',
+        'descripcion',
     ];
 
+    public function genero()
+    {
+        return $this->belongsTo(Genero::class);
+    }
 
 }

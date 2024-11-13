@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('anuncios', function (Blueprint $table) {
             $table->id();
             $table->string ('titulo');
-            $table->string ('categoria'); // dj, restaurante o disco
-            $table->string ('genero'); //house, regueton, etc
-            $table->string ('precio'); //cobro o pago para futuras estadisticas
+            $table->double ('precio'); //cobro o pago para futuras estadisticas
+            $table->string ('descripción');
+
+
+            //tipo de genero músical: house, regueton, etc
+            $table->unsignedBigInteger('genero_id')->nullable();
+            $table->foreign('genero_id')->references('id')->on('genero')->onDelete('set null');
+
+
             $table->timestamps();
         });
     }

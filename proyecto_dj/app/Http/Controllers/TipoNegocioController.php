@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Anuncio;
-use App\Models\Genero;
 use Illuminate\Http\Request;
 
-class AnuncioController extends Controller
+class TipoNegocioController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $anuncios = Anuncio:: all();
-        $generos = Genero::all();
-        $titulo = "Todos los anuncios";
-        return view('anuncios.index', compact('anuncios', 'generos', 'request', 'titulo'));
+        //
     }
 
     /**

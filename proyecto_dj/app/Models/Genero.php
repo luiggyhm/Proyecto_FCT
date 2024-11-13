@@ -14,5 +14,10 @@ class Genero extends Model
         'posicion',
     ];
 
+    public function anuncios()
+    {
+        return $this->hasMany(Anuncio::class);
+    }
+
 
 }

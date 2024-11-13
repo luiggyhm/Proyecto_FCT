@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-
+            $table->unsignedBigInteger('suscripcion_id')->nullable();
+            $table->foreign('suscripcion_id')->references('id')->on('suscripcion')->onDelete('set null');
             
             $table->timestamps();
         });

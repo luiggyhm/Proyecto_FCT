@@ -24,6 +24,18 @@ class User extends Authenticatable
         'password',
     ];
 
+
+    public function suscripcion()
+    {
+        return $this->belongsTo(Suscripcion::class);
+    }
+
+    public function ftpUser()
+    {
+        return $this ->hasOne(FtpUser::class);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

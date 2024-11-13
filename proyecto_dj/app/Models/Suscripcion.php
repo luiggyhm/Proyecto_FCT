@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Suscripcion extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nombre',
+    ];
+
+
+    public function Users()
+    {
+        return $this->hasMany(User::class);
+    }
+
 }
