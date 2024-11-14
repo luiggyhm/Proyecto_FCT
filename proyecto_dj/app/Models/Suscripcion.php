@@ -14,9 +14,9 @@ class Suscripcion extends Model
     ];
 
 
-    public function Users()
+    public function User()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
 }

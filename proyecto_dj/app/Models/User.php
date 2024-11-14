@@ -25,9 +25,9 @@ class User extends Authenticatable
     ];
 
 
-    public function suscripcion()
+    public function suscripcions()
     {
-        return $this->belongsTo(Suscripcion::class);
+        return $this->hasMany(Suscripcion::class);
     }
 
     public function ftpUser()
