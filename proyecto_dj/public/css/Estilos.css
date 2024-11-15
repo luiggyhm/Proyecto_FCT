@@ -1,0 +1,516 @@
+/**********USO GENERAL**********/
+
+/**********Colores**********/
+:root {
+
+    --blanco: #FFFFFF;
+    --negro: #000000;
+    --grisOscuro: #202020;
+    --grisIntermedio: #5c5c5c;
+    --grisIntenso: #141414;
+    --morado: #6b38d0;
+}
+
+/**********Globables**********/
+html {
+    font-size: 62.5%;
+    /*solo cuando se usa rem, sirve para que un rem equivalga 10px*/
+    box-sizing: border-box;
+    /*Esto se usa junto con el box-sizing inherit (ver mas abajo )*/
+    scroll-snap-type: y mandatory;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*:before,
+
+*:after {
+    box-sizing: inherit;
+    /*esto es para que al poner padding o un border, no aumente el tamaño de las cajas*/
+}
+
+/**********Headder - nav**********/
+.logo {
+    height: 15rem;
+    margin-left: -15rem;
+}
+
+.cabecera {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.barra {
+    background-color: var(--blanco);
+    width: 80rem;
+    height: 6rem;
+    margin-top: 2rem;
+    margin-left: -20rem;
+    margin-right: -20rem;
+    border: 1rem;
+    border-radius: 20rem;
+}
+
+.barra__opciones {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-between;
+    margin-right: 3rem;
+}
+
+.busqueda {
+    background-color: var(--blanco);
+    width: 15rem;
+    margin-right: 3rem;
+    height: 6rem;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 20rem;
+    display: flex;
+    flex-direction: row;
+    font-size: medium;
+}
+.input_busqueda{
+    background-color: var(--blanco);
+    color: var(--negro);
+}
+
+.lupa {
+    height: 2rem;
+    margin-top: 2rem;
+}
+
+/**********Botones de funcionalidad**********/
+.cambio {
+    padding: 1rem 2rem;
+    background-color: #041c35;/* Azul por defecto */
+    color: var(--blanco);
+    cursor: pointer;
+    text-align: center;
+    border-radius: 1rem;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.cambio:hover {
+    background-color: #192635;
+    /* Cambia el color de fondo al azul oscuro al pasar el ratón sobre el botón */
+}
+
+.cambio:active {
+    background-color: white;
+    /* Cambia el color de fondo a blanco cuando se hace clic en el botón */
+    color: black;
+    /* Cambia el color del texto a negro cuando se hace clic en el botón */
+}
+
+.fondo_blanco{
+    background-color: var(--blanco);
+}
+
+.fuente_grande{
+    font-size: x-large;
+}
+
+.fuente_mas_grande{
+    font-size: xx-large;
+}
+
+
+/**********Body**********/
+.fondo_negro {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, var(--negro), var(--negro), var(--grisIntenso), var(--grisOscuro), var(--grisIntermedio));
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Architects Daughter', cursive;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:active {
+    background-color: var(--morado);
+    /* Color de fondo para la página activa */
+    color: white;
+}
+
+figcaption {
+    text-align: center;
+}
+
+input {
+    border: none;
+    width: 7rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+iframe {
+    border-radius: 2rem;
+    height: 40rem;
+    width: 150rem;
+}
+
+ul {
+    list-style: none;
+}
+
+span{
+    color: red;
+    font-size: small;
+}
+
+/**********Relleno inputs**********/
+.boton-neon {
+    background-color: transparent;
+    color: #fff;
+    /* Color del texto */
+    font-size: 2rem;
+    border: 2px solid var(--morado);
+    /* Borde del botón */
+    border-radius: 1rem;
+    /* Borde redondeado */
+    padding: 1rem 2rem;
+    /* Espaciado del botón */
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.boton-neon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--morado);
+    /* Color del borde neon */
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.3s ease-in-out;
+    z-index: -1;
+}
+
+.boton-neon:hover::before {
+    transform: scaleX(1);
+}
+
+
+/**********Contenedores**********/
+.contenedor_dos_columnas {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+.contenedor_calendario {
+    display: grid;
+    grid-template-columns: 20% 40% 40%;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+.contenedor_video_youtube {
+    display: flex;
+    align-items: center;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    border-radius: 2rem;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+.contenedor_tres_columnas {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+.contenedor_limpio {
+    margin-left: 20rem;
+    margin-right: 20rem;
+    font-size: large;
+
+}
+
+/**********Enlaces Rápidos**********/
+.botones {
+    background-image: url('/img/Fondo_botones.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    margin-top: 10rem;
+}
+
+.inicio-sesion-rrss {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    margin-top: 10rem;
+}
+
+.caja {
+    display: flex;
+    justify-content: center;
+}
+
+.redes-sociales {
+    margin-left: 25rem;
+    text-align: left;
+}
+
+/**********Footer**********/
+.pie {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    text-align: center;
+    background-color: var(--grisIntenso);
+    color: var(--blanco);
+}
+
+.img_w3c{
+    border:0;
+    width:7rem;
+    height:3rem
+}
+
+/**********FIN DE USO GENERAL **********/
+
+
+/**********Index**********/
+/**********Texto_ general**********/
+.parrafo-blanco {
+    color: var(--blanco);
+    /* margin-top: 5rem;
+    margin-bottom: 5rem; */
+    font-size: large;
+}
+
+.parrafo-negro {
+    color: var(--negro);
+    /* margin-top: 5rem;
+    margin-bottom: 5rem; */
+    font-size: large;
+}
+
+/**********Primera foto Index**********/
+.posicion {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#img_ventura {
+    background-size: cover;
+    max-height: 50%;
+    max-width: 60%;
+    margin-left: 15rem;
+    border-radius: 2rem;
+}
+
+/**********Calendario**********/
+.calendario {
+    background-size: cover;
+    border-radius: 2rem;
+    margin-top: 40%;
+    max-width: 80%;
+    max-height: auto;
+}
+
+/**********Slider de imagenes**********/
+.slider {
+    position: relative;
+    background-size: cover;
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+    /* Oculta las imágenes adicionales */
+    border-radius: 2rem;
+}
+
+.slider-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    /* Inicialmente, todas las imágenes están ocultas */
+    animation: slideshow 30s infinite;
+    /* Aplica la animación */
+}
+
+/* Muestra solo una imagen a la vez */
+.slider-img:nth-child(1) {
+    opacity: 1;
+}
+
+/* Establece diferentes valores de opacidad según el tiempo */
+.slider-img:nth-child(2) {
+    animation-delay: 3s;
+    /* Retrasa la segunda imagen 3 segundos */
+}
+
+.slider-img:nth-child(3) {
+    animation-delay: 6s;
+    /* Retrasa la tercera imagen 6 segundos */
+}
+
+@keyframes slideshow {
+
+    0%,
+    25% {
+        opacity: 0;
+    }
+
+    25%,
+    50% {
+        opacity: 1;
+    }
+
+    50%,
+    55% {
+        opacity: 0;
+    }
+
+    75%,
+    100% {
+        opacity: 1;
+    }
+}
+
+/**********Imágenes pequeñas de eventos**********/
+.imagen-pequena img {
+    margin-left: 10rem;
+    max-height: auto;
+    max-width: 80%;
+    border-radius: 2rem;
+}
+
+.imagen-pequena2 img {
+    margin-right: 25rem;
+    max-height: auto;
+    max-width: 80%;
+    float: right;
+    border-radius: 2rem;
+}
+
+/**********Página de Venta contenido**********/
+/**********Texto**********/
+.section_titulo {
+    text-align: center;
+    font-size: medium;
+    margin-top: -6rem;
+}
+
+.section_ftp {
+    font-size: large;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/**********Boton de Inicio o Redes Sociales**********/
+
+.registro-inicio {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+}
+
+.li_separados{
+    margin-bottom: 2rem;
+}
+
+.inicio {
+    display: flex;
+    justify-content: right;
+}
+
+.registro {
+    display: flex;
+    justify-content: left;
+}
+
+/**********Medio de pago**********/
+.titulo-pago {
+    margin-left: 4.4rem;
+}
+
+.inputs-pago {
+    margin: 0;
+    margin-left: 4.4rem;
+    border: 5rem;
+    height: 3rem;
+    width: 40rem;
+    outline: none;
+}
+/**********Página Contrataciones**********/
+.section_doble {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 90rem;
+}
+
+
+/**********Formularios**********/
+.datos {
+    display: flex;
+    flex-direction: row;
+    margin-left: 4.4rem;
+}
+
+.inputs {
+    margin: 0;
+    border: 5rem;
+    height: 3rem;
+    width: 20rem;
+    outline: none;
+}
+
+.datos_contrataciones {
+    display: flex;
+    flex-direction: row;
+    margin-left: 30rem;
+}
+
+.inputs_peticiones {
+    margin: 0;
+    border: 5rem;
+    height: 16rem;
+    width: 40.5rem;
+    outline: none;
+    text-align: center;
+}
+
+.envio {
+    height: 3rem;
+    width: 20rem;
+    background-color: #260e5f;
+    /* Azul por defecto */
+    color: var(--blanco);
+    cursor: pointer;
+    text-align: center;
+    border-radius: 1rem;
+    border: none;
+    transition: background-color 0.3s;
+    font-size: large;
+}
+
+.envio:hover {
+    background-color: #640581;
+    /* Cambia el color de fondo al azul oscuro al pasar el ratón sobre el botón */
+}

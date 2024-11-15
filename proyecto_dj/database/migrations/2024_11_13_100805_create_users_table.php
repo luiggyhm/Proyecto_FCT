@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('telefono');
             $table->string('password');
+            $table->string('tipo');
+
             $table->rememberToken();
 
             $table->unsignedBigInteger('suscripcion_id')->nullable();

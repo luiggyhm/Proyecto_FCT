@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string ('titulo');
             $table->double ('precio');
-            $table->string ('descripcion');
+            $table->text ('descripcion');
 
 
             //tipo de genero músical: house, regueton, etc
             $table->unsignedBigInteger('genero_id')->nullable();
             $table->foreign('genero_id')->references('id')->on('generos')->onDelete('set null');
+
+            $table->text('otros_generos');
 
 
             $table->timestamps();

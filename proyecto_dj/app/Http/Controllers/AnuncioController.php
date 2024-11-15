@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 
 class AnuncioController extends Controller
 {
-
+//mostrar todos los anuncios 
     public function index(Request $request)
     {
         $generos = Genero::all();
         $anuncios = Anuncio:: all();
+        //titulo usado en la vista
         $titulo_view = "Todos los anuncios";
         return view('anuncios.index', compact('anuncios', 'generos', 'request', 'titulo_view'));
     }
@@ -27,36 +28,41 @@ class AnuncioController extends Controller
         return view('anuncios.genero', compact('anuncios','generos', 'titulo','request'));
     }
 
-
-
-
+    //muestra todos los generos
     public function create()
     {
         $generos = Genero::all();
-        return view('anuncios.create',compact('generos'));
+        return view('formularioCrear',compact('generos'));
     }
 
 
 
-
+//crear un nuevo anuncio
     public function store(Request $request)
     {
-        
+        // Converte el array de otros géneros en una cadena separada por comas
+        $generosString = implode(',', $request->input('otros_generos'));
+
+        //crea anuncio
+        $anuncio = new Anuncio();
+        $anuncio->titulo = $request->titulo;
+        $anuncio->precio = $request->precio;
+        $anuncio->descripcion = $request->descripcion;
+        $anuncio->genero = $request->genero;
+
+        //incluimos el array separado por comas
+        $anuncio->otros_generos = $request->$generosString;
+
+        $anuncio->save();
+        return redirect()->back()->with('status', 'Anuncio creado');
     }
 
 
 
-    //crear un nuevo anuncio
+    
     public function show(Request $request)
     {
-        $a = new Anuncio();
-        $a->titulo = $request->titulo;
-        $a->precio = $request->precio;
-        $a->descripcion = $request->descripcion;
-        $a->genero = $request->genero;
-
-        $a->save();
-        return redirect()->back()->with('status', 'Anuncio creado');
+        //
     }
 
 

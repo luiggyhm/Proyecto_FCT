@@ -36,10 +36,10 @@ class SuscripcionController extends Controller
      */
     public function show(string $id)
     {
-        $paypalSubscriptionId;
+        //$paypalSubscriptionId;
         $subscription = new Suscripcion();
         $subscription->user_id = auth()->id(); // ID del usuario autenticado
-        $subscription->paypal_suscripcion_id = $paypalSubscriptionId; // ID de la suscripción de PayPal
+        //$subscription->paypal_suscripcion_id = $paypalSubscriptionId; // ID de la suscripción de PayPal
         $subscription->status = 'ACTIVE'; // O el estado inicial de la suscripción
         $subscription->start_date = now(); // Fecha de inicio de la suscripción
         $subscription->save();
