@@ -328,7 +328,7 @@ span{
 .calendario {
     background-size: cover;
     border-radius: 2rem;
-    margin-top: 40%;
+    margin-left: -8rem ;
     max-width: 80%;
     max-height: auto;
 }
@@ -513,4 +513,53 @@ span{
 .envio:hover {
     background-color: #640581;
     /* Cambia el color de fondo al azul oscuro al pasar el ratón sobre el botón */
+}
+
+
+
+
+
+/********** Calendario **********/
+#calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 30rem;
+    padding: 1rem;
+    background: var(--grisOscuro);
+    border-radius: 1rem;
+}
+
+.day-name {
+    font-size: 1.2rem;
+    color: var(--blanco);
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--grisIntermedio);
+}
+
+.calendario__dia {
+    font-size: 1.4rem;
+    color: var(--blanco);
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.calendario__dia:hover {
+    background-color: var(--morado);
+    color: var(--blanco);
 }

@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/normalizar.css') }}">
 
     <script src ="{{ asset('js/funcionalidad.js') }}"></script>
-
+    <script src="{{ asset('js/calendar.js') }}"></script>
 
 </head>
 
@@ -64,17 +64,28 @@
         @include('layouts._partials.iframeYoutube')
 
         <!-- Tercera Sección porque elegirnos -->
-        <h2>¿Por qué elegirnos?</h2>
-        <ul>
-            <li>Para DJs y artistas: Sube tu música, promociona tus eventos y llega a más personas que disfrutan de tu estilo.</li>
-            <li>Para locales y restaurantes: Anúnciate sin costos y atrae a nuevos clientes con el poder de la música.</li>
-            <li>Para todos: Descubre música fresca, eventos en vivo y espacios únicos para disfrutar de la mejor oferta musical.</li>
-        </ul>
-        <p>Únete hoy y haz que tu música, tu negocio o tu evento se escuchen al máximo.</p>
+        <section class="contenedor_calendario">
+            <article class="calendario">
+                <figure>
+                    <div id="calendar-container"></div> <!-- Contenedor del calendario dinámico -->
+                </figure>
+            </article>
+    
 
+            <article>
+                <h2>¿Por qué elegirnos?</h2>
+                    <ul>
+                        <li>Para DJs y artistas: Sube tu música, promociona tus eventos y llega a más personas que disfrutan de tu estilo.</li>
+                        <li>Para locales y restaurantes: Anúnciate sin costos y atrae a nuevos clientes con el poder de la música.</li>
+                        <li>Para todos: Descubre música fresca, eventos en vivo y espacios únicos para disfrutar de la mejor oferta musical.</li>
+                    </ul>
+                <p>Únete hoy y haz que tu música, tu negocio o tu evento se escuchen al máximo.</p>
+            </article>
 
+            <!--Slider-->
+            @include('layouts._partials.bateriaImg')
 
-
+        </section>
 
         @include('layouts._partials.accesosRapidos')
 
