@@ -44,11 +44,11 @@ html {
 
 .barra {
     background-color: var(--blanco);
-    width: 80rem;
+    width: 60%;
     height: 6rem;
     margin-top: 2rem;
-    margin-left: -20rem;
-    margin-right: -20rem;
+    margin-left: auto;
+    margin-right: auto;
     border: 1rem;
     border-radius: 20rem;
 }
@@ -73,7 +73,8 @@ html {
     flex-direction: row;
     font-size: medium;
 }
-.input_busqueda{
+
+.input_busqueda {
     background-color: var(--blanco);
     color: var(--negro);
 }
@@ -86,7 +87,8 @@ html {
 /**********Botones de funcionalidad**********/
 .cambio {
     padding: 1rem 2rem;
-    background-color: #041c35;/* Azul por defecto */
+    background-color: #041c35;
+    /* Azul por defecto */
     color: var(--blanco);
     cursor: pointer;
     text-align: center;
@@ -107,15 +109,15 @@ html {
     /* Cambia el color del texto a negro cuando se hace clic en el botón */
 }
 
-.fondo_blanco{
+.fondo_blanco {
     background-color: var(--blanco);
 }
 
-.fuente_grande{
+.fuente_grande {
     font-size: x-large;
 }
 
-.fuente_mas_grande{
+.fuente_mas_grande {
     font-size: xx-large;
 }
 
@@ -162,7 +164,7 @@ ul {
     list-style: none;
 }
 
-span{
+span {
     color: red;
     font-size: small;
 }
@@ -205,6 +207,12 @@ span{
 
 
 /**********Contenedores**********/
+.contenedor_una_columna {
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+
 .contenedor_dos_columnas {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -283,10 +291,10 @@ span{
     color: var(--blanco);
 }
 
-.img_w3c{
-    border:0;
-    width:7rem;
-    height:3rem
+.img_w3c {
+    border: 0;
+    width: 7rem;
+    height: 3rem
 }
 
 /**********FIN DE USO GENERAL **********/
@@ -328,7 +336,7 @@ span{
 .calendario {
     background-size: cover;
     border-radius: 2rem;
-    margin-left: -8rem ;
+    margin-left: -8rem;
     max-width: 80%;
     max-height: auto;
 }
@@ -431,7 +439,7 @@ span{
     align-items: center;
 }
 
-.li_separados{
+.li_separados {
     margin-bottom: 2rem;
 }
 
@@ -458,6 +466,7 @@ span{
     width: 40rem;
     outline: none;
 }
+
 /**********Página Contrataciones**********/
 .section_doble {
     display: grid;

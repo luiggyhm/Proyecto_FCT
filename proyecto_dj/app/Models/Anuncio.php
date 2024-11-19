@@ -14,6 +14,7 @@ class Anuncio extends Model
         'precio',
         'descripcion',
         'genero',
+        'imagen',
     ];
 
     public function genero()

@@ -11,8 +11,13 @@ class FtpUser extends Model
     protected $fillable = [
         'alias',
         'password',
+        'directorio_raiz',
+        'tipo_user',
+        'estado',
+        'user_id',
     ];
 
+    //relación 1:1 con el usuario FTP
     public function user()
     {
         return $this ->belongsTo(User::class);

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('genero_id')->references('id')->on('generos')->onDelete('set null');
 
             $table->text('otros_generos');
+            $table->string('imagen'); // Guardar la ruta de la imagen
 
 
             $table->timestamps();

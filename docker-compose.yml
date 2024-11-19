@@ -1,5 +1,5 @@
 services:
-#base de datos maríadb
+  #base de datos maríadb
   mariadb:
     image: docker.io/bitnami/mariadb:11.2
     ports:
@@ -14,7 +14,7 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-  
+
   #framework laravel
   myapp:
     tty: true
@@ -36,23 +36,27 @@ services:
     depends_on:
       - mariadb
 
-#servidor ftp
+  #servidor ftp
   ftp:
     image: fauria/vsftpd
     ports:
       - "21:21"
       - "21100-21110:21100-21110"
+
     environment:
       - PASV_ADDRESS=0.0.0.0
       - PASV_MIN_PORT=21100
       - PASV_MAX_PORT=21110
       - FTP_USER=admin
       - FTP_PASSWORD=admin
+      - PASV_ENABLE=YES
 
     volumes:
-      - ./ftp-data:/home/vsftpd  # Carpeta para archivos FTP
-      - ./vsftpd:/etc/vsftpd/    # Configuración del servidor FTP
-      - ./pam_mysql:/etc/pam.d/   # Configuración de autenticación PAM
+      - ./ftp-data:/srv/ftp                # Carpeta base para FTP
+      - ./vsftpd:/etc/vsftpd/              # Configuración principal de vsftpd
+      - ./pam_mysql:/etc/pam.d/            # Autenticación PAM
+      - ./user_config:/etc/vsftpd/user_config # Configuración específica por usuario
+
     restart: always
     depends_on:
       - mariadb

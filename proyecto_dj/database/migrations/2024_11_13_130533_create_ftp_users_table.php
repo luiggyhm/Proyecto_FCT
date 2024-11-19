@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('ftp_users', function (Blueprint $table) {
             $table->id();
-            $table->string ('alias')->unique();
-            $table->string ('password');
+            $table->string('alias')->unique();
+            $table->string('password');
+            $table->string('directorio_raiz');
+            $table->enum('tipo_user', ['admin', 'cliente']); // Tipo de usuario
+            $table->enum('estado', ['activo', 'inactivo'])->default('activo'); // Estado del usuario
 
 
+            //relación con la base de datos 1:1 de usuario
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

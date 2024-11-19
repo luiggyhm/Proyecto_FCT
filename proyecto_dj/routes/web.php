@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AnuncioController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\NavController;
+use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,9 +47,20 @@ Route::get('/compraContenido', [NavController::class, 'compraContenido'])->name(
 
 
 
+//la ruta para poder ver las img de los perfiles de usuarios
+//Route::resource('anuncios', AnuncioController::class);
+
+
+//pagos
+//ruta encargada de ejecutar los pagos
+//Route::get ('paypal/pay', PagoController::class, 'pagarConPaypal') -> name ('pagarPaypal');
+
+//Route::get ('paypal/error', PagoController::class, 'estadoPago') -> name ('errorPago');
 
 
 
 
 
-require __DIR__.'/auth.php';
+
+
+require __DIR__ . '/auth.php';

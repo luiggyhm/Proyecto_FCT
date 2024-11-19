@@ -13,18 +13,15 @@ return new class extends Migration
     {
         Schema::create('suscripcions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('paypal_subscripcion_id'); // ID de suscripción de PayPal
-            $table->string('estado')->default('Pendiente'); // Estado de la suscripción, por defecto pendiente
-            $table->timestamp('start_date')->nullable(); //fecha que se hace
-            $table->timestamp('end_date')->nullable(); //fecha que termina
-            
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); //relación
+            $table->string('pago_id')->unique();
+            $table->string('cliente_id');
+            $table->string('token');
+            $table->string('estado_pago');
+            $table->decimal('cantidad_cobro', 8, 2);
+            $table->string('tipo_moneda');
+            $table->text('descripcion_transacccion')->nullable();
             
             $table->timestamps();
-
-
-
         });
     }
 

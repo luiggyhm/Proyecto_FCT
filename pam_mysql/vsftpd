@@ -1,0 +1,2 @@
+auth required pam_mysql.so user=${MARIADB_USER} passwd=${MARIADB_PASSWORD} host=mariadb db=${MARIADB_DATABASE} table=ftp_users usercolumn=alias passwdcolumn=password homecolumn=directorio_raiz crypt=1 where= "status='activo'"
+account required pam_mysql.so user=${MARIADB_USER} passwd=${MARIADB_PASSWORD} host=mariadb db=${MARIADB_DATABASE} table=ftp_users usercolumn=alias passwdcolumn=password homecolumn=directorio_raiz crypt=1 where= "status='activo'"

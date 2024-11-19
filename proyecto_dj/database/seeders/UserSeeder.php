@@ -13,28 +13,37 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
+        User::create([
+            "nombre" => "Admin",
+            "apellidos" => "El Mandator",
+            "email" => "admin@dj.com",
+            "telefono" => "622622622",
+            "password" => "admin1234",
+            "tipo" => "admin",
+            "suscripcion_id" => '1',
+        ]); //así asignamos los roles ->assignRole('admin');
+        
         User::create([
             "nombre" => "Dj",
+            "apellidos" => "Chambea",
             "email" => "dj@dj.com",
             "telefono" => "665544663",
-            "password" => "entro1234"
-            
+            "tipo" => "dj",
+            "password" => "dj1234",
+            "suscripcion_id" => '2',
         ]);         //así asignamos los roles ->assignRole('dj');
 
 
         User::create([
-            "nombre" => "Interesado",
-            "email" => "interesado@dj.com",
+            "nombre" => "Negocio",
+            "apellidos" => "Bar",
+            "email" => "negocio@dj.com",
             "telefono" => "665544663",
-            "password" => "entro123"
-        ]);         //así asignamos los roles ->assignRole('interesado');
-
-        
-        User::create([
-            "nombre" => "admin",
-            "email" => "admin@dj.com",
-            "telefono" => "665544663",
-            "password" => "admin123"
-        ]);         //así asignamos los roles ->assignRole('admin');
+            "tipo" => "negocio",
+            "password" => "negocio123",            
+            "suscripcion_id" => '3',
+        ]);         //así asignamos los roles ->assignRole('interesado');    
     }
+
 }

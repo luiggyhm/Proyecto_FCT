@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nombre',
+        'apellidos',
         'email',
         'telefono',
         'password',
@@ -26,10 +27,10 @@ class User extends Authenticatable
         'suscripcion_id',
     ];
 
-
-    public function suscripcions()
+    //relación 1:1 un usuario solo puede comprar una suscripcion
+    public function suscripcion()
     {
-        return $this->hasMany(Suscripcion::class);
+        return $this->belongsTo(Suscripcion::class, 'suscripcion_id');
     }
 
     public function ftpUser()
