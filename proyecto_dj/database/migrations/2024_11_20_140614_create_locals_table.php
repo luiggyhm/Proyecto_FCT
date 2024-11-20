@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_negocios', function (Blueprint $table) {
+        Schema::create('locals', function (Blueprint $table) {
             $table->id();
-            $table->string ('nombre'); //nombre local
-            $table->string ('tipo_negocio'); //tipo de nogocio
-            $table->string ('aforo'); //aforo en el negocio
-
-
+            $table->string ('tipo_local');
+            $table->string ('descripcion');
 
             $table->timestamps();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_negocios');
+        Schema::dropIfExists('locals');
     }
 };

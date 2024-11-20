@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoNegocio extends Model
+class Negocio extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'nombre',
-        'tipo_negocio', //restaurante, local,bar...
+        'tipo_local', //restaurante, local,bar...
         'direccion',
         'descripcion',
         'telefono',

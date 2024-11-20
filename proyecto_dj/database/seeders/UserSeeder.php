@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             "email" => "admin@dj.com",
             "telefono" => "622622622",
             "password" => "admin1234",
-            "tipo" => "admin",
+            "tipo_acceso" => "admin",
             "suscripcion_id" => '1',
         ]); //así asignamos los roles ->assignRole('admin');
         
@@ -28,8 +28,8 @@ class UserSeeder extends Seeder
             "nombre" => "Dj",
             "apellidos" => "Chambea",
             "email" => "dj@dj.com",
-            "telefono" => "665544663",
-            "tipo" => "dj",
+            "telefono" => "665544667",
+            "tipo_acceso" => "dj",
             "password" => "dj1234",
             "suscripcion_id" => '2',
         ]);         //así asignamos los roles ->assignRole('dj');
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             "apellidos" => "Bar",
             "email" => "negocio@dj.com",
             "telefono" => "665544663",
-            "tipo" => "negocio",
+            "tipo_acceso" => "negocio",
             "password" => "negocio123",            
             "suscripcion_id" => '3',
         ]);         //así asignamos los roles ->assignRole('interesado');    

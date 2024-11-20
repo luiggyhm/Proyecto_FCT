@@ -22,7 +22,11 @@ return new class extends Migration
             $table->unsignedBigInteger('genero_id')->nullable();
             $table->foreign('genero_id')->references('id')->on('generos')->onDelete('set null');
 
-            $table->text('otros_generos');
+            //tipo de negocio: bar, discoteca, local, etc...
+            $table->unsignedBigInteger('tipo_negocio_id'); 
+            $table->foreign('tipo_negocio_id')->references('id')->on('tipo_negocios')->onDelete('cascade');
+
+            $table->text('otros_generos'); //Guarda array de generos
             $table->string('imagen'); // Guardar la ruta de la imagen
 
 

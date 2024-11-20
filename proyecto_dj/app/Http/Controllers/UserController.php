@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -27,7 +28,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario = new User();
+        $usuario->nombre = $request->nombre;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->email = $request->email;
+        $usuario->telefono = $request->telefono;
+        $usuario->password = $request->password;
+        $usuario->tipo_negocio = $request->tipo_negocio;
+        $usuario->suscripcion_id = $request->suscripcion_id;
+
+        $usuario->save();
+        return redirect()->back()->with('status', 'Usuario creado');
+
     }
 
     /**
@@ -49,9 +61,18 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(User $usuario, Request $request)
     {
-        //
+        $usuario->nombre = $request->nombre;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->email = $request->email;
+        $usuario->telefono = $request->telefono;
+        $usuario->password = $request->password;
+        $usuario->tipo_negocio = $request->tipo_negocio;
+        $usuario->suscripcion_id = $request->suscripcion_id;
+
+        $usuario->save();
+        return redirect()->back()->with('status', 'Usuario modificado');
     }
 
     /**

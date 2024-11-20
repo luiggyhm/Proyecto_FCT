@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('telefono');
             $table->string('password');
-            $table->enum('tipo', ['dj', 'negocio','admin']);
+            $table->enum('tipo_negocio', ['dj', 'negocio','admin']);
 
              // Relación n:1 con suscripciones
              $table->foreignId('suscripcion_id')->nullable()->constrained('suscripcions')->onDelete('set null');

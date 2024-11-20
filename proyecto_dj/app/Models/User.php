@@ -23,7 +23,7 @@ class User extends Authenticatable
         'email',
         'telefono',
         'password',
-        'tipo',
+        'tipo_acceso',
         'suscripcion_id',
     ];
 
@@ -33,6 +33,7 @@ class User extends Authenticatable
         return $this->belongsTo(Suscripcion::class, 'suscripcion_id');
     }
 
+    //relación 1:1 un usuario solo puede tener un usuario FTP
     public function ftpUser()
     {
         return $this ->hasOne(FtpUser::class);

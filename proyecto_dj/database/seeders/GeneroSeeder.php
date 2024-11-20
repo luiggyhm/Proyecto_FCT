@@ -14,42 +14,42 @@ class GeneroSeeder extends Seeder
     public function run(): void
     {
         Genero::create([
-            "genero" => "House",
+            "nombre" => "House",
             "posicion" => "5",
         ]);
 
 
         Genero::create([
-            "genero" => "Deep House",
+            "nombre" => "Deep House",
             "posicion" => "10",
         ]);
 
 
         Genero::create([
-            "genero" => "Techno",
+            "nombre" => "Techno",
             "posicion" => "15",
         ]);
 
 
         Genero::create([
-            "genero" => "Comercial",
+            "nombre" => "Comercial",
             "posicion" => "20",
         ]);
 
 
         Genero::create([
-            "genero" => "Reguetón",
+            "nombre" => "Reguetón",
             "posicion" => "25",
         ]);
 
 
         Genero::create([
-            "genero" => "latino",
+            "nombre" => "latino",
             "posicion" => "35",
         ]);
 
         Genero::create([
-            "genero" => "Disco 80's",
+            "nombre" => "Disco 80's",
             "posicion" => "45",
         ]);
 

@@ -16,6 +16,14 @@
                 <h2><a href="{{route('compraContenido')}}">Contenido Musical</a></h2>
             </li>
 
+            <li>
+                <h2><a href="{{route('compraContenido')}}">Anuncios Locales</a></h2>
+            </li>
+
+            <li>
+                <h2><a href="{{route('compraContenido')}}">Anuncios Negocios</a></h2>
+            </li>
+
 
 
 

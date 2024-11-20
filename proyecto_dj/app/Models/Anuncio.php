@@ -13,13 +13,21 @@ class Anuncio extends Model
         'titulo',
         'precio',
         'descripcion',
-        'genero',
+        'genero_id',
+        'tipo_negocio_id',
+        'otros_generos',
         'imagen',
     ];
 
     public function genero()
     {
         return $this->belongsTo(Genero::class);
+    }
+
+    //Un anuncio solo puede pertenecer a un tipo de negocio
+    public function tipoNegocio()
+    {
+        return $this->belongsTo(Negocio::class, 'tipo_negocio_id');
     }
 
 }

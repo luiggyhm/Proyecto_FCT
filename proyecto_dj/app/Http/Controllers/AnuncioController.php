@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
 use App\Models\Genero;
+use App\Models\TipoNegocio;
 use Illuminate\Http\Request;
 
 class AnuncioController extends Controller
@@ -19,29 +20,32 @@ class AnuncioController extends Controller
     }
 
 
-    public function generos(Genero $genero, Request $request)
+    public function genero(Genero $genero, Request $request)
     {
 
         $generos = Genero::all();
-        $anuncios = Anuncio::where('genero_id', $genero->id)->get();
-        $nombre = $genero->titulo;
 
-        return view('anuncios.genero', compact('anuncios', 'generos', 'titulo', 'request'));
+        $anuncios = Anuncio::where('genero_id', $genero->id)->get();
+        $nombre_genero = $genero->nombre;
+
+        return view('anuncios.genero', compact('anuncios', 'generos', 'nombre_genero', 'request'));
     }
 
     //muestra todos los generos
     public function create()
     {
         $generos = Genero::all();
-        return view('formularioCrear', compact('generos'));
+        $tipo_negocios =TipoNegocio::all();
+
+        return view('formularioCrear', compact('generos', 'tipo_negocios'));
     }
 
 
 
-    //crear un nuevo anuncio
+    //crear un nuevo anuncio en BD
     public function store(Request $request)
     {
-        // Converte el array de otros géneros en una cadena separada por comas
+        // Convierte el array de otros géneros en una cadena separada por comas
         $generosString = implode(',', $request->input('otros_generos'));
         $rutaImg = $request->file('imagen')->store('public/anuncios');
 
@@ -50,11 +54,20 @@ class AnuncioController extends Controller
         $anuncio->titulo = $request->titulo;
         $anuncio->precio = $request->precio;
         $anuncio->descripcion = $request->descripcion;
-        $anuncio->genero = $request->genero;
-        $anuncio->imagen = $rutaImg; // Guardamos la ruta de la imagen
+        $anuncio->genero_id = $request->genero;
+        
+        /* //el id 1 es = a que es dj
+        if($request-> tipo_negocio_id == 1){
+            $anuncio->tipo_negocio_id = $request->tipo_negocio;
+        }
+            */
+        $anuncio->tipo_negocio_id = $request->tipo_negocio;
 
         //incluimos el array separado por comas
-        $anuncio->otros_generos = $request->$generosString;
+        $anuncio->otros_generos = $generosString;
+
+        // Guardamos la ruta de la imagen
+        $anuncio->imagen = $rutaImg;
 
         $anuncio->save();
         return redirect()->back()->with('status', 'Anuncio creado');
@@ -84,10 +97,22 @@ class AnuncioController extends Controller
     //Actualizar anuncio
     public function update(Request $request, Anuncio $anuncio)
     {
-        $anuncio->titulo = $request->nombre;
+
+        $generosString = implode(',', $request->input('otros_generos'));
+        $rutaImg = $request->file('imagen')->store('public/anuncios');
+
+        $anuncio->titulo = $request->titulo;
         $anuncio->precio = $request->precio;
         $anuncio->descripcion = $request->descripcion;
         $anuncio->genero_id = $request->genero;
+        $anuncio->tipo_negocio_id = $request->tipo_negocio;
+
+        //incluimos el array separado por comas
+        $anuncio->otros_generos = $generosString;
+
+        // Guardamos la ruta de la imagen
+        $anuncio->imagen = $rutaImg;
+
         $anuncio->save();
 
         return redirect()->back()->with('status', 'Anuncio Modificado');
