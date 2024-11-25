@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
 use App\Models\Genero;
-use App\Models\TipoNegocio;
+use App\Models\Local;
 use Illuminate\Http\Request;
 
 class AnuncioController extends Controller
@@ -35,7 +35,7 @@ class AnuncioController extends Controller
     public function create()
     {
         $generos = Genero::all();
-        $tipo_negocios =TipoNegocio::all();
+        $tipo_negocios =Local::all();
 
         return view('formularioCrear', compact('generos', 'tipo_negocios'));
     }

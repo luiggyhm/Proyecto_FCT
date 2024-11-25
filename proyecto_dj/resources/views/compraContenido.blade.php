@@ -1,35 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Busca animar tu vida</title>
+@include('layouts._partials.head')
 
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+<body id="body" class="fondo_negro">
 
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
+    @include('layouts._partials.menu')
 
-    <!--Tipo de fuente usada de google-->
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <main id="main" class="parrafo-blanco">
 
-
-    <!--Usar mi Css por el momento-->
-    <link rel="stylesheet" href="{{ asset('css/Estilos.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/normalizar.css') }}">
-
-    <script src ="{{ asset('js/funcionalidad.js') }}"></script>
-    <script src="{{ asset('js/calendar.js') }}"></script>
-
-</head>
-<body id ="body" class ="fondo_negro">
-@include('layouts._partials.menu')
-
-<main id ="main" class = "parrafo-blanco">
         <!--Explicación venta de contenido-->
         <section class="section_titulo">
             <h1><strong>¡Eleva tu Experiencia Musical con Nuestros Mashups y Remixes Exclusivos!</strong></h1>
@@ -38,6 +17,7 @@
 
 
         <section class="contenedor_tres_columnas">
+
             <!--Primera columna-->
             <article>
                 <h2><strong>¿Por que elegir esta página?</strong></h2>
@@ -85,33 +65,31 @@
                     </li>
                 </ul>
             </article>
-                <!--Botones-->
-                <!-- poner en el onclick route('pago') -->
-                <section class="registro-inicio">
-                    <article class="inicio">
-                        <button class="boton-neon" onclick=""> Acceso Mensual </button>
-                    </article>
 
-                    <article class="registro">
-                        <button class="boton-neon" onclick="">Acceso Anual </button>
-                    </article>
-                </section>
+            <!--Botones-->
+            <!-- poner en el onclick route('pago') -->
+            <section class="registro-inicio">
+                <article class="inicio">
+                    <button class="boton-neon" onclick=""> Acceso Mensual </button>
+                </article>
+
+                <article class="registro">
+                    <button class="boton-neon" onclick="">Acceso Anual </button>
+                </article>
+            </section>
 
 
-
-            <!-- poner foto de estructuras de carpetas con la musica que hay para descargar -->
 
             <article>
-                
+                <!-- poner foto de estructuras de carpetas con la musica que hay para descargar -->
+
             </article>
-        </section>
 
+            @include('layouts._partials.accesosRapidos')
 
+    </main>
 
+    @include('layouts._partials.footer')
 
-        </article>
-            <!-- agregar dos botones elegir pago mensual o pago anual y redirigir directamente a paypal al pago -->
-             
-            <article></article>
-</main>
+    </main>
 </body>

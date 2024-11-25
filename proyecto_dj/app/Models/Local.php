@@ -14,5 +14,10 @@ class Local extends Model
         'descripcion',
     ];
 
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 
 }

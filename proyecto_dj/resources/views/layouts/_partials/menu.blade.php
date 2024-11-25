@@ -17,11 +17,19 @@
             </li>
 
             <li>
-                <h2><a href="{{route('compraContenido')}}">Anuncios Locales</a></h2>
+                <h2><a href="{{route('anuncios.index')}}">Anuncios</a></h2>
             </li>
 
             <li>
                 <h2><a href="{{route('compraContenido')}}">Anuncios Negocios</a></h2>
+            </li>
+
+            <li>
+                <h2><a href="{{route('compraContenido')}}">Anuncios Dj`s</a></h2>
+            </li>
+
+            <li>
+                <h2><a href="{{route('compraContenido')}}">Crear Anuncio</a></h2>
             </li>
 
 

@@ -45,6 +45,9 @@ Route::get('/conoceme', [NavController::class, 'conoceme'])->name('conoceme');
 //Muestra la vista de Venta Contenido
 Route::get('/compraContenido', [NavController::class, 'compraContenido'])->name('compraContenido');
 
+//Muestra todos los anuncios
+Route::get('/anuncios', [AnuncioController::class, 'index'])->name('anuncios.index');
+
 
 
 //la ruta para poder ver las img de los perfiles de usuarios

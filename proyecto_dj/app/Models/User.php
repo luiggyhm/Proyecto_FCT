@@ -24,7 +24,18 @@ class User extends Authenticatable
         'telefono',
         'password',
         'tipo_acceso',
+
+        //si es dj mostrar oculto
+        'ciudad',
+
+        //si es negocio mostrar
+        'direccion',
+        'aforo',
+        
+        'tipo_local',
         'suscripcion_id',
+
+        //traer datos de negocio y que esten ocultos, que se muestren segun el checkbox de dj o negocio
     ];
 
     //relación 1:1 un usuario solo puede comprar una suscripcion
@@ -38,6 +49,12 @@ class User extends Authenticatable
     {
         return $this ->hasOne(FtpUser::class);
     }
+
+    //relación n:1 un usuario puede tener varios locales
+    public function locales()
+{
+    return $this->hasMany(Local::class);
+}
 
 
     /**
