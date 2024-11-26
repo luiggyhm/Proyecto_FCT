@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\AnuncioController;
-use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\NavController;
-use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});*/
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,23 +29,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
 //rutas creadas visibles para todos
 
 //Muestra la vista inicio si accede a /
-Route::get('/', [NavController::class, 'home'])->name('inicio');
+Route::get('/', [NavController::class, 'home'])->name('nav.inicio');
 
 //Muestra la vista de Conoceme
-Route::get('/conoceme', [NavController::class, 'conoceme'])->name('conoceme');
+Route::get('/conoceme', [NavController::class, 'conoceme'])->name('nav.conoceme');
 
 //Muestra la vista de Venta Contenido
-Route::get('/compraContenido', [NavController::class, 'compraContenido'])->name('compraContenido');
+Route::get('/compraContenido', [NavController::class, 'compraContenido'])->name('nav.compraContenido');
 
 //Muestra todos los anuncios
-Route::get('/anuncios', [AnuncioController::class, 'index'])->name('anuncios.index');
+Route::get('/anuncios', [NavController::class, 'anuncios'])->name('nav.todosLosAnuncios');
 
 
+Route::get('/registrar', [NavController::class, 'registrarse'])->name('nav.registrarse');
 
 //la ruta para poder ver las img de los perfiles de usuarios
 //Route::resource('anuncios', AnuncioController::class);
@@ -66,4 +62,4 @@ Route::get('/anuncios', [AnuncioController::class, 'index'])->name('anuncios.ind
 
 
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

@@ -44,7 +44,6 @@
                     <div id="calendar-container"></div> <!-- Contenedor del calendario dinámico -->
                 </figure>
             </article>
-    
 
             <article>
                 <h2>¿Por qué elegirnos?</h2>

@@ -20,13 +20,24 @@ class AnuncioController extends Controller
     }
 
 
-    public function genero(Genero $genero, Request $request)
+    public function genero(Genero $generos, Request $request)
     {
 
         $generos = Genero::all();
 
-        $anuncios = Anuncio::where('genero_id', $genero->id)->get();
-        $nombre_genero = $genero->nombre;
+        $anuncios = Anuncio::where('genero_id', $generos->id)->get();
+        $nombre_genero = $generos->nombre;
+
+        return view('anuncios.genero', compact('anuncios', 'generos', 'nombre_genero', 'request'));
+    }
+
+    public function locales(Local $locales, Request $request)
+    {
+
+        $locales = Local::all();
+
+        $anuncios = Anuncio::where('tipo_local', $locales->id)->get();
+        $tipo_locales = $locales->nombre;
 
         return view('anuncios.genero', compact('anuncios', 'generos', 'nombre_genero', 'request'));
     }

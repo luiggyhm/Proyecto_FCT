@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Local;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,10 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $locales = Local::all();
+        return view('_components.usuarios.formularioCrearUsuario', compact('locales', 'request'));
     }
 
     /**
@@ -39,7 +41,6 @@ class UserController extends Controller
 
         $usuario->save();
         return redirect()->back()->with('status', 'Usuario creado');
-
     }
 
     /**

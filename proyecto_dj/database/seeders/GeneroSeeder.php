@@ -14,7 +14,7 @@ class GeneroSeeder extends Seeder
     public function run(): void
     {
         Genero::create([
-            "nombre" => "House",
+            "nombre" => "Comercial",
             "posicion" => "5",
         ]);
 
@@ -32,7 +32,7 @@ class GeneroSeeder extends Seeder
 
 
         Genero::create([
-            "nombre" => "Comercial",
+            "nombre" => "House",
             "posicion" => "20",
         ]);
 

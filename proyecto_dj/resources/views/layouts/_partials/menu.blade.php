@@ -5,31 +5,31 @@
         <ul class="barra__opciones">
 
             <li>
-                <h2><a href="{{route('inicio')}}">Inicio</a></h2>
+                <h2><a href="{{route('nav.inicio')}}">Inicio</a></h2>
             </li>
 
             <li>
-                <h2><a href="{{route('conoceme')}}">Conoceme</a></h2>
+                <h2><a href="{{route('nav.conoceme')}}">Conoceme</a></h2>
             </li>
 
             <li>
-                <h2><a href="{{route('compraContenido')}}">Contenido Musical</a></h2>
+                <h2><a href="{{route('nav.compraContenido')}}">Contenido Musical</a></h2>
             </li>
 
             <li>
-                <h2><a href="{{route('anuncios.index')}}">Anuncios</a></h2>
+                <h2><a href="{{route('nav.todosLosAnuncios')}}">Anuncios</a></h2>
             </li>
 
             <li>
-                <h2><a href="{{route('compraContenido')}}">Anuncios Negocios</a></h2>
+                <h2><a href="{{route('nav.compraContenido')}}">Anuncios Negocios</a></h2>
             </li>
 
             <li>
-                <h2><a href="{{route('compraContenido')}}">Anuncios Dj`s</a></h2>
+                <h2><a href="{{route('nav.compraContenido')}}">Anuncios Dj`s</a></h2>
             </li>
 
             <li>
-                <h2><a href="{{route('compraContenido')}}">Crear Anuncio</a></h2>
+                <h2><a href="{{route('nav.compraContenido')}}">Crear Anuncio</a></h2>
             </li>
 
 
@@ -56,6 +56,8 @@
                         <i class="bi bi-person"></i>
                         Login
                     </a>
+                    <a href ="{{route('nav.registrarse')}}"><i class="bi bi-person"></i>Registrate</a>
+                    
                     @endauth
                     @endif
                 </h2>

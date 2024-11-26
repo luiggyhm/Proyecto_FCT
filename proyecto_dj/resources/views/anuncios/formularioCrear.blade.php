@@ -5,36 +5,49 @@
     <article class="container px-4 px-lg-5 bg-dark rounded p-4 mt-5" style="width: 30%;">
 
         <!-- Contenido del formulario -->
-        <div class="mb-3">
-            <label for="titulo" class="form-label text-white">Titulo del Anuncio :</label>
-            <input type="text" class="form-control w-100" id="titulo" name="titulo" placeholder="Titulo del anuncio">
+        <div>
+            <label for="titulo">Titulo del Anuncio :</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Titulo del anuncio">
         </div>
 
-        <div class="mb-3">
-            <label for="precio" class="form-label text-white">Precio:</label>
-            <input type="number" class="form-control w-100" id="precio" name="precio" placeholder="Precio por el servicio">
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" placeholder="Precio por el servicio">
         </div>
 
-        <div class="mb-3">
-            <label for="descripcion" class="form-label text-white">Descripción de Servicios:</label>
-            <input type="text" class="form-control w-100" step="any" id="descripcion" name="descripcion" min="0" placeholder="descripcion">
+        <div>
+            <label for="descripcion">Descripción de Servicios:</label>
+            <input type="text" step="any" id="descripcion" name="descripcion" min="0" placeholder="descripcion">
         </div>
 
-        <div class="mb-3">
-            <label for="genero_principal" class="form-label text-white">Género de música principal:</label>
-            <select class="form-select w-100" name="genero_principal">
+        <div>
+            <label for="genero_principal">Género de música principal:</label>
+            <select  name="genero_principal">
                 @foreach ($generos as $g)
                 <option>{{$g->nombre}}</option>
                 @endforeach
             </select>
         </div>
 
-        <@foreach ($generos as $g)
-            <div class="form-check">
-            <label class="form-check-label text-white" for="otros_generos{{ $g->id }}">Otros Géneros Músicales:</label>
-            <input class="form-check-input" type="checkbox" name="otros_generos" value="{{ $g->nombre }}" id="genero-{{ $g->id }}">
-            </div>
-            @endforeach
+        <div>
+            <label for="otros_generos">Más generos:</label>
+                @foreach ($generos as $g)
+                <input type="checkbox" id ="{{$g->nombre}}"value="{{$g->id}}">{{$g->nombre}}</input>
+                @endforeach
+            </select>
+        </div>
+
+
+
+        <div>
+            <label for="otros_generos">Tipo local:</label>
+                @foreach ($locales as $l)
+                <input type="checkbox" id ="{{$l->nombre}}"value="{{$l->id}}">{{$l->nombre}}</input>
+                @endforeach
+            </select>
+        </div>
+
+
 
 
             <div>
@@ -42,7 +55,7 @@
                 <input type="file" name="imagen" id="imagen" required>
             </div>
 
-            <button type="submit" class="btn btn-light">Crear Anuncio</button>
+            <button type="submit">Crear Anuncio</button>
 
     </article>
 </form>

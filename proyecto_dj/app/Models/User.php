@@ -25,16 +25,17 @@ class User extends Authenticatable
         'password',
         'tipo_acceso',
 
-        //si es dj mostrar oculto
+        //si es dj
         'ciudad',
-
-        //si es negocio mostrar
-        'direccion',
-        'aforo',
-        
-        'tipo_local',
         'suscripcion_id',
 
+        //si es negocio
+        'direccion',
+        'aforo',
+        'id_tipo_local',
+
+
+  
         //traer datos de negocio y que esten ocultos, que se muestren segun el checkbox de dj o negocio
     ];
 

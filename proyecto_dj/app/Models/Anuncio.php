@@ -14,7 +14,7 @@ class Anuncio extends Model
         'precio',
         'descripcion',
         'genero_id',
-        'tipo_negocio',
+        'tipo_local',
         'otros_generos',
         'imagen',
     ];

@@ -22,4 +22,15 @@ class NavController extends Controller
     {
         return view('compraContenido');
     }
+
+    public function anuncios()
+    {
+        return view('anuncios.index');
+    }
+
+    public function registrarse()
+    {
+        return view('usuarios.index');
+    }
+
 }

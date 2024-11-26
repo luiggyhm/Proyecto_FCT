@@ -32,8 +32,8 @@ return new class extends Migration
             $table->string ('aforo')->nullable();
 
             //relacion n:1 con tabla locals para cerrar los tipos de locales
-            $table->unsignedBigInteger('tipo_local')->nullable();
-            $table->foreign('tipo_local')->references('id')->on('locals')->onDelete('cascade');
+            $table->unsignedBigInteger('id_tipo_local')->nullable();
+            $table->foreign('id_tipo_local')->references('id')->on('locals')->onDelete('cascade');
 
 
 

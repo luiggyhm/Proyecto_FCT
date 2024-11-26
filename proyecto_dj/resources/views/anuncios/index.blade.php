@@ -17,10 +17,10 @@ para luego llamarlo con un yield donde queremos que se inserte-->
     @foreach ($anuncios as $anuncio)
 
         @component('_components.anuncio.mostrarAnuncio')
-            @slot('nombre', $anuncio->titulo)
+            @slot('titulo', $anuncio->titulo)
             @slot('precio', $anuncio->precio)
-            @slot('precio', $anuncio->descripcion)
-            @slot('id', $anuncio->genero)
+            @slot('descripcion', $anuncio->descripcion)
+            @slot('genero_id', $anuncio->genero_id)
             @slot('otros_generos',$anuncio->otros_generos)
             @slot('imagen',$anuncio->imagen)
         @endcomponent

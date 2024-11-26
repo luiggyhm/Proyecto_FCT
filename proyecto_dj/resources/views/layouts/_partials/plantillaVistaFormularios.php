@@ -7,14 +7,14 @@
     <!-- Nav Barra principal-->
     @include('layouts._partials.menu')
 
-    <header class="bg-dark py-5">
 
-        @yield('nombreGenero')
-
-    </header>
+    @yield('eleccionUsuario')
 
 
-    @yield('anuncios')
+
+    @yield('tipoUsuario')
+
+
     
 </body>
 
