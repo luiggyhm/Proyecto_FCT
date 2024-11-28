@@ -17,7 +17,7 @@
             </li>
 
             <li>
-                <h2><a href="{{route('nav.todosLosAnuncios')}}">Anuncios</a></h2>
+                <h2><a href="{{route('todosLosAnuncios')}}">Anuncios</a></h2>
             </li>
 
             <li>
@@ -56,7 +56,7 @@
                         <i class="bi bi-person"></i>
                         Login
                     </a>
-                    <a href ="{{route('nav.registrarse')}}"><i class="bi bi-person"></i>Registrate</a>
+                    <a href ="{{route('registrarse')}}"><i class="bi bi-person"></i>Registrate</a>
                     
                     @endauth
                     @endif

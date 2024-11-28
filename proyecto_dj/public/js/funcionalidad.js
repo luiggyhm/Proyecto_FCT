@@ -3,6 +3,7 @@ window.onload = function () {
     let botonFondo = document.getElementById("cambiarFondo");
     let botonTamanio = document.getElementById("cambiarTamanio");
     let p =document.getElementsByTagName("p");
+    let li =document.getElementsByTagName("li");
     var main = document.getElementById("main");
 
 
@@ -25,6 +26,19 @@ window.onload = function () {
                 p[i].setAttribute('class', 'fuente_mas_grande');
             }else{
                 p[i].setAttribute('class', '');
+            }
+            
+        }
+    });
+
+    botonTamanio.addEventListener("click", function (event) {
+        for (let i = 0; i < p.length; i++) {
+            if(li[i].getAttribute('class') == ""){
+                li[i].setAttribute('class', 'fuente_grande');
+            }else if(p[i].getAttribute('class')== 'fuente_grande'){
+                li[i].setAttribute('class', 'fuente_mas_grande');
+            }else{
+                li[i].setAttribute('class', '');
             }
             
         }

@@ -9,51 +9,52 @@ use Illuminate\Http\Request;
 
 class AnuncioController extends Controller
 {
-    //mostrar todos los anuncios 
+    //Index se usa para pasar datos de la BDD y paginarlos, es decir mostrar todos los anuncios
     public function index(Request $request)
     {
-        $generos = Genero::all();
         $anuncios = Anuncio::all();
+        $anuncios = Anuncio::with('genero')->get();
+        $generos = Genero::all();
         //titulo usado en la vista
         $titulo_view = "Todos los anuncios";
-        return view('anuncios.index', compact('anuncios', 'generos', 'request', 'titulo_view'));
+        return view('anuncios.index', compact('anuncios', 'request', 'generos',  'titulo_view'));
     }
 
 
-    public function genero(Genero $generos, Request $request)
+    //mostrar anuncios por el genero que tiene cada uno
+    public function genero(Genero $genero, Request $request)
     {
-
         $generos = Genero::all();
 
-        $anuncios = Anuncio::where('genero_id', $generos->id)->get();
-        $nombre_genero = $generos->nombre;
+        $anuncios = Anuncio::where('genero_id', $genero->id)->get();
+        $nombre_genero = $genero->nombre;
 
         return view('anuncios.genero', compact('anuncios', 'generos', 'nombre_genero', 'request'));
     }
 
-    public function locales(Local $locales, Request $request)
+    public function locales(Local $local, Request $request)
     {
 
         $locales = Local::all();
 
-        $anuncios = Anuncio::where('tipo_local', $locales->id)->get();
+        $anuncios = Anuncio::where('tipo_local', $local->id)->get();
         $tipo_locales = $locales->nombre;
 
         return view('anuncios.genero', compact('anuncios', 'generos', 'nombre_genero', 'request'));
     }
 
-    //muestra todos los generos
+    //Create sirve para pasarle todos los datos necesarios al formulario para luego poder crearlo con store
     public function create()
     {
         $generos = Genero::all();
-        $tipo_negocios =Local::all();
+        $locales = Local::all();
 
-        return view('formularioCrear', compact('generos', 'tipo_negocios'));
+        return view('anuncio.formularioCrear', compact('generos', 'locales'));
     }
 
 
 
-    //crear un nuevo anuncio en BD
+    //Store es el encargado de saber como crear los datos en la BDD
     public function store(Request $request)
     {
         // Convierte el array de otros géneros en una cadena separada por comas
@@ -65,20 +66,18 @@ class AnuncioController extends Controller
         $anuncio->titulo = $request->titulo;
         $anuncio->precio = $request->precio;
         $anuncio->descripcion = $request->descripcion;
+        $anuncio->telefono = $request->telefono;
+        $anuncio->otros_generos = $request->otros_generos;
+        $anuncio->imagen = $request->imagen;
         $anuncio->genero_id = $request->genero;
-        
-        /* //el id 1 es = a que es dj
-        if($request-> tipo_negocio_id == 1){
-            $anuncio->tipo_negocio_id = $request->tipo_negocio;
-        }
-            */
-        $anuncio->tipo_negocio_id = $request->tipo_negocio;
 
-        //incluimos el array separado por comas
-        $anuncio->otros_generos = $generosString;
+        //si es dj
+        $anuncio->ciudad = $request->ciudad;
 
-        // Guardamos la ruta de la imagen
-        $anuncio->imagen = $rutaImg;
+        //si es negocio
+        $anuncio->tipo_local = $request->tipo_local;
+        $anuncio->direccion = $request->direccion;
+        $anuncio->aforo = $request->aforo;
 
         $anuncio->save();
         return redirect()->back()->with('status', 'Anuncio creado');

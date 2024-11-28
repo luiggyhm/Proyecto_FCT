@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Local;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +16,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $locales = Local::all();
-        return view('_components.usuarios.formularioCrearUsuario', compact('locales', 'request'));
+        return view('usuarios.index', compact('locales', 'request'));
     }
 
     /**
@@ -34,13 +36,18 @@ class UserController extends Controller
         $usuario->nombre = $request->nombre;
         $usuario->apellidos = $request->apellidos;
         $usuario->email = $request->email;
-        $usuario->telefono = $request->telefono;
         $usuario->password = $request->password;
-        $usuario->tipo_negocio = $request->tipo_negocio;
-        $usuario->suscripcion_id = $request->suscripcion_id;
+        $usuario->tipo_acceso = $request->tipo_acceso;
 
         $usuario->save();
-        return redirect()->back()->with('status', 'Usuario creado');
+
+         // Lanzar el evento de registro
+         event(new Registered($usuario));
+
+         // Autenticar al usuario automáticamente
+         Auth::login($usuario);
+
+        return redirect()->intended('/')->with('status', 'Usuario creado');
     }
 
     /**

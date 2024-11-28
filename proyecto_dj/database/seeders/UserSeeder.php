@@ -24,11 +24,9 @@ class UserSeeder extends Seeder
             "nombre" => "Admin",
             "apellidos" => "El Mandator",
             "email" => "admin@dj.com",
-            "telefono" => "622622622",
-            "password" => "admin1234",
             "tipo_acceso" => "admin",
-            'ciudad' => "Madrid",
-            'direccion' => "Av. de las Estrellas",
+            "password" => "admin1234",
+
 
         ])->assignRole('administrador');
         
@@ -36,10 +34,8 @@ class UserSeeder extends Seeder
             "nombre" => "Dj",
             "apellidos" => "Chambea",
             "email" => "dj@dj.com",
-            "telefono" => "665544667",
             "tipo_acceso" => "dj",
             "password" => "dj1234",
-            'ciudad' => "Madrid",
 
         ])->assignRole('dj');
 
@@ -48,12 +44,8 @@ class UserSeeder extends Seeder
             "nombre" => "Negocio",
             "apellidos" => "Bar",
             "email" => "negocio@dj.com",
-            "telefono" => "665544663",
             "tipo_acceso" => "negocio",
             "password" => "negocio123",
-            'direccion' => "Av. de las vacas",
-            'aforo' => "150",
-            'id_tipo_local' => "1",
 
         ])->assignRole('negocio');    
     }

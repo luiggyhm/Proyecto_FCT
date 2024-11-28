@@ -13,10 +13,18 @@ class Anuncio extends Model
         'titulo',
         'precio',
         'descripcion',
-        'genero_id',
-        'tipo_local',
+        'telefono',
         'otros_generos',
         'imagen',
+        'genero_id',
+
+        //si es dj
+        'ciudad',
+        
+        //si es negocio
+        'tipo_local',
+        'direccion',
+        'aforo',
     ];
 
     public function genero()
@@ -29,5 +37,6 @@ class Anuncio extends Model
     {
         return $this->belongsTo(Negocio::class, 'tipo_negocio_id');
     }
+
 
 }

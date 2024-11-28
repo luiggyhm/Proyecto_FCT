@@ -8,9 +8,11 @@
     @endcomponent
 @endsection
 
+
+
 @section('nombreGenero')
     @component('_components.anuncios.nombreGenero')
-        @slot('nombre',$titulo_view)
+        @slot('nombre',$nombre_genero)
     @endcomponent
 @endsection
 

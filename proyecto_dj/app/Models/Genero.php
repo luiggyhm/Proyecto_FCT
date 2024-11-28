@@ -16,7 +16,7 @@ class Genero extends Model
 
     public function anuncios()
     {
-        return $this->hasMany(Anuncio::class);
+        return $this->hasMany(Anuncio::class, );
     }
 
 

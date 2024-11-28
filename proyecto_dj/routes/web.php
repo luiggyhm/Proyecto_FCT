@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AnuncioController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,10 +43,13 @@ Route::get('/conoceme', [NavController::class, 'conoceme'])->name('nav.conoceme'
 Route::get('/compraContenido', [NavController::class, 'compraContenido'])->name('nav.compraContenido');
 
 //Muestra todos los anuncios
-Route::get('/anuncios', [NavController::class, 'anuncios'])->name('nav.todosLosAnuncios');
+Route::get('/todosLosAnuncios', [AnuncioController::class, 'index'])->name('todosLosAnuncios');
+Route::get('/anuncio/genero/{genero}', [AnuncioController::class, 'genero'])->name('anuncio.genero');
 
 
-Route::get('/registrar', [NavController::class, 'registrarse'])->name('nav.registrarse');
+Route::get('/registrar', [UserController::class, 'index'])->name('registrarse');
+Route::post('/registro', [UserController::class, 'store'])->name('usuario.store');
+
 
 //la ruta para poder ver las img de los perfiles de usuarios
 //Route::resource('anuncios', AnuncioController::class);

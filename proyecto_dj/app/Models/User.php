@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,22 +22,8 @@ class User extends Authenticatable
         'nombre',
         'apellidos',
         'email',
-        'telefono',
         'password',
         'tipo_acceso',
-
-        //si es dj
-        'ciudad',
-        'suscripcion_id',
-
-        //si es negocio
-        'direccion',
-        'aforo',
-        'id_tipo_local',
-
-
-  
-        //traer datos de negocio y que esten ocultos, que se muestren segun el checkbox de dj o negocio
     ];
 
     //relación 1:1 un usuario solo puede comprar una suscripcion
@@ -48,14 +35,8 @@ class User extends Authenticatable
     //relación 1:1 un usuario solo puede tener un usuario FTP
     public function ftpUser()
     {
-        return $this ->hasOne(FtpUser::class);
+        return $this->hasOne(FtpUser::class);
     }
-
-    //relación n:1 un usuario puede tener varios locales
-    public function locales()
-{
-    return $this->hasMany(Local::class);
-}
 
 
     /**

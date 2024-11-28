@@ -17,7 +17,7 @@ class FtpUserController extends Controller
         //$paypalSubscriptionId;
         $ftUser = new FtpUser();
         $ftUser->user_id = auth()->id(); // ID del usuario autenticado
-        $ftUser->alias = $request; // alias que haya elegido el usaurio
+        $ftUser->alias = $request; // alias que haya elegido el usuario
         $ftUser->password = $ftpPassword; // contraseña generada arriba aleatoriamente
 
 

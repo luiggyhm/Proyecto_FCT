@@ -85,6 +85,8 @@ html {
 }
 
 /**********Botones de funcionalidad**********/
+
+/*Cambio de texto*/
 .cambio {
     padding: 1rem 2rem;
     background-color: #041c35;
@@ -108,6 +110,8 @@ html {
     color: black;
     /* Cambia el color del texto a negro cuando se hace clic en el botón */
 }
+
+/*Cambio de fondo*/
 
 .fondo_blanco {
     background-color: var(--blanco);
@@ -168,6 +172,9 @@ span {
     color: red;
     font-size: small;
 }
+
+
+
 
 /**********Relleno inputs**********/
 .boton-neon {
@@ -483,11 +490,12 @@ span {
 }
 
 .inputs {
-    margin: 0;
-    border: 5rem;
+    margin: 0; /* Ajusta margen interno */
     height: 3rem;
     width: 20rem;
     outline: none;
+    border: 1px solid #ccc; /* Mejora estética del borde */
+    box-sizing: border-box; /* Para que ancho incluya bordes */
 }
 
 .datos_contrataciones {

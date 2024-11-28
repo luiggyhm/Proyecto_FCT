@@ -2,24 +2,24 @@
 <section class="botones">
     <article class="info">
         <div>
-            <button class="boton-neon"> +INFO Suscripciones </button>
+            <a class="boton-neon" href="{{ route('nav.compraContenido') }}"> +INFO Suscripciones </a>
         </div>
     </article>
 
     <article class="inicio-sesion-rrss">
         <aside class="caja">
-            <button class="boton-neon"> Inicio Sesion </button>
+            <a class="boton-neon"> Inicio Sesion </a>
         </aside>
 
         <aside class="caja">
-            <button class="boton-neon">Redes Sociales </button>
+            <a class="boton-neon">Redes Sociales </a>
         </aside>
     </article>
 
 
     <article class="info">
         <aside>
-            <button class="boton-neon"> +INFO Patrocinadores </button>
+            <a class="boton-neon"> +INFO Patrocinadores </a>
         </aside>
     </article>
 </section>

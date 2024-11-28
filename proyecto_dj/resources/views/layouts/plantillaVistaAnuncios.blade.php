@@ -7,6 +7,9 @@
     <!-- Nav Barra principal-->
     @include('layouts._partials.menu')
 
+    @yield('botonesGenero')
+
+
     <header class="bg-dark py-5">
 
         @yield('nombreGenero')
@@ -14,7 +17,7 @@
     </header>
 
 
-    @yield('anuncios')
+    @yield('mostrarAnuncios')
     
 </body>
 

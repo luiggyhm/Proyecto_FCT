@@ -9,6 +9,14 @@
 
      <main id ="main" class ="parrafo-blanco">
 
+<!-- Si se crea el usuario aparece este texto -->
+     @if(session('status'))
+     <section class = "contenedor_video_youtube">
+        <h3>{{session('status')}}</h3>
+    </section>
+     
+     @endif
+
         <!--Primer contenedor descripción y foto-->
         <section class="contenedor_dos_columnas">
             <article>
@@ -55,12 +63,11 @@
                 <p>Únete hoy y haz que tu música, tu negocio o tu evento se escuchen al máximo.</p>
             </article>
 
-            <!--Slider-->
-            @include('layouts._partials.bateriaImg')
 
         </section>
 
         @include('layouts._partials.accesosRapidos')
+        <br>
 
 
 </main> 
