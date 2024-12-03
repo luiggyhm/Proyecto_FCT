@@ -213,6 +213,7 @@ span {
 }
 
 
+
 /**********Contenedores**********/
 .contenedor_una_columna {
     margin-left: 20rem;
@@ -532,8 +533,13 @@ span {
     /* Cambia el color de fondo al azul oscuro al pasar el ratón sobre el botón */
 }
 
-
-
+/********** Formulario Anuncios **********/
+.hidden {
+    display: none;
+}
+.mostrar {
+    display: block;
+}
 
 
 /********** Calendario **********/

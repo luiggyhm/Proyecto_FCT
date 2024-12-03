@@ -14,12 +14,13 @@ class Anuncio extends Model
         'precio',
         'descripcion',
         'telefono',
-        'otros_generos',
-        'imagen',
         'genero_id',
+        'imagen',
+        'otros_generos',
 
-        //si es dj
+        //si es dj o negocio
         'ciudad',
+        'localidad',
         
         //si es negocio
         'tipo_local',

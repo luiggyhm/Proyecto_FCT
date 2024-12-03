@@ -13,6 +13,7 @@
      @if(session('status'))
      <section class = "contenedor_video_youtube">
         <h3>{{session('status')}}</h3>
+        <h3>{{session('imagen')}}</h3>
     </section>
      
      @endif

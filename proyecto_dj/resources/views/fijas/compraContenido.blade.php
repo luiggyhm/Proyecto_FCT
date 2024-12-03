@@ -84,8 +84,10 @@
                 <!-- poner foto de estructuras de carpetas con la musica que hay para descargar -->
 
             </article>
+        </section>
 
-            @include('layouts._partials.accesosRapidos')
+        @include('layouts._partials.accesosRapidos')
+        <br>
 
     </main>
 

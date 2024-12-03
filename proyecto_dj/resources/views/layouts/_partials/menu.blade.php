@@ -1,5 +1,5 @@
 <header class="cabecera">
-    <img class="logo" src={{asset ('imagenes/logo')}} alt="logo Dj Luiggyhm">
+    <img class="logo" src={{asset ('img/logo.png')}} alt="logo Dj Luiggyhm">
 
     <nav class="barra">
         <ul class="barra__opciones">
@@ -29,7 +29,7 @@
             </li>
 
             <li>
-                <h2><a href="{{route('nav.compraContenido')}}">Crear Anuncio</a></h2>
+                <h2><a href="{{route('anuncio.formAnuncio')}}">Crear Anuncio</a></h2>
             </li>
 
 
@@ -52,7 +52,7 @@
                         </button>
                     </form>
                     @else
-                    <a class="btn btn-outline-dark ms-3" href="{{route('login')}}">
+                    <a href="{{route('login')}}">
                         <i class="bi bi-person"></i>
                         Login
                     </a>

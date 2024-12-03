@@ -27,6 +27,7 @@ return new class extends Migration
 
             //si es dj
             $table->string ('ciudad')->nullable();
+            $table->string ('localidad')->nullable();
 
 
             //si es negocio

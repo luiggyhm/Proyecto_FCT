@@ -6,6 +6,7 @@ use App\Models\Anuncio;
 use App\Models\Genero;
 use App\Models\Local;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends Controller
 {
@@ -43,13 +44,14 @@ class AnuncioController extends Controller
         return view('anuncios.genero', compact('anuncios', 'generos', 'nombre_genero', 'request'));
     }
 
+
     //Create sirve para pasarle todos los datos necesarios al formulario para luego poder crearlo con store
     public function create()
     {
         $generos = Genero::all();
         $locales = Local::all();
 
-        return view('anuncio.formularioCrear', compact('generos', 'locales'));
+        return view('anuncios.create', compact('generos', 'locales'));
     }
 
 
@@ -58,17 +60,28 @@ class AnuncioController extends Controller
     public function store(Request $request)
     {
         // Convierte el array de otros géneros en una cadena separada por comas
-        $generosString = implode(',', $request->input('otros_generos'));
-        $rutaImg = $request->file('imagen')->store('public/anuncios');
+        $otrosGeneros = $request->input('otros_generos');
+        if (!is_array($otrosGeneros)) {
+            $otrosGeneros = $otrosGeneros ? explode(',', $otrosGeneros) : [];
+        }
+        $generosString = implode(',', $otrosGeneros);
 
+
+
+        if ($request->hasFile('imagen')) {
+            $rutaImg = $request->file('imagen')->store('public/anuncios');
+            $urlPublicaImg = Storage::url($rutaImg);
+        } else {
+            return redirect()->back()->withErrors(['imagen' => 'No se pudo cargar la imagen.']);
+        }
         //crea anuncio
         $anuncio = new Anuncio();
         $anuncio->titulo = $request->titulo;
         $anuncio->precio = $request->precio;
         $anuncio->descripcion = $request->descripcion;
         $anuncio->telefono = $request->telefono;
-        $anuncio->otros_generos = $request->otros_generos;
-        $anuncio->imagen = $request->imagen;
+        $anuncio->otros_generos = $generosString;
+        $anuncio->imagen = $rutaImg;
         $anuncio->genero_id = $request->genero;
 
         //si es dj
@@ -80,7 +93,7 @@ class AnuncioController extends Controller
         $anuncio->aforo = $request->aforo;
 
         $anuncio->save();
-        return redirect()->back()->with('status', 'Anuncio creado');
+        return redirect()->intended('/')->with('status', 'Anuncio creado');
     }
 
 
@@ -108,20 +121,30 @@ class AnuncioController extends Controller
     public function update(Request $request, Anuncio $anuncio)
     {
 
-        $generosString = implode(',', $request->input('otros_generos'));
+        $otrosGeneros = $request->input('otros_generos');
+        if (!is_array($otrosGeneros)) {
+            $otrosGeneros = $otrosGeneros ? explode(',', $otrosGeneros) : [];
+        }
+        $generosString = implode(',', $otrosGeneros);
+
+
         $rutaImg = $request->file('imagen')->store('public/anuncios');
 
         $anuncio->titulo = $request->titulo;
         $anuncio->precio = $request->precio;
         $anuncio->descripcion = $request->descripcion;
-        $anuncio->genero_id = $request->genero;
-        $anuncio->tipo_negocio_id = $request->tipo_negocio;
-
-        //incluimos el array separado por comas
+        $anuncio->telefono = $request->telefono;
         $anuncio->otros_generos = $generosString;
-
-        // Guardamos la ruta de la imagen
         $anuncio->imagen = $rutaImg;
+        $anuncio->genero_id = $request->genero;
+
+        //si es dj
+        $anuncio->ciudad = $request->ciudad;
+
+        //si es negocio
+        $anuncio->tipo_local = $request->tipo_local;
+        $anuncio->direccion = $request->direccion;
+        $anuncio->aforo = $request->aforo;
 
         $anuncio->save();
 

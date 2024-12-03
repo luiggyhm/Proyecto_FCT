@@ -12,6 +12,6 @@
 @component('_components.anuncios.formularioCrearAnuncio')
 @slot('generos',$generos)
 @slot('locales',$locales)
-@slot('textoBoton','Crear anuncio')
+@slot('textoBoton','Modificar anuncio')
 @endcomponent
 @endsection
