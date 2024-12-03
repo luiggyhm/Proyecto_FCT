@@ -5,7 +5,7 @@
     <meta name="author" content="" />
     <title>Busca animar tu vida</title>
 
-    <!-- Bootstrap icons-->
+    <!-- Bootstrap iconos-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 
      <!-- Bootstrap CSS -->
@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('css/Estilos.css') }}">
     <link rel="stylesheet" href="{{ asset('css/normalizar.css') }}">
 
+    <!-- JS mio -->
     <script src ="{{ asset('js/funcionalidad.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
     <script src="{{ asset('js/botonDJONegocio.js') }}"></script>

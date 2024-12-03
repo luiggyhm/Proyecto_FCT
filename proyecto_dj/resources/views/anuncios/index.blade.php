@@ -24,7 +24,6 @@ para luego llamarlo con un yield donde queremos que se inserte-->
             @component('_components.anuncios.mostrarAnuncio')
                 @slot('anuncios', $anuncios)
             @endcomponent
-
     </div>
 @endsection
 

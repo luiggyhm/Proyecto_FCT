@@ -21,19 +21,9 @@
 que se indica en  el componente, el section sirve para ponerle un nombre
 para luego llamarlo con un yield donde queremos que se inserte-->
 @section('mostrarAnuncios')
-
-    @foreach ($anuncios as $anuncio)
-
-        @component('_components.anuncios.mostrarAnuncio')
-            @slot('id', $anuncio->id)
-            @slot('titulo', $anuncio->titulo)
-            @slot('precio', $anuncio->precio)
-            @slot('descripcion', $anuncio->descripcion)
-            @slot('genero_nombre', $anuncio->genero->nombre)
-            @slot('otros_generos',$anuncio->otros_generos)
-            @slot('imagen',$anuncio->imagen)
-        @endcomponent
-
-    @endforeach
-
+    <div class="row">
+            @component('_components.anuncios.mostrarAnuncio')
+                @slot('anuncios', $anuncios)
+            @endcomponent
+    </div>
 @endsection
