@@ -22,7 +22,7 @@ que se indica en  el componente, el section sirve para ponerle un nombre
 para luego llamarlo con un yield donde queremos que se inserte-->
 @section('mostrarAnuncios')
     <div class="row">
-            @component('_components.anuncios.mostrarAnuncio')
+            @component('_components.anuncios.mostrarAnuncios')
                 @slot('anuncios', $anuncios)
             @endcomponent
     </div>

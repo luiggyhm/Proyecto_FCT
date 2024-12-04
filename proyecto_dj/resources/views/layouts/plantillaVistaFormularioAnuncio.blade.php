@@ -12,7 +12,6 @@
         @yield('seleccionAcceso')
 
         @yield('formularioCrearAnuncio')
-    </main>
 
     @include('layouts._partials.accesosRapidos')
 

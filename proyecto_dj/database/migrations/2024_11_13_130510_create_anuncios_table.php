@@ -33,9 +33,13 @@ return new class extends Migration
             //si es negocio
             $table->text ('direccion')->nullable();
             $table->text ('aforo')->nullable();
+
             //tipo de negocio: bar, discoteca, local, etc...
             $table->unsignedBigInteger('tipo_local')->nullable(); 
             $table->foreign('tipo_local')->references('id')->on('locals')->onDelete('cascade');
+
+            $table->string ('tipo_anuncio')->nullable();
+            
 
 
             $table->timestamps();

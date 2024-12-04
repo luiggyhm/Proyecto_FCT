@@ -13,7 +13,6 @@ class AnuncioController extends Controller
     //Index se usa para pasar datos de la BDD y paginarlos, es decir mostrar todos los anuncios
     public function index(Request $request)
     {
-        $anuncios = Anuncio::all();
         $anuncios = Anuncio::with('genero')->get();
         $generos = Genero::all();
         //titulo usado en la vista
@@ -86,11 +85,16 @@ class AnuncioController extends Controller
 
         //si es dj
         $anuncio->ciudad = $request->ciudad;
+        $anuncio->localidad = $request->localidad;
+        
 
         //si es negocio
         $anuncio->tipo_local = $request->tipo_local;
         $anuncio->direccion = $request->direccion;
         $anuncio->aforo = $request->aforo;
+
+        //elemento oculto enviado por el botón que pulse
+        $anuncio->tipo_anuncio = $request->tipo_anuncio;
 
         $anuncio->save();
         return redirect()->intended('/')->with('status', 'Anuncio creado');
@@ -99,9 +103,10 @@ class AnuncioController extends Controller
 
 
 
-    public function show(Request $request)
+    public function show($id)
     {
-        //
+        $anuncio = Anuncio::find($id);
+        return view('anuncios.show', compact('anuncio'));
     }
 
 
@@ -140,11 +145,16 @@ class AnuncioController extends Controller
 
         //si es dj
         $anuncio->ciudad = $request->ciudad;
+        $anuncio->locallidad = $request->localidad;
+        
 
         //si es negocio
         $anuncio->tipo_local = $request->tipo_local;
         $anuncio->direccion = $request->direccion;
         $anuncio->aforo = $request->aforo;
+
+        //elemento oculto enviado por el botón que pulse
+        $anuncio->tipo_anuncio = $request->tipo_anuncio;
 
         $anuncio->save();
 

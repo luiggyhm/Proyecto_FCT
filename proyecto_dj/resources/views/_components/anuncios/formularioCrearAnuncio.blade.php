@@ -6,7 +6,7 @@
 <section class="contenedor_una_columna">
 
     <!-- Contenido del formulario -->
-    <article class="hidden">
+    <article id ="primero" class="hidden">
         <h2>Rellena los siguientes datos:</h2>
 
         <label for="titulo">Titulo del Anuncio:<span>*</span>

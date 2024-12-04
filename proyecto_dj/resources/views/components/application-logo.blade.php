@@ -1,1 +1,1 @@
-<img src="{{ asset('img/gato.jpg') }}" style="height: 50px; width: auto;" alt="Logo actualizado">
+<img src="{{ asset('img/logo.png') }}" style="height: 50px; width: auto;" alt="Logo actualizado">

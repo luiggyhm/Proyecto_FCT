@@ -26,6 +26,9 @@ class Anuncio extends Model
         'tipo_local',
         'direccion',
         'aforo',
+
+        //se rellena desde el formulario al pulsar el botón automaticamente
+        'tipo_anuncio',
     ];
 
     public function genero()

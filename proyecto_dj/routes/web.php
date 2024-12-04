@@ -47,6 +47,7 @@ Route::get('/todosLosAnuncios', [AnuncioController::class, 'index'])->name('todo
 Route::get('/anuncio/genero/{genero}', [AnuncioController::class, 'genero'])->name('anuncio.genero');
 Route::get('/anuncio/crear', [AnuncioController::class, 'create'])->name('anuncio.formAnuncio');
 Route::post('/registroAnuncio', [AnuncioController::class, 'store'])->name('anuncio.store');
+Route::get('/detalle/{id}', [AnuncioController::class, 'show'])->name('anuncio.show');
 
 
 Route::get('/registrar', [UserController::class, 'index'])->name('registrarse');
