@@ -8,11 +8,11 @@
 
     <article class="inicio-sesion-rrss">
         <aside class="caja">
-            <a class="boton-neon" href=""> Anuncios Negocios </a>
+            <a class="boton-neon" href="{{route('anunciosNegocios')}}"> Anuncios Negocios </a>
         </aside>
 
         <aside class="caja">
-            <a class="boton-neon" href="">Anuncios DJ </a>
+            <a class="boton-neon" href="{{route('anunciosDjs')}}">Anuncios DJ </a>
         </aside>
     </article>
 

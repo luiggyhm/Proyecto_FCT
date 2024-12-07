@@ -43,6 +43,34 @@ class AnuncioController extends Controller
         return view('anuncios.genero', compact('anuncios', 'generos', 'nombre_genero', 'request'));
     }
 
+    public function djs(Genero $genero, Request $request)
+    {
+
+        $anunciosDj = Anuncio::all();
+        $anunciosDj = Anuncio::where('tipo_anuncio', 'dj')->get();
+
+        $generos = Genero::all();
+        $anuncios = Anuncio::where('genero_id', $genero->id)->get();
+        $nombre_genero = $genero->nombre;
+        $tituloPag = 'Anuncios de Djs';
+
+        return view('anuncios.soloDjs', compact('anunciosDj', 'request', 'generos', 'nombre_genero', 'tituloPag', 'anuncios'));
+    }
+
+    public function negocios(Genero $genero, Request $request)
+    {
+
+        $anunciosNegocios = Anuncio::all();
+        $anunciosNegocios = Anuncio::where('tipo_anuncio', 'negocio')->get();
+
+        $generos = Genero::all();
+        $anuncios = Anuncio::where('genero_id', $genero->id)->get();
+        $nombre_genero = $genero->nombre;
+        $tituloPag = 'Anuncios de Djs';
+
+        return view('anuncios.soloNegocios', compact('anunciosNegocios', 'request', 'generos', 'nombre_genero', 'tituloPag', 'anuncios'));
+    }
+
 
     //Create sirve para pasarle todos los datos necesarios al formulario para luego poder crearlo con store
     public function create()

@@ -23,7 +23,9 @@ class AnuncioSeeder extends Seeder
             'genero_id'=>'1',
             'otros_generos'=>'House, Regueton, Bachata, Salsa',
             'imagen' => '/anuncios/dj/luiggyhm.jpg',
-            'ciudad' => 'Parla',
+            'ciudad' => 'Madrid',
+            'localidad' =>'Parla',
+            'tipo_anuncio'=> 'dj',
         ]);
 
         Anuncio::create([
@@ -34,7 +36,9 @@ class AnuncioSeeder extends Seeder
             'genero_id'=>'2',
             'otros_generos'=>'House, Regueton, Bachata, Salsa',
             'imagen' => '/anuncios/dj/TGZer0.jpg',
-            'ciudad' => 'Madrid',
+            'ciudad' => 'Toledo',
+            'localidad'=> 'Mentrida',
+            'tipo_anuncio'=> 'dj'
         ]);
 
 
@@ -51,6 +55,7 @@ class AnuncioSeeder extends Seeder
             'imagen' => '/anuncios/dj/Ventura.jpg',
             'direccion'=> 'Av. de por ahí',
             'aforo' => '100',
+            'tipo_anuncio'=> 'negocio',
         ]);
 
         Anuncio::create([
@@ -64,6 +69,7 @@ class AnuncioSeeder extends Seeder
             'imagen' => '/anuncios/dj/Ventura.jpg',
             'direccion'=> 'Calle Rorrejon',
             'aforo' => '100',
+            'tipo_anuncio'=> 'negocio',
         ]);
 
         Anuncio::create([
@@ -77,6 +83,7 @@ class AnuncioSeeder extends Seeder
             'imagen' => '/anuncios/dj/Ventura.jpg',
             'direccion'=> 'pinto',
             'aforo' => '50',
+            'tipo_anuncio'=> 'negocio',
         ]);
 
         Anuncio::create([
@@ -90,6 +97,7 @@ class AnuncioSeeder extends Seeder
             'imagen' => '/anuncios/dj/Ventura.jpg',
             'direccion'=> 'enfreente Siroco',
             'aforo' => '150',
+            'tipo_anuncio'=> 'negocio',
         ]);
 
     }

@@ -5,140 +5,112 @@ namespace App\Http\Controllers;
 use App\Models\Suscripcion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use PayPal\Rest\ApiContext;
-
-//use de paypal
-use PayPal\Api\Amount;
-use PayPal\Api\Payer;
-use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;
-use PayPal\Auth\OAuthTokenCredential;
-use PayPal\Exception\PayPalConnectionException;
+use Illuminate\Support\Facades\Log;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as CheckoutSession;
 
 class SuscripcionController extends Controller
 {
-    private $apiContext;
-
-    //este construcctor accede a los datos que tenemos en el la carpeta de conf y este a su vez en el .env
-    public function __construct()
+    public function pagarConStripe(Request $request)
     {
-        $payPalConfig = Config::get('paypal');
+        //validación de datos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'precio' => 'required|numeric|min:0',
+        ]);
 
-        $this->apiContext = new ApiContext(
-            new OAuthTokenCredential(
-                $payPalConfig['client_id'],
-                $payPalConfig['secret']
-            )
-        );
+        //consigue el archivo de configuración con las credenciales
+        Stripe::setApiKey(Config::get('stripe.secret'));
 
-        $this->apiContext->setConfig($payPalConfig['settings']);
-    }
+        // Usar el email del usuario autenticado o un email de prueba en modo sandbox
+        //$customerEmail = auth()->check() ? auth()->user()->email : 'test@example.com';
 
-    public function pagarConPaypal()
-    {
-        $cliente = new Payer();
-        //seleccionamos el metodo de pago que será por paypal
-        $cliente->setPaymentMethod('paypal');
-
-        //Ejecuta el pago que se debe hacer
-        $cantidadDeCobro = new Amount();
-
-        //podemos indicarle que sea el precio de lo que se quiere adquierir
-        $cantidadDeCobro->setTotal('3.99');
-        //tipo de moneda
-        $cantidadDeCobro->setCurrency('€');
-
-
-        //se crea transacción por la cantidad indicada, dado que solo puede adquir un producto, en caso ser más de uno modificarlo
-        $transacion = new Transaction();
-        $transacion->setAmount($cantidadDeCobro);
-        $transacion->setDescription('Compra de ....');
-
-        $rutaDeVuelta = url('errorPago');
-
-
-        //agregamos las rutas que queremos mostrar cuando se hace el pago ok o cancelado si lo cancela el comprador
-        $redireccionDeUrls = new RedirectUrls();
-        $redireccionDeUrls->setReturnUrl($rutaDeVuelta)
-            ->setCancelUrl($rutaDeVuelta);
-
-        $pago = new Payment();
-        $pago->setIntent('sale')
-            ->setPayer($cliente)
-            ->setTransactions(array($transacion))
-            ->setRedirectUrls($redireccionDeUrls);
-
-
-        //creamos un objeto pago para la cobrarlo
         try {
-            $pago->create($this->apiContext);
-
-            //redirección aprobada por paypal
-            return redirect()->away($pago->getApprovalLink());
-        } catch (PayPalConnectionException $ex) {
-            //muestra la excepción, pero se debería de mostrar una vista con el error
-            echo $ex->getData();
-        }
-    }
-
-
-    //metodo para que se realice el pago
-    public function estadoPago(Request $request)
-    {
-        //dd($request->all()); pintamos toda la info que envia paypal
-
-        //recuperamos el id del pago, el id de quien lo ha pagado y el token
-        $idDelPago = $request->input('paymentId');
-        $idDelPagador = $request->input('PayerID');
-        $token = $request->input('token');
-
-        if (!$idDelPago || !$idDelPagador || !$token) {
-            $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-
-            //mensaje que podemos mostrar en la vista fallo
-            return redirect('/paypal/fallo')->with(compact('status'));
-        }
-
-        //Obtenemos un objeto pago que necesita todos los datos antes nombrados para realizar el pago
-        $pago = Payment::get($idDelPago, $this->apiContext);
-
-        //ejecutamos el pago
-        $ejecucion = new PaymentExecution();
-        $ejecucion->setPayerId($idDelPagador);
-
-        /** Ejecuta el pago **/
-        $resultado = $pago->execute($ejecucion, $this->apiContext);
-        //podemos usar dd($result); para ver los resultados que nos dan al ejecutarse el pago
-
-        //Si el pago está aceptado, guarda datos en la BD
-        if ($resultado->getState() === 'approved') {
-            // Crea una entrada nueva de suscripción
-            Suscripcion::create([
-                'pago_id' => $idDelPago,
-                'cliente_id' => $idDelPagador,
-                'token' => $token,
-                'estado_pago' => $resultado->getState(),
-                'cantidad_cobro' => $resultado->getTransactions()[0]->getAmount()->getTotal(),
-                'tipo_moneda' => $resultado->getTransactions()[0]->getAmount()->getCurrency(),
-                'descripcion_transacccion' => $resultado->getTransactions()[0]->getDescription(),
+            // Crear un cliente en Stripe con el correo
+            $customer = \Stripe\Customer::create([
+                //'email' => $customerEmail,
             ]);
 
-            // El pago fue exitoso, se puede ingestar este dato en la vista 
-            $status = 'Gracias! El pago a través de PayPal se ha realizado correctamente.';
-            return redirect('/home')->with(compact('status'));
+            // Crear la sesión de pago con el ID del cliente
+            $checkoutSession = CheckoutSession::create([
+                'payment_method_types' => ['card'],
+                'customer' => $customer->id,
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'product_data' => [
+                            'name' => $request->nombre,
+                        ],
+                        'unit_amount' => $request->precio * 100, // Stripe maneja los importes en centimos
+                    ],
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                //envia a estas rutas para indicar el error o si esta ok
+                'success_url' => route('estadoPagoStripe') . '?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('estadoPagoStripe'),
+            ]);
+
+            return redirect($checkoutSession->url);
+        } catch (\Exception $ex) {
+            Log::error('Error al crear sesión de pago en Stripe', ['exception' => $ex->getMessage()]);
+            return back()->withErrors(['error' => 'Error al procesar el pago con Stripe.']);
+        }
+    }
+
+
+
+    public function estadoPagoStripe(Request $request)
+    {
+        Log::debug('Debug: Inicio del método estadoPagoStripe');
+
+        //crea la session
+        $sessionId = $request->input('session_id');
+
+        //si no existe la session es error
+        if (!$sessionId) {
+            $status = 'Lo sentimos! El pago a través de Stripe no se pudo realizar.';
+            Log::error('Error: Falta de session_id en la respuesta de Stripe');
+            return redirect('/')->with(compact('status'));
         }
 
-        $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-        return redirect('/cesta')->with(compact('status'));
+        //consigue el archivo de configuración con las credenciales
+        Stripe::setApiKey(Config::get('stripe.secret'));
 
+        try {
+            $session = CheckoutSession::retrieve($sessionId);
+            $paymentIntent = $session->payment_intent; //Obtiene el id del pago
+            $clienteId = $session->customer; //Obtiene el Id del cliente
+            $customerEmail = $session->customer_details->email; // Obtener el email del cliente
 
-        /*
-        mostraje que podemos mostrar en la vista
-        @if(session('status')) 
-        //podemos mostrar cualquien mensaje, inyección de codigo o alert desde la vista
-        @endif
-        */
+            // Verificar que los datos existen antes de acceder a ellos
+            if (isset($session->payment_status) && $session->payment_status === 'paid' && $clienteId) {
+                Suscripcion::create([
+                    'pago_id' => $paymentIntent,
+                    'cliente_id' => $clienteId,
+                    'token' => $sessionId,
+                    'email' => $customerEmail,
+                    'estado_pago' => $session->payment_status,
+                    'cantidad_cobro' => $session->amount_total / 100,
+                    'tipo_moneda' => $session->currency,
+                    'descripcion_transacccion' => $session->display_items[0]->custom->name ?? 'Descripción no disponible',
+                ]);
+
+                Log::debug('Debug: Suscripción creada en la base de datos');
+                $status = 'Gracias! El pago a través de Stripe se ha realizado correctamente.';
+                return redirect('/')->with(compact('status'));
+            } else {
+                Log::error('Error: El estado de pago no es "paid" o cliente_id es nulo', [
+                    'payment_status' => $session->payment_status,
+                    'cliente_id' => $clienteId,
+                ]);
+                $status = 'Lo sentimos! El pago a través de Stripe no se pudo realizar.';
+                return redirect('/')->with(compact('status'));
+            }
+        } catch (\Exception $ex) {
+            Log::error('Error al recuperar la sesión de pago en Stripe', ['exception' => $ex->getMessage()]);
+            $status = 'Lo sentimos! El pago a través de Stripe no se pudo realizar.';
+            return redirect('/')->with(compact('status'));
+        }
     }
 }

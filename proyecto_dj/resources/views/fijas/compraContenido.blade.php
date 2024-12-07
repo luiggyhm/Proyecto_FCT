@@ -67,17 +67,7 @@
             </article>
 
             <!--Botones-->
-            <!-- poner en el onclick route('pago') -->
-            <section class="registro-inicio">
-                <article class="inicio">
-                    <button class="boton-neon" onclick=""> Acceso Mensual </button>
-                </article>
-
-                <article class="registro">
-                    <button class="boton-neon" onclick="">Acceso Anual </button>
-                </article>
-            </section>
-
+            @include('pagos.formularioPago')
 
 
             <article>

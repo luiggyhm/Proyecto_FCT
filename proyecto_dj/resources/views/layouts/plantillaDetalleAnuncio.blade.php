@@ -16,6 +16,7 @@
         @include('layouts._partials.accesosRapidos')
 
     </main>
+    
     <br>
     @include('layouts._partials.footer')
 

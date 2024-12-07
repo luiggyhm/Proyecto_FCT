@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('cantidad_cobro', 8, 2);
             $table->string('tipo_moneda');
             $table->text('descripcion_transacccion')->nullable();
+            $table->string('email')->nullable();
             
             $table->timestamps();
         });

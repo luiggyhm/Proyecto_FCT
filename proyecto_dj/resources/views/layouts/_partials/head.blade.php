@@ -29,4 +29,6 @@
     <script src ="{{ asset('js/funcionalidad.js') }}"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
     <script src="{{ asset('js/botonDJONegocio.js') }}"></script>
+    <script src="{{ asset('js/mostrar.js') }}"></script>
+
 </head>

@@ -12,6 +12,7 @@ class Suscripcion extends Model
     protected $fillable = [
         'pago_id',
         'cliente_id',
+        'email',
         'token',
         'estado_pago',
         'cantidad_cobro',
@@ -24,8 +25,4 @@ class Suscripcion extends Model
     {
         return $this->hasMany(User::class, 'suscripcion_id');
     }
-
-
-
-
 }

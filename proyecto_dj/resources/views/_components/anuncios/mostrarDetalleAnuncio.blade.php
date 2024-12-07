@@ -6,23 +6,38 @@
 
     <!-- Detalles del anuncio-->
     <div¡ class="card-body p-4">
-        <div class="text-center">
+        <div class="text-center justify-content-center">
             
             <!-- Datos Adicionales -->
-            <label class="form-label d-flex justify-content-center">Descripción: {{ $descripcion }}</label>
-            <label class="form-label d-flex justify-content-center">Precio: {{ $precio }} €</label>
-            <label class="form-label d-flex justify-content-center">Género Principal: {{ $genero }}</label>
-            <label class="form-label d-flex justify-content-center">Telefono: {{ $telefono }}</label>
-            <label class="form-label d-flex justify-content-center">Descripción: {{ $descripcion }}</label>
-            <label class="form-label d-flex justify-content-center">Ciudad: {{ $ciudad }}</label>
-            <label class="form-label d-flex justify-content-center">Localidad: {{ $localidad }}</label>
+            <label id="">Descripción: {{ $descripcion }}</label>
+            <br>
+            <label id="">Precio: {{ $precio }} €</label>
+            <br>
+            <label id="">Género Principal: {{ $genero }}</label>
+            <br>
+            <label id="">Descripción: {{ $descripcion }}</label>
+            <br>
+            <label id="">Ciudad: {{ $ciudad }}</label>
+            <br>
+            <label id="">Localidad: {{ $localidad }}</label>
+            <br>
+
+            <label id="">Generos Adicionales: {{ $otros_generos }}</label>
+            <br>
+
+            <button class="btn btn-success" id = 'mostrarTelefono'> Mostrar teléfono</button>
+            <label id= "telefono" class="hidden">Telefono: {{ $telefono }}</label>
+            <br>
 
             @if ($tipo_anuncio == 'Negocio')
-            <label class="form-label d-flex justify-content-center">Tipo Local: {{ $tipo_local }}</label>
-            <label class="form-label d-flex justify-content-center">Dirección: {{ $direccion }}</label>
-            <label class="form-label d-flex justify-content-center">Aforo: {{ $aforo }}</label>
+            <label id="">Tipo Local: {{ $tipo_local }}</label>
+            <br>
+            <label id="">Dirección: {{ $direccion }}</label>
+            <br>
+            <label id="">Aforo: {{ $aforo }}</label>
             @endif
 
+            <br>
             <a class="btn btn-success" href="">Modificar</a>
             <a class="btn btn-danger" href="">Eliminar</a>
 

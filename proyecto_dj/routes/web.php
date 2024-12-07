@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnuncioController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,25 +45,20 @@ Route::get('/compraContenido', [NavController::class, 'compraContenido'])->name(
 
 //Muestra todos los anuncios
 Route::get('/todosLosAnuncios', [AnuncioController::class, 'index'])->name('todosLosAnuncios');
-Route::get('/anuncio/genero/{genero}', [AnuncioController::class, 'genero'])->name('anuncio.genero');
-Route::get('/anuncio/crear', [AnuncioController::class, 'create'])->name('anuncio.formAnuncio');
+Route::get('/anuncios/genero/{genero}', [AnuncioController::class, 'genero'])->name('anuncio.genero');
+Route::get('/anuncios/crear', [AnuncioController::class, 'create'])->name('anuncio.formAnuncio');
 Route::post('/registroAnuncio', [AnuncioController::class, 'store'])->name('anuncio.store');
 Route::get('/detalle/{id}', [AnuncioController::class, 'show'])->name('anuncio.show');
+Route::get('/anuncios/dj', [AnuncioController::class, 'djs'])->name('anunciosDjs');
+Route::get('/anuncios/Negocios', [AnuncioController::class, 'negocios'])->name('anunciosNegocios');
 
 
 Route::get('/registrar', [UserController::class, 'index'])->name('registrarse');
 Route::post('/registro', [UserController::class, 'store'])->name('usuario.store');
 
-
-//la ruta para poder ver las img de los perfiles de usuarios
-//Route::resource('anuncios', AnuncioController::class);
-
-
 //pagos
-//ruta encargada de ejecutar los pagos
-//Route::get ('paypal/pay', PagoController::class, 'pagarConPaypal') -> name ('pagarPaypal');
-
-//Route::get ('paypal/error', PagoController::class, 'estadoPago') -> name ('errorPago');
+Route::post('/pagarConStripe', [SuscripcionController::class, 'pagarConStripe'])->name('pagarConStripe');
+Route::get('/estadoPagoStripe', [SuscripcionController::class, 'estadoPagoStripe'])->name('estadoPagoStripe');
 
 
 
