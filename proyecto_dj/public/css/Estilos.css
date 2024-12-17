@@ -84,12 +84,42 @@ html {
     margin-top: 2rem;
 }
 
-/**********Botones de funcionalidad**********/
+/**********Botones de Busqueda Anuncios**********/
+
+/* Estilo para el género seleccionado */
+.nav-link.active {
+    color: var(--blanco);
+    background-color: var(--morado);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+/* Estilo para los botones de búsqueda seleccionados */
+#botones-busqueda {
+    transition: all 0.3s ease;
+}
+
+/* Cuando los botones de búsqueda están activos */
+#botones-busqueda.active {
+    background-color: var(--blanco);
+    border: 1px solid var(--morado);
+    border-radius: 5px;
+}
+
+/* Ajustes generales */
+.container.my-4 .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
 
 /*Cambio de texto*/
 .cambio {
     padding: 1rem 2rem;
-    background-color: #041c35;
+    background-color: var(--morado);
     /* Azul por defecto */
     color: var(--blanco);
     cursor: pointer;
@@ -100,12 +130,12 @@ html {
 }
 
 .cambio:hover {
-    background-color: #192635;
+    background-color: var(--morado);
     /* Cambia el color de fondo al azul oscuro al pasar el ratón sobre el botón */
 }
 
 .cambio:active {
-    background-color: white;
+    background-color:var(--blanco);
     /* Cambia el color de fondo a blanco cuando se hace clic en el botón */
     color: black;
     /* Cambia el color del texto a negro cuando se hace clic en el botón */
@@ -144,7 +174,7 @@ a {
 a:active {
     background-color: var(--morado);
     /* Color de fondo para la página activa */
-    color: white;
+    color: var(--blanco);
 }
 
 figcaption {
@@ -179,7 +209,7 @@ span {
 /**********Relleno inputs**********/
 .boton-neon {
     background-color: transparent;
-    color: #fff;
+    color: var(--blanco);
     /* Color del texto */
     font-size: 2rem;
     border: 2px solid var(--morado);

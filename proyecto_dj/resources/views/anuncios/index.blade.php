@@ -14,9 +14,6 @@
     @endcomponent
 @endsection
 
-
-
-
 <!--Se encarga de inyectar los datos dentro del código dentro del balde
 que se indica en  el componente, el section sirve para ponerle un nombre
 para luego llamarlo con un yield donde queremos que se inserte-->

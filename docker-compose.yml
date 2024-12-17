@@ -1,5 +1,5 @@
 services:
-  #base de datos maríadb
+  #base de datos mariadb
   mariadb:
     image: docker.io/bitnami/mariadb:11.2
     ports:
@@ -9,7 +9,6 @@ services:
     env_file:
       - ".env"
     environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
@@ -37,26 +36,23 @@ services:
       - mariadb
 
   #servidor ftp
-  ftp:
-    image: fauria/vsftpd
+  pure-ftp:
+    image: stilliard/pure-ftpd
     ports:
       - "21:21"
-      - "21100-21110:21100-21110"
-
+      - "30000-30009:30000-30009"  # Active mode FTP ports
     environment:
-      - PASV_ADDRESS=0.0.0.0
-      - PASV_MIN_PORT=21100
-      - PASV_MAX_PORT=21110
-      - FTP_USER=admin
-      - FTP_PASSWORD=admin
-      - PASV_ENABLE=YES
-
+      - MYSQL_USER=${MARIADB_USER}
+      - MYSQL_PASSWORD=${MARIADB_PASSWORD}
+      - MYSQL_HOST=mariadb
+      - MYSQL_DB=ftp_db
+      - PURE_FTPD_USERS_DB=ftp_users
+      - FTP_USER_ALIAS_FIELD=alias
+      - FTP_USER_PASSWORD_FIELD=password
+      - FTP_USER_HOME_FIELD=directorio_raiz
+      - FTP_USER_STATUS_FIELD=estado
+      - FTP_USER_TYPE_FIELD=tipo_user
     volumes:
-      - ./ftp-data:/srv/ftp                # Carpeta base para FTP
-      - ./vsftpd:/etc/vsftpd/              # Configuración principal de vsftpd
-      - ./pam_mysql:/etc/pam.d/            # Autenticación PAM
-      - ./user_config:/etc/vsftpd/user_config # Configuración específica por usuario
-
-    restart: always
+      - './ftp/ftp_data:/home/ftpusers'
     depends_on:
       - mariadb

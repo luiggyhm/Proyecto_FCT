@@ -12,7 +12,7 @@
 
             <li class="mx-2"><h2><a href="{{ route('todosLosAnuncios') }}" class="text-dark">Anuncios</a></h2></li>
 
-            <li class="mx-2"><h2><a href="{{ route('anuncio.formAnuncio') }}" class="text-dark">Crear Anuncio</a></h2></li>
+            <li class="mx-2"><h2><a href="{{route('ftpUser.elecccion')}}" class="text-dark">Usuarios</a></h2></li>
 
             
             <li class="mx-2"><button id="cambiarFondo" class="btn cambio">Cambiar Fondo</button></li>

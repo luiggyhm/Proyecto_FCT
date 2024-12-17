@@ -26,8 +26,6 @@ class UserSeeder extends Seeder
             "email" => "admin@dj.com",
             "tipo_acceso" => "admin",
             "password" => "admin1234",
-
-
         ])->assignRole('administrador');
         
         User::create([
@@ -36,7 +34,6 @@ class UserSeeder extends Seeder
             "email" => "dj@dj.com",
             "tipo_acceso" => "dj",
             "password" => "dj1234",
-
         ])->assignRole('dj');
 
 
@@ -46,7 +43,6 @@ class UserSeeder extends Seeder
             "email" => "negocio@dj.com",
             "tipo_acceso" => "negocio",
             "password" => "negocio123",
-
         ])->assignRole('negocio');    
     }
 

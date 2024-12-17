@@ -16,7 +16,7 @@ class FtpUserSeeder extends Seeder
         FtpUser::create([
             'alias' => 'admin',
             'password' => 'admin1234',
-            'directorio_raiz' => '/home',
+            'directorio_raiz' => '/',
             'tipo_user' => 'admin',
             'estado' => "activo",
             'user_id' => '1',
@@ -25,7 +25,7 @@ class FtpUserSeeder extends Seeder
         FtpUser::create([
             'alias' => 'cliente',
             'password' => 'cliente1234',
-            'directorio_raiz' => '/home/remixes',
+            'directorio_raiz' => '/',
             'tipo_user' => 'cliente',
             'estado' => "activo",
             'user_id' => '2',

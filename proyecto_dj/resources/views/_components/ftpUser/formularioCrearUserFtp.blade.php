@@ -1,0 +1,58 @@
+<form action="{{ route('ftpUser.store') }}" method="post" style="width: 3000px;" enctype="multipart/form-data">
+
+    <!--Se añade @csrf para darleseguridad al formulario y protegerlo -->
+    @csrf
+
+    <section class="contenedor_una_columna">
+
+        <!-- Contenido del formulario -->
+        <article id="primero">
+            <h2>Rellena los siguientes datos:</h2>
+
+            <label for="Alias">suario o Alias:<span>*</span>
+                <br>
+                <input type="text" class="inputs" id="alias" name="alias" placeholder="Alias" required>
+            </label>
+
+            <label for="password">Contraseña:<span>*</span>
+                <br>
+                <input type="text" class="inputs" id="password" name="password" required>
+            </label>
+
+            <label for="directorio_raiz">Directorio:<span>*</span>
+                <br>
+                <select class="inputs" name="directorio_raiz" required>
+                    @foreach ($directorios as $directorio )
+                    <option id="{{$directorio}}" value="{{$directorio}}">{{$directorio}}</option>
+                    @endforeach
+                </select>
+            </label>
+        </article>
+        <br>
+
+        <article>
+
+            <label for="tipo_user">Tipo Usuario:<span>*</span>
+                <br>
+                <select class="inputs" name="tipo_user" required>
+                    @foreach ($tipo_users as $user )
+                    <option id="{{$user}}" value="{{$user}}">{{$user}}</option>
+                    @endforeach
+                </select>
+            </label>
+
+            <label for="estado">Estado:<span>*</span>
+                <br>
+                <select class="inputs" name="estado" required>
+                    @foreach ($estados as $estado )
+                    <option id="{{$estado}}" value="{{$estado}}">{{$estado}}</option>
+                    @endforeach
+                </select>
+            </label>
+            <asside>
+                <input type="submit" class="inputs" value="{{$textoBoton}}"></input>
+            </asside>
+        </article>
+
+    </section>
+</form>

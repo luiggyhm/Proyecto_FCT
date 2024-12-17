@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -53,9 +54,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $usuario = User::find($id);
+        return view('user.show', compact('usuario'));
     }
 
     /**
@@ -75,7 +77,7 @@ class UserController extends Controller
         $usuario->apellidos = $request->apellidos;
         $usuario->email = $request->email;
         $usuario->telefono = $request->telefono;
-        $usuario->password = $request->password;
+        $usuario->password = Hash::make($$request->password);
         $usuario->tipo_negocio = $request->tipo_negocio;
         $usuario->suscripcion_id = $request->suscripcion_id;
 

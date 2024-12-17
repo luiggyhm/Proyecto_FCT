@@ -1,29 +1,37 @@
 <div class="container my-4">
     <div class="row align-items-center">
-        <!-- Primera columna: Navbar con géneros -->
-        <div class="col-md-6">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                            @foreach ($generos as $g)
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" href="{{route('anuncio.genero',$g->id)}}">{{$g->nombre}}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+        <!-- Navbar con géneros -->
+        <div class="col-md-4 d-flex justify-content-center">
+            <nav class="navbar navbar-expand-lg bg-white">
+                <div class="collapse navbar-collapse justify-content-center">
+                    <ul class="navbar-nav">
+                        @foreach ($generos as $g)
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{ route('anuncio.genero', $g->id) }}">{{$g->nombre}}</a>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </nav>
         </div>
 
-        <!-- Segunda columna: Botones de búsqueda -->
-        <div class="col-md-6">
-            <nav>
-                @include('_components.anuncios.botonesBusquedaDjsNegocios')
+        <!-- Botón "Crear Anuncio" -->
+        <div class="col-md-4 d-flex justify-content-center">
+            <nav class="navbar bg-white">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ route('anuncio.formAnuncio') }}" class="nav-link text-dark">Crear Anuncio</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Botones de búsqueda -->
+        <div class="col-md-4 d-flex justify-content-center">
+            <nav id="botones-busqueda" class="navbar bg-white">
+                <ul class="navbar-nav d-flex flex-row">
+                    @include('_components.anuncios.botonesBusqueda')
+                </ul>
             </nav>
         </div>
     </div>

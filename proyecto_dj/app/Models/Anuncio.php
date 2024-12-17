@@ -21,7 +21,7 @@ class Anuncio extends Model
         //si es dj o negocio
         'ciudad',
         'localidad',
-        
+
         //si es negocio
         'tipo_local',
         'direccion',
@@ -42,5 +42,9 @@ class Anuncio extends Model
         return $this->belongsTo(Negocio::class, 'tipo_negocio_id');
     }
 
-
+    // Relación n:n con User
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'anuncio_user');
+    }
 }

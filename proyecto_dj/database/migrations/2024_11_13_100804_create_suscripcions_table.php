@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('tipo_moneda');
             $table->text('descripcion_transacccion')->nullable();
             $table->string('email')->nullable();
-            
+            $table->string('estado')->nullable();
+
             $table->timestamps();
         });
     }

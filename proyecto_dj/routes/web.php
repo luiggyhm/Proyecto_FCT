@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnuncioController;
+use App\Http\Controllers\FtpUserController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuscripcionController;
@@ -32,38 +33,48 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//rutas creadas visibles para todos
-
-//Muestra la vista inicio si accede a /
+//Barra nav
 Route::get('/', [NavController::class, 'home'])->name('nav.inicio');
-
-//Muestra la vista de Conoceme
 Route::get('/conoceme', [NavController::class, 'conoceme'])->name('nav.conoceme');
-
-//Muestra la vista de Venta Contenido
 Route::get('/compraContenido', [NavController::class, 'compraContenido'])->name('nav.compraContenido');
 
-//Muestra todos los anuncios
-Route::get('/todosLosAnuncios', [AnuncioController::class, 'index'])->name('todosLosAnuncios');
+//Anuncios
+//Mostrar Anuncios
+Route::get('/anuncios/todos', [AnuncioController::class, 'index'])->name('todosLosAnuncios'); 
+Route::get('/anuncios/dj', [AnuncioController::class, 'mostrarDjs'])->name('anuncios.mostrarDjs');
+Route::get('/anuncios/Negocios', [AnuncioController::class, 'negocios'])->name('anuncios.mostrarNegocios');
+Route::get('/anuncio/detalle/{id}', [AnuncioController::class, 'show'])->name('anuncio.show');
+
+//Ver generos
 Route::get('/anuncios/genero/{genero}', [AnuncioController::class, 'genero'])->name('anuncio.genero');
+
+//Crear Anuncio
 Route::get('/anuncios/crear', [AnuncioController::class, 'create'])->name('anuncio.formAnuncio');
 Route::post('/registroAnuncio', [AnuncioController::class, 'store'])->name('anuncio.store');
-Route::get('/detalle/{id}', [AnuncioController::class, 'show'])->name('anuncio.show');
-Route::get('/anuncios/dj', [AnuncioController::class, 'djs'])->name('anunciosDjs');
-Route::get('/anuncios/Negocios', [AnuncioController::class, 'negocios'])->name('anunciosNegocios');
 
 
+//Usuarios
+//crear Usuario
 Route::get('/registrar', [UserController::class, 'index'])->name('registrarse');
 Route::post('/registro', [UserController::class, 'store'])->name('usuario.store');
 
-//pagos
-Route::post('/pagarConStripe', [SuscripcionController::class, 'pagarConStripe'])->name('pagarConStripe');
+
+//Usuarios FTP
+Route::get('/ftpUser/opciones', [FtpUserController::class, 'opciones'])->name('ftpUser.elecccion');
+Route::get('/ftpUser/verTodos', [FtpUserController::class, 'index'])->name('ftpUser.index');
+Route::get('/ftpUser/detalle/{id}', [FtpUserController::class, 'show'])->name('ftpUser.show');
+
+//crear Usuario FTP
+Route::get('/registrarFtp', [FtpUserController::class, 'create'])->name('ftpUser.formAnuncio');
+Route::post('/registroFtp', [FtpUserController::class, 'store'])->name('ftpUser.store');
+
+
+
+
+//Pagos
+//Stripe
+Route::post('/pago/Stripe', [SuscripcionController::class, 'pagarConStripe'])->name('pagarConStripe');
 Route::get('/estadoPagoStripe', [SuscripcionController::class, 'estadoPagoStripe'])->name('estadoPagoStripe');
-
-
-
-
-
 
 
 require __DIR__.'/auth.php';

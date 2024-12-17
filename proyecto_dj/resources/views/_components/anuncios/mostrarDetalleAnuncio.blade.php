@@ -7,7 +7,7 @@
     <!-- Detalles del anuncio-->
     <div¡ class="card-body p-4">
         <div class="text-center justify-content-center">
-            
+
             <!-- Datos Adicionales -->
             <label id="">Descripción: {{ $descripcion }}</label>
             <br>
@@ -25,9 +25,22 @@
             <label id="">Generos Adicionales: {{ $otros_generos }}</label>
             <br>
 
-            <button class="btn btn-success" id = 'mostrarTelefono'> Mostrar teléfono</button>
-            <label id= "telefono" class="hidden">Telefono: {{ $telefono }}</label>
-            <br>
+
+            @if (Route::has('login'))
+            @auth
+            
+                <button class="btn btn-success" id='mostrarTelefono'> Mostrar teléfono</button>
+                <label id="telefono" class="hidden">Telefono: {{ $telefono }}</label>
+                <br>
+  
+            @else
+            <a href="{{ route('login') }}" class="btn btn-outline-dark mx-1">
+                <i class="bi bi-person"></i> Necesita Inicio de Session
+            </a>
+            @endauth
+            @endif
+
+
 
             @if ($tipo_anuncio == 'Negocio')
             <label id="">Tipo Local: {{ $tipo_local }}</label>
@@ -42,6 +55,6 @@
             <a class="btn btn-danger" href="">Eliminar</a>
 
         </div>
-    </div>
-    
+</div>
+
 </div>

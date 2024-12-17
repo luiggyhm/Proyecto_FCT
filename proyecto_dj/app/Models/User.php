@@ -26,6 +26,12 @@ class User extends Authenticatable
         'tipo_acceso',
     ];
 
+    // Relación n:n con Anuncio
+    public function anuncios()
+    {
+        return $this->belongsToMany(Anuncio::class, 'anuncio_user');
+    }
+
     //relación 1:1 un usuario solo puede comprar una suscripcion
     public function suscripcion()
     {
@@ -37,6 +43,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(FtpUser::class);
     }
+
+
 
 
     /**

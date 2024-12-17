@@ -6,6 +6,7 @@ use App\Models\Anuncio;
 use App\Models\Genero;
 use App\Models\Local;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends Controller
@@ -43,7 +44,7 @@ class AnuncioController extends Controller
         return view('anuncios.genero', compact('anuncios', 'generos', 'nombre_genero', 'request'));
     }
 
-    public function djs(Genero $genero, Request $request)
+    public function mostrarDjs(Genero $genero, Request $request)
     {
 
         $anunciosDj = Anuncio::all();
@@ -93,14 +94,13 @@ class AnuncioController extends Controller
         }
         $generosString = implode(',', $otrosGeneros);
 
-
-
         if ($request->hasFile('imagen')) {
             $rutaImg = $request->file('imagen')->store('public/anuncios');
             $urlPublicaImg = Storage::url($rutaImg);
         } else {
             return redirect()->back()->withErrors(['imagen' => 'No se pudo cargar la imagen.']);
         }
+
         //crea anuncio
         $anuncio = new Anuncio();
         $anuncio->titulo = $request->titulo;
@@ -108,13 +108,13 @@ class AnuncioController extends Controller
         $anuncio->descripcion = $request->descripcion;
         $anuncio->telefono = $request->telefono;
         $anuncio->otros_generos = $generosString;
-        $anuncio->imagen = $rutaImg;
+        $anuncio->imagen = $urlPublicaImg;
         $anuncio->genero_id = $request->genero;
 
         //si es dj
         $anuncio->ciudad = $request->ciudad;
         $anuncio->localidad = $request->localidad;
-        
+
 
         //si es negocio
         $anuncio->tipo_local = $request->tipo_local;
@@ -124,11 +124,17 @@ class AnuncioController extends Controller
         //elemento oculto enviado por el botón que pulse
         $anuncio->tipo_anuncio = $request->tipo_anuncio;
 
+
         $anuncio->save();
+
+        // Asocia el anuncio con el usuario autenticado
+        $user = Auth::user(); // Obtiene el usuario autenticado
+        if ($user) {
+        $anuncio->users()->attach($user->id);
+        }
+        
         return redirect()->intended('/')->with('status', 'Anuncio creado');
     }
-
-
 
 
     public function show($id)
@@ -174,7 +180,7 @@ class AnuncioController extends Controller
         //si es dj
         $anuncio->ciudad = $request->ciudad;
         $anuncio->locallidad = $request->localidad;
-        
+
 
         //si es negocio
         $anuncio->tipo_local = $request->tipo_local;
