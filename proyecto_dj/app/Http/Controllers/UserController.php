@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FtpUser;
 use App\Models\Local;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,8 +18,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $locales = Local::all();
-        return view('usuarios.index', compact('locales', 'request'));
+        $tipos_accesos = ['Dj', 'Negocio de Ocio'];
+        return view('usuarios.index', compact('tipos_accesos', 'request'));
     }
 
     /**
@@ -25,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $tipos_accesos = ['Dj', 'Negocio de Ocio'];
+        return view('usuarios.create', compact('tipos_accesos'));
     }
 
     /**
@@ -33,14 +36,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        try {
         $usuario = new User();
         $usuario->nombre = $request->nombre;
         $usuario->apellidos = $request->apellidos;
         $usuario->email = $request->email;
-        $usuario->password = $request->password;
+        $usuario->password =  Hash::make($request->password);
         $usuario->tipo_acceso = $request->tipo_acceso;
 
         $usuario->save();
+
+        FtpUser::create([
+            'user_id' => $usuario->id,
+            'alias' => $usuario->email,
+            'password' =>  Hash::make($request->password),
+            'directorio_raiz' => '/',
+            'tipo_user' => 'cliente',
+            'estado' => 'inactivo'
+        ]);
+
 
          // Lanzar el evento de registro
          event(new Registered($usuario));
@@ -48,7 +62,16 @@ class UserController extends Controller
          // Autenticar al usuario automáticamente
          Auth::login($usuario);
 
-        return redirect()->intended('/')->with('status', 'Usuario creado');
+
+
+         return redirect()->back()->with('status', 'Usuario creado con éxito.');
+        } catch (QueryException $e) {
+            if ($e->getCode() == '23000') {
+                $status = 'Lo sentimos! Este correo ya está registrado.';
+            return redirect('/')->with(compact('status'));
+            }
+            throw $e;
+        }
     }
 
     /**
@@ -57,16 +80,19 @@ class UserController extends Controller
     public function show($id)
     {
         $usuario = User::find($id);
-        return view('user.show', compact('usuario'));
+        return view('usuarios.show', compact('usuario'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+
+     public function edit(User $usuario)
+     {
+        $tipos_accesos = ['dj', 'Negocio de Ocio'];
+         return view('usuarios.edit', compact('usuario', 'tipos_accesos'));
+     }
+ 
 
     /**
      * Update the specified resource in storage.
@@ -76,13 +102,14 @@ class UserController extends Controller
         $usuario->nombre = $request->nombre;
         $usuario->apellidos = $request->apellidos;
         $usuario->email = $request->email;
-        $usuario->telefono = $request->telefono;
-        $usuario->password = Hash::make($$request->password);
-        $usuario->tipo_negocio = $request->tipo_negocio;
-        $usuario->suscripcion_id = $request->suscripcion_id;
+        $usuario->password =  Hash::make($request->password);
+        $usuario->tipo_acceso = $request->tipo_acceso;
 
         $usuario->save();
-        return redirect()->back()->with('status', 'Usuario modificado');
+
+        $usuario->save();
+
+       return redirect()->intended('/')->with('status', 'Usuario modificado');
     }
 
     /**

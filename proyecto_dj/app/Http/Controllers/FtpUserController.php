@@ -6,6 +6,7 @@ use App\Models\FtpUser;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class FtpUserController extends Controller
 {
@@ -18,10 +19,40 @@ class FtpUserController extends Controller
         
     }
 
+    public function usuariosInconsistentes(Request $request)
+{
+    // Consulta con join entre ftp_users y suscripcions
+    $inconsistentes = DB::table('ftp_users')
+        ->join('suscripcions', 'ftp_users.alias', '=', 'suscripcions.email')
+        ->where('ftp_users.estado', '!=', 'suscripcions.estado')
+        ->select('ftp_users.alias', 'ftp_users.estado as estado_ftp', 'suscripcions.email', 'suscripcions.estado as estado_suscripcion')
+        ->get();
+
+    $titulo_view = "Usuarios con inconsistencias";
+    
+    return view('ftpUser.inconsistentes', compact('inconsistentes', 'titulo_view', 'request'));
+}
+
     public function opciones(Request $request)
     {
         return view('ftpUser.mostrarOpciones');
     }
+
+    public function activos(FtpUser $usuariosFtp, Request $request)
+    {
+        $usuariosFtpActivos = FtpUser::where('estado', 'activo')->get();
+        $titulo_view = "Activo";
+
+        return view('ftpUser.activos', compact('usuariosFtpActivos', 'request', 'titulo_view'));
+    }
+    public function inactivos(FtpUser $usuariosFtp, Request $request)
+    {
+        $usuariosFtpInactivos = FtpUser::where('estado', 'inactivo')->get();
+        $titulo_view = "Inactivo";
+
+        return view('ftpUser.inactivos', compact('usuariosFtpInactivos', 'request', 'titulo_view'));
+    }
+
     public function create(Request $request)
     {
         $estados =['activo', 'inactivo'];

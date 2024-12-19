@@ -20,13 +20,14 @@
             <p><a href="{{ route('login') }}" class="boton-neon">
                     <i class="bi bi-person"></i>Login
                 </a>
-            <a href="{{ route('registrarse') }}" class="boton-neon">
+                <a href="{{ route('registrarse') }}" class="boton-neon">
                     <i class="bi bi-person"></i>Registrate
-                </a></p>
+                </a>
+            </p>
         </section>
         @endauth
         @endif
-        
+
         @include('layouts._partials.accesosRapidos')
 
     </main>
@@ -34,9 +35,6 @@
     @include('layouts._partials.footer')
 
 
-</body>
-
-</html>
 </body>
 
 </html>

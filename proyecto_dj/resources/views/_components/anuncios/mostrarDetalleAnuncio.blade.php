@@ -51,7 +51,7 @@
             @endif
 
             <br>
-            <a class="btn btn-success" href="">Modificar</a>
+            <a class="btn btn-success" href="{{route('anuncios.edit', $id)}}">Modificar</a>
             <a class="btn btn-danger" href="">Eliminar</a>
 
         </div>

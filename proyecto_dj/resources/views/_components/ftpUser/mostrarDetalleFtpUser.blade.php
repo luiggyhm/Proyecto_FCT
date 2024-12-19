@@ -9,7 +9,7 @@
             <!-- Datos Adicionales -->
             <label id="">Alias: {{ $alias }}</label>
             <br>
-            <label id="">Directorio: {{ $directorio }} €</label>
+            <label id="">Directorio: {{ $directorio }}</label>
             <br>
             <label id="">Tipo de Usuario: {{ $tipo_user }}</label>
             <br>
@@ -17,9 +17,6 @@
             <br>
             <label id="">Usuario Relacionado: {{ $user_id }}</label>
             <br>
-
-            <a class="btn btn-success" href="">Modificar</a>
-            <a class="btn btn-danger" href="">Eliminar</a>
 
         </div>
     </div>

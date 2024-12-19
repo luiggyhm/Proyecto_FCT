@@ -21,7 +21,7 @@
                             <label class="form-label d-flex justify-content-center">Género Principal: {{ $anuncio->genero->nombre }}</label>
                             <label class="form-label d-flex justify-content-center">Otros Géneros: {{ $anuncio->otros_generos }}</label>
                         </div>
-                        <a href="{{ route('anuncio.show', $anuncio->id) }}">Ver detalle del anuncio</a>
+                        <a href="{{ route('anuncios.show', $anuncio->id) }}">Ver detalle del anuncio</a>
                     </div>
                 </div>
             </div>

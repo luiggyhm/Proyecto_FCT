@@ -93,6 +93,7 @@ class SuscripcionController extends Controller
                     'estado_pago' => $session->payment_status,
                     'cantidad_cobro' => $session->amount_total / 100,
                     'tipo_moneda' => $session->currency,
+                    'estado'=> 'activo',
                     'descripcion_transacccion' => $session->display_items[0]->custom->name ?? 'Descripción no disponible',
                 ]);
 

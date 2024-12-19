@@ -47,4 +47,10 @@ class Anuncio extends Model
     {
         return $this->belongsToMany(User::class, 'anuncio_user');
     }
+
+    public static function createEmpty()
+    {
+        $anuncio = new Anuncio();
+        return $anuncio;
+    }
 }

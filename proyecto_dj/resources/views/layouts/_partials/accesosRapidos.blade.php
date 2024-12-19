@@ -19,7 +19,7 @@
 
     <article class="info">
         <aside>
-            <a class="boton-neon" href="todosLosAnuncios"> Anuncios </a>
+            <a class="boton-neon" href="{{route('todosLosAnuncios')}}"> Anuncios </a>
         </aside>
     </article>
 </section>

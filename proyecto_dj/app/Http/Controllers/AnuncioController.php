@@ -130,9 +130,9 @@ class AnuncioController extends Controller
         // Asocia el anuncio con el usuario autenticado
         $user = Auth::user(); // Obtiene el usuario autenticado
         if ($user) {
-        $anuncio->users()->attach($user->id);
+            $anuncio->users()->attach($user->id);
         }
-        
+
         return redirect()->intended('/')->with('status', 'Anuncio creado');
     }
 
@@ -149,37 +149,41 @@ class AnuncioController extends Controller
     public function edit(Anuncio $anuncio)
     {
         $generos = Genero::all();
-        $generoActual = Genero::where('id', $anuncio->genero_id)->get()->first();
-
-
-        return view('anuncios.edit', compact('anuncio', 'generos', 'generoActual'));
+        $locales = Local::all();
+        return view('anuncios.edit', compact('anuncio', 'generos', 'locales'));
     }
+
 
 
     //Actualizar anuncio
     public function update(Request $request, Anuncio $anuncio)
     {
 
+        // Convierte el array de otros géneros en una cadena separada por comas
         $otrosGeneros = $request->input('otros_generos');
         if (!is_array($otrosGeneros)) {
             $otrosGeneros = $otrosGeneros ? explode(',', $otrosGeneros) : [];
         }
         $generosString = implode(',', $otrosGeneros);
 
-
-        $rutaImg = $request->file('imagen')->store('public/anuncios');
+        if ($request->hasFile('imagen')) {
+            $rutaImg = $request->file('imagen')->store('public/anuncios');
+            $urlPublicaImg = Storage::url($rutaImg);
+        } else {
+            return redirect()->back()->withErrors(['imagen' => 'No se pudo cargar la imagen.']);
+        }
 
         $anuncio->titulo = $request->titulo;
         $anuncio->precio = $request->precio;
         $anuncio->descripcion = $request->descripcion;
         $anuncio->telefono = $request->telefono;
         $anuncio->otros_generos = $generosString;
-        $anuncio->imagen = $rutaImg;
+        $anuncio->imagen = $urlPublicaImg;
         $anuncio->genero_id = $request->genero;
 
         //si es dj
         $anuncio->ciudad = $request->ciudad;
-        $anuncio->locallidad = $request->localidad;
+        $anuncio->localidad = $request->localidad;
 
 
         //si es negocio
@@ -190,9 +194,10 @@ class AnuncioController extends Controller
         //elemento oculto enviado por el botón que pulse
         $anuncio->tipo_anuncio = $request->tipo_anuncio;
 
+
         $anuncio->save();
 
-        return redirect()->back()->with('status', 'Anuncio Modificado');
+        return redirect()->route('anuncios.show', $anuncio->id);
     }
 
 

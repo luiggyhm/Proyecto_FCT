@@ -7,7 +7,7 @@
                     <ul class="navbar-nav">
                         @foreach ($generos as $g)
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="{{ route('anuncio.genero', $g->id) }}">{{$g->nombre}}</a>
+                            <a class="nav-link text-dark" href="{{ route('anuncios.genero', $g->id) }}">{{$g->nombre}}</a>
                         </li>
                         @endforeach
                     </ul>
@@ -20,7 +20,7 @@
             <nav class="navbar bg-white">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="{{ route('anuncio.formAnuncio') }}" class="nav-link text-dark">Crear Anuncio</a>
+                        <a href="{{ route('anuncios.formAnuncio') }}" class="nav-link text-dark">Crear Anuncio</a>
                     </li>
                 </ul>
             </nav>

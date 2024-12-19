@@ -1,6 +1,8 @@
-@extends('layouts.plantillaVistaFormularioAnuncio')
+@php
+use App\Models\User;
+@endphp
 
-<!-- Todos los dolares vienen del controlador -->
+@extends('layouts.plantillaVistaFormularioAnuncio')
 
 @section('explicacionRegistro')
     @component('_components.usuarios.explicacionRegistro')
@@ -15,13 +17,10 @@
     @endcomponent
 @endsection
 
-
-<!--Se encarga de inyectar los datos dentro del código dentro del balde
-que se indica en  el componente, el section sirve para ponerle un nombre
-para luego llamarlo con un yield donde queremos que se inserte-->
-
 @section('formUsuario')
     @component('_components.usuarios.formularioCrearUsuario')
-        @slot('locales', $locales)
+        @slot('tipos_accesos', $tipos_accesos)
+        @slot('usuario', User::createEmpty())
+        @slot('nombreBoton', 'Crear Usuario')
     @endcomponent
 @endsection

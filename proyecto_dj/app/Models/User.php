@@ -44,7 +44,11 @@ class User extends Authenticatable
         return $this->hasOne(FtpUser::class);
     }
 
-
+    public static function createEmpty()
+    {
+        $usuario = new User();
+        return $usuario;
+    }
 
 
     /**

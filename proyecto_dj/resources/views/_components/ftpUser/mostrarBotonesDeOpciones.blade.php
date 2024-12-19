@@ -6,7 +6,7 @@
                 <div class="collapse navbar-collapse justify-content-center">
                     <ul class="navbar-nav">
                         <li class="nav-item mb-2">
-                            <a class="nav-link text-dark" href="{{route('ftpUser.index') }}">Ver usuarios FTP</a>
+                            <a class="nav-link text-dark" href="{{route('ftpUser.inconsistentes') }}">Usuarios para crear en FTP</a>
                         </li>
                     </ul>
                 </div>

@@ -1,3 +1,7 @@
+@php
+use App\Models\Anuncio;
+@endphp
+
 @extends('layouts.plantillaVistaFormularioAnuncio')
 
 <!-- Todos los dolares vienen del controlador -->
@@ -12,6 +16,7 @@
 @component('_components.anuncios.formularioCrearAnuncio')
 @slot('generos',$generos)
 @slot('locales',$locales)
+@slot('anuncio', Anuncio::createEmpty())
 @slot('textoBoton','Crear anuncio')
 @endcomponent
 @endsection
