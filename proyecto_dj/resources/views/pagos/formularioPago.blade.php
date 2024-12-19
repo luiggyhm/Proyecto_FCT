@@ -15,7 +15,10 @@
         <input class="hidden" type="text" name="precio" value="49.99">
         <button type="submit" class="boton-neon">Acceso Anual - €49,99</button>
     </form>
+
+    <h1>Importante pagar con el correo con el que te has registrado</h1>
 </article>
+
 </form>
 @else
 <article>

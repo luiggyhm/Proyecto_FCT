@@ -1,29 +1,45 @@
-<form action="{{ route('ftpUser.store') }}" method="post" style="width: 3000px;" enctype="multipart/form-data">
+@php
+$modoCreacion =true;
+if(isset($ftpUser->alias)) {
+$modoCreacion =false;
+}
+
+$rutaAction = route('ftpUser.store');
+if(!$modoCreacion){
+$rutaAction = route('ftpUser.actualizar', $ftpUser);
+}
+@endphp
+
+<form action="{{ $rutaAction }}" method="post" style="width: 3000px;" enctype="multipart/form-data">
 
     <!--Se añade @csrf para darleseguridad al formulario y protegerlo -->
     @csrf
 
+    @if(!$modoCreacion)
+        @method('put')
+    @endif
+    
     <section class="contenedor_una_columna">
 
         <!-- Contenido del formulario -->
         <article id="primero">
             <h2>Rellena los siguientes datos:</h2>
 
-            <label for="Alias">suario o Alias:<span>*</span>
+            <label for="Alias">Usuario o Alias:<span>*</span>
                 <br>
-                <input type="text" class="inputs" id="alias" name="alias" placeholder="Alias" required>
+                <input type="email" class="inputs" id="alias" name="alias" value="{{$ftpUser->alias}}" placeholder="Alias" required>
             </label>
 
             <label for="password">Contraseña:<span>*</span>
                 <br>
-                <input type="text" class="inputs" id="password" name="password" required>
+                <input type="password" class="inputs" id="password" name="password" value="{{$ftpUser->password}}" required>
             </label>
 
             <label for="directorio_raiz">Directorio:<span>*</span>
                 <br>
                 <select class="inputs" name="directorio_raiz" required>
                     @foreach ($directorios as $directorio )
-                    <option id="{{$directorio}}" value="{{$directorio}}">{{$directorio}}</option>
+                    <option id="{{$directorio}}" @checked($ftpUser->directorio_raiz == $directorio) value="{{$directorio}}">{{$directorio}}</option>
                     @endforeach
                 </select>
             </label>
@@ -36,7 +52,7 @@
                 <br>
                 <select class="inputs" name="tipo_user" required>
                     @foreach ($tipo_users as $user )
-                    <option id="{{$user}}" value="{{$user}}">{{$user}}</option>
+                    <option @checked($ftpUser->tipo_user == $user) id="{{$user}}" value="{{$user}}">{{$user}}</option>
                     @endforeach
                 </select>
             </label>
@@ -45,7 +61,7 @@
                 <br>
                 <select class="inputs" name="estado" required>
                     @foreach ($estados as $estado )
-                    <option id="{{$estado}}" value="{{$estado}}">{{$estado}}</option>
+                    <option id="{{$estado}}" @checked($ftpUser->estado == $estado) value="{{$estado}}">{{$estado}}</option>
                     @endforeach
                 </select>
             </label>

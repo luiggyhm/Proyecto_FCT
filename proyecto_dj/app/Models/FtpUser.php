@@ -32,6 +32,4 @@ class FtpUser extends Model
     protected $casts = [
         'password' => 'hashed',
     ];
-
-
 }

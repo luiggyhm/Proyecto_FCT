@@ -79,10 +79,23 @@ Route::get('/ftpUser/activos', [FtpUserController::class, 'activos'])->name('ftp
 
 Route::get('/ftpUsers/inconsistentes', [FtpUserController::class, 'usuariosInconsistentes'])->name('ftpUser.inconsistentes');
 
+
+//cambiar estado activo o inactivo
+
+Route::get('/ftpUsers/form/activar', [FtpUserController::class, 'datosFormActivar'])->name('ftpUser.formActivar');
+Route::get('/ftpUsers/form/desactivar', [FtpUserController::class, 'datosFormDesactivar'])->name('ftpUser.formDesactivar');
+
+Route::post('/ftpUsers/activar', [FtpUserController::class, 'activarUserFtp'])->name('ftpUser.activar');
+Route::post('/ftpUsers/desactivar', [FtpUserController::class, 'desactivarUserFtp'])->name('ftpUser.desactivar');
+
+
 //crear Usuario FTP
 Route::get('/registrarFtp', [FtpUserController::class, 'create'])->name('ftpUser.formAnuncio');
 Route::post('/registroFtp', [FtpUserController::class, 'store'])->name('ftpUser.store');
 
+//modificar Usuario FTP
+Route::get('/ftpUsers/ {ftpUser}/editar', [FtpUserController::class, 'edit'])->name('ftpUser.edit');
+Route::put('/ftpUsers/{ftpUser}', [FtpUserController::class, 'update'])->name('ftpUser.actualizar');
 
 
 

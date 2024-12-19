@@ -1,7 +1,3 @@
-@php
-use App\Models\FtpUser;
-@endphp
-
 @extends('layouts.plantillaVistaFormUserFtp')
 
 <!-- Todos los dolares vienen del controlador -->
@@ -17,7 +13,7 @@ use App\Models\FtpUser;
 @slot('estados', $estados)
 @slot('directorios',$directorios)
 @slot('tipo_users',$tipo_users)
-@slot('ftpUser', FtpUser::createEmpty())
-@slot('textoBoton','Crear usuario FTP')
+@slot('ftpUser', $ftpUser)
+@slot('textoBoton','Modificar usuario FTP')
 @endcomponent
 @endsection

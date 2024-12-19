@@ -35,7 +35,7 @@
   
             @else
             <a href="{{ route('login') }}" class="btn btn-outline-dark mx-1">
-                <i class="bi bi-person"></i> Necesita Inicio de Session
+                <i class="bi bi-person"></i> Necesita Inicio de Sesion
             </a>
             @endauth
             @endif

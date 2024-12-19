@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+
+@include('layouts._partials.head')
+
+<body id="body" class="fondo_negro">
+
+    @include('layouts._partials.menu')
+
+    <main id = "main" class = "parrafo-blanco">
+        @yield('fomularioCambioEstado')
+    </main>
+</body>
+</html>

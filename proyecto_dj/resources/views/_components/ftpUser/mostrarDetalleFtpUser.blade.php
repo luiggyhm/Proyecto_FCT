@@ -18,6 +18,9 @@
             <label id="">Usuario Relacionado: {{ $user_id }}</label>
             <br>
 
+            <a class="btn btn-success" href="{{route('ftpUser.edit', $id)}}">Modificar</a>
+            <a class="btn btn-danger" href="">Eliminar</a>
+
         </div>
     </div>
 

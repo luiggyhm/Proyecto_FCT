@@ -2,10 +2,10 @@
 
 @section('inconsistentes')
 <div class="container">
-    <h1>{{ $titulo_view }}</h1>
+    <h1 class="text-decoration-none text-white">{{ $titulo_view }}</h1>
     
     @if($inconsistentes->isEmpty())
-        <p>No se encontraron inconsistencias entre los usuarios FTP y las suscripciones.</p>
+        <p class="text-decoration-none text-white">No se encontraron inconsistencias entre los usuarios FTP y las suscripciones.</p>
     @else
         <table class="table table-striped">
             <thead>

@@ -19,13 +19,13 @@ class ActualizarSuscripciones extends Command
         $suscripcionesMensuales = Suscripcion::where('estado_pago', 'activo')
             ->where('cantidad_cobro', 5.99)
             ->whereDate('created_at', '<=', $now->subMonth())
-            ->update(['estado_pago' => 'inactivo']);
+            ->update(['estado_pago' => 'noPaid', 'estado' => 'inactivo']);
 
         // Procesar suscripciones de un año
         $suscripcionesAnuales = Suscripcion::where('estado_pago', 'activo')
             ->where('cantidad_cobro', 49.99)
             ->whereDate('created_at', '<=', $now->subYear())
-            ->update(['estado_pago' => 'inactivo']);
+            ->update(['estado_pago' => 'noPaid','estado' => 'inactivo']);
 
         $this->info("Suscripciones actualizadas: {$suscripcionesMensuales} mensuales, {$suscripcionesAnuales} anuales.");
     }
