@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('anuncio_user', function (Blueprint $table) {
+        Schema::create('anuncio_users', function (Blueprint $table) {
             $table->id();
             
             // Foreign keys
@@ -24,6 +24,8 @@ return new class extends Migration
             
             // Índices para consultas rápidas
             $table->unique(['user_id', 'anuncio_id']);
+
+            $table->timestamps();  // Agrega las columnas created_at y updated_at
         });
     }
 
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('anuncio_user');
+        Schema::dropIfExists('anuncio_users');
     }
 };

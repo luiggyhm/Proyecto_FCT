@@ -14,18 +14,20 @@ class FtpUserSeeder extends Seeder
     public function run(): void
     {
         FtpUser::create([
+            'id'=>'1001',
             'alias' => 'admin',
             'password' => 'admin1234',
-            'directorio_raiz' => '/',
+            'directorio_raiz' => '/home/musica',
             'tipo_user' => 'admin',
             'estado' => "activo",
             'user_id' => '1',
         ]);
 
         FtpUser::create([
+            'id'=>'1002',
             'alias' => 'cliente',
             'password' => 'cliente1234',
-            'directorio_raiz' => '/',
+            'directorio_raiz' => '/home/musica',
             'tipo_user' => 'cliente',
             'estado' => "activo",
             'user_id' => '2',

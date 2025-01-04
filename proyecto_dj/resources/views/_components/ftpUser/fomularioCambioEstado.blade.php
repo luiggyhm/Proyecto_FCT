@@ -3,6 +3,10 @@
     <!--Se añade @csrf para darleseguridad al formulario y protegerlo -->
     @csrf
 
+    @if($eliminar)
+        @method('delete')
+    @endif
+
     <section class="contenedor_una_columna">
 
         <!-- Contenido del formulario -->

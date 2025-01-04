@@ -14,7 +14,7 @@
 
                         <!-- Datos Adicionales -->
                         <label class="form-label d-flex justify-content-center">Estado: {{ $usuario->estado }}</label>
-                        <label class="form-label d-flex justify-content-center">directorio_raiz: {{ $usuario->directorio_raiz }}</label>
+                        <label class="form-label d-flex justify-content-center">Directorio_raiz: {{ $usuario->directorio_raiz }}</label>
                     </div>
                     <a href="{{ route('ftpUser.show', $usuario->id) }}">Ver detalle del anuncio</a>
                 </div>

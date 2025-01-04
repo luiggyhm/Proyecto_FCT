@@ -46,11 +46,22 @@ class UserController extends Controller
 
         $usuario->save();
 
+        // Asignar el rol "cliente"
+        if($usuario->tipo_acceso == "dj"){
+            $usuario->assignRole('dj');
+        }else{
+            $usuario->assignRole('negocio');
+        }
+
+       // Contar los usuarios en FtpUser
+       $numeroUsuarios = FtpUser::count();
+
         FtpUser::create([
+            'id'=> 1000 + $numeroUsuarios,
             'user_id' => $usuario->id,
             'alias' => $usuario->email,
-            'password' =>  Hash::make($request->password),
-            'directorio_raiz' => '/',
+            'password' =>  $request->password,
+            'directorio_raiz' => '/home/musica/mensual',
             'tipo_user' => 'cliente',
             'estado' => 'inactivo'
         ]);

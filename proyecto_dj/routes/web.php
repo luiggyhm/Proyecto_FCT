@@ -34,75 +34,86 @@ Route::middleware('auth')->group(function () {
 });
 
 //Barra nav
-Route::get('/', [NavController::class, 'home'])->name('nav.inicio');
-Route::get('/conoceme', [NavController::class, 'conoceme'])->name('nav.conoceme');
-Route::get('/compraContenido', [NavController::class, 'compraContenido'])->name('nav.compraContenido');
+Route::controller(NavController::class)->group(function () {
+    Route::get('/',  'home')->name('nav.inicio');
+    Route::get('/conoceme', 'conoceme')->name('nav.conoceme');
+    Route::get('/compraContenido', 'compraContenido')->name('nav.compraContenido');
+});
 
 //Anuncios
-//Mostrar Anuncios
-Route::get('/anuncios/todos', [AnuncioController::class, 'index'])->name('todosLosAnuncios');
-Route::get('/anuncios/dj', [AnuncioController::class, 'mostrarDjs'])->name('anuncios.mostrarDjs');
-Route::get('/anuncios/Negocios', [AnuncioController::class, 'negocios'])->name('anuncios.mostrarNegocios');
-Route::get('/anuncio/detalle/{id}', [AnuncioController::class, 'show'])->name('anuncios.show');
+Route::controller(AnuncioController::class)->group(function () {
+    //Mostrar Anuncios
+    Route::get('/anuncios/todos', 'index')->name('todosLosAnuncios');
+    Route::get('/anuncios/dj', 'mostrarDjs')->name('anuncios.mostrarDjs');
+    Route::get('/anuncios/Negocios', 'negocios')->name('anuncios.mostrarNegocios');
+    Route::get('/anuncio/detalle/{id}', 'show')->name('anuncios.show');
 
-//Ver generos
-Route::get('/anuncios/genero/{genero}', [AnuncioController::class, 'genero'])->name('anuncios.genero');
+    //Ver generos
+    Route::get('/anuncios/genero/{genero}', 'genero')->name('anuncios.genero');
 
-//Crear Anuncio
-Route::get('/anuncios/crear', [AnuncioController::class, 'create'])->name('anuncios.formAnuncio');
-Route::post('/registroAnuncio', [AnuncioController::class, 'store'])->name('anuncios.store');
+    //Crear Anuncio
+    Route::get('/anuncios/crear', 'create')->name('anuncios.formAnuncio');
+    Route::post('/registroAnuncio', 'store')->name('anuncios.store');
 
-//Modificar anuncio
-Route::get('/anuncio/{anuncio}/editar', [AnuncioController::class, 'edit'])->name('anuncios.edit');
-Route::put('/anuncio/{anuncio}', [AnuncioController::class, 'update'])->name('anuncios.actualizar');
+    //Modificar anuncio
+    Route::get('/anuncio/{anuncio}/editar', 'edit')->name('anuncios.edit');
+    Route::put('/anuncio/{anuncio}', 'update')->name('anuncios.actualizar');
 
+    //Eliminar anuncio
+    Route::delete('/anuncio/{anuncio}', 'destroy')->name('anuncio.eliminar');
+});
 
 //Usuarios
-//crear Usuario
-Route::get('/registrar', [UserController::class, 'index'])->name('registrarse');
-Route::post('/usuario/formularioRegistro', [UserController::class, 'create'])->name('usuario.create');
-Route::post('/usuario/registro', [UserController::class, 'store'])->name('usuario.store');
+Route::controller(UserController::class)->group(function () {
+    //crear Usuario
+    Route::get('/registrar', 'index')->name('registrarse');
+    Route::get('/usuario/formularioRegistro', 'create')->name('usuario.create');
+    Route::post('/usuario/registro', 'store')->name('usuario.store');
 
-//modificar usuario
-Route::get('/usuario/{usuario}/editar', [UserController::class, 'edit'])->name('usuario.edit');
-Route::put('/registro/{usuario}', [UserController::class, 'update'])->name('usuario.actualizar');
-
+    //modificar usuario
+    Route::get('/usuario/{usuario}/editar', 'edit')->name('usuario.edit');
+    Route::put('/registro/{usuario}', 'update')->name('usuario.actualizar');
+});
 
 
 
 //Usuarios FTP
-Route::get('/ftpUser/opciones', [FtpUserController::class, 'opciones'])->name('ftpUser.elecccion');
-Route::get('/ftpUser/verTodos', [FtpUserController::class, 'index'])->name('ftpUser.index');
-Route::get('/ftpUser/detalle/{id}', [FtpUserController::class, 'show'])->name('ftpUser.show');
-Route::get('/ftpUser/inactivos', [FtpUserController::class, 'inactivos'])->name('ftpUser.inactivos');
-Route::get('/ftpUser/activos', [FtpUserController::class, 'activos'])->name('ftpUser.activos');
+Route::controller(FtpUserController::class)->middleware(['auth', 'role:administrador'])->group(function () {
+    Route::get('/ftpUser/opciones', 'opciones')->name('ftpUser.elecccion');
+    Route::get('/ftpUser/verTodos', 'index')->name('ftpUser.index');
+    Route::get('/ftpUser/detalle/{id}', 'show')->name('ftpUser.show');
+    Route::get('/ftpUser/inactivos', 'inactivos')->name('ftpUser.inactivos');
+    Route::get('/ftpUser/activos', 'activos')->name('ftpUser.activos');
 
-Route::get('/ftpUsers/inconsistentes', [FtpUserController::class, 'usuariosInconsistentes'])->name('ftpUser.inconsistentes');
+    Route::get('/ftpUsers/inconsistentes', 'usuariosInconsistentes')->name('ftpUser.inconsistentes');
 
+    //cambiar estado activo o inactivo
+    Route::get('/ftpUsers/form/activar', 'datosFormActivar')->name('ftpUser.formActivar');
+    Route::get('/ftpUsers/form/desactivar', 'datosFormDesactivar')->name('ftpUser.formDesactivar');
 
-//cambiar estado activo o inactivo
+    Route::post('/ftpUsers/activar', 'activarUserFtp')->name('ftpUser.activar');
+    Route::post('/ftpUsers/desactivar', 'desactivarUserFtp')->name('ftpUser.desactivar');
 
-Route::get('/ftpUsers/form/activar', [FtpUserController::class, 'datosFormActivar'])->name('ftpUser.formActivar');
-Route::get('/ftpUsers/form/desactivar', [FtpUserController::class, 'datosFormDesactivar'])->name('ftpUser.formDesactivar');
+    //crear Usuario FTP
+    Route::get('/registrarFtp', 'create')->name('ftpUser.formAnuncio');
+    Route::post('/registroFtp', 'store')->name('ftpUser.store');
 
-Route::post('/ftpUsers/activar', [FtpUserController::class, 'activarUserFtp'])->name('ftpUser.activar');
-Route::post('/ftpUsers/desactivar', [FtpUserController::class, 'desactivarUserFtp'])->name('ftpUser.desactivar');
+    //modificar Usuario FTP
+    Route::get('/ftpUsers/ {ftpUser}/editar', 'edit')->name('ftpUser.edit');
+    Route::put('/ftpUsers/{ftpUser}', 'update');
 
-
-//crear Usuario FTP
-Route::get('/registrarFtp', [FtpUserController::class, 'create'])->name('ftpUser.formAnuncio');
-Route::post('/registroFtp', [FtpUserController::class, 'store'])->name('ftpUser.store');
-
-//modificar Usuario FTP
-Route::get('/ftpUsers/ {ftpUser}/editar', [FtpUserController::class, 'edit'])->name('ftpUser.edit');
-Route::put('/ftpUsers/{ftpUser}', [FtpUserController::class, 'update'])->name('ftpUser.actualizar');
-
+    //Eliminar Usuario FTP
+    Route::delete('/ftpUsers/eliminado', 'destroy')->name('ftpUser.eliminar');
+    Route::get('/ftpUsers/form/eliminar', 'datosFormEliminar')->name('ftpUser.datosFormEliminar');
+    
+});
 
 
 //Pagos
-//Stripe
-Route::post('/pago/Stripe', [SuscripcionController::class, 'pagarConStripe'])->name('pagarConStripe');
-Route::get('/estadoPagoStripe', [SuscripcionController::class, 'estadoPagoStripe'])->name('estadoPagoStripe');
-
+Route::controller(SuscripcionController::class)->group(function () {
+    //Stripe
+    Route::post('/pago/Stripe', 'pagarConStripe')->name('pagarConStripe');
+    Route::get('/estadoPagoStripe', 'estadoPagoStripe')->name('estadoPagoStripe');
+});
 
 require __DIR__ . '/auth.php';

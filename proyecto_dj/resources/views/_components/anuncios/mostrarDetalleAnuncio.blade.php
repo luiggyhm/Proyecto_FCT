@@ -28,11 +28,11 @@
 
             @if (Route::has('login'))
             @auth
-            
-                <button class="btn btn-success" id='mostrarTelefono'> Mostrar teléfono</button>
-                <label id="telefono" class="hidden">Telefono: {{ $telefono }}</label>
-                <br>
-  
+
+            <button class="btn btn-success" id='mostrarTelefono'> Mostrar teléfono</button>
+            <label id="telefono" class="hidden">Telefono: {{ $telefono }}</label>
+            <br>
+
             @else
             <a href="{{ route('login') }}" class="btn btn-outline-dark mx-1">
                 <i class="bi bi-person"></i> Necesita Inicio de Sesion
@@ -51,8 +51,21 @@
             @endif
 
             <br>
+
+            @auth
+            @if (Auth::user()->id == $creadorAnuncio->id)
+
             <a class="btn btn-success" href="{{route('anuncios.edit', $id)}}">Modificar</a>
-            <a class="btn btn-danger" href="">Eliminar</a>
+
+            <br>
+            <br>
+
+            <form action="{{route('anuncio.eliminar', $id)}}" method="post">
+                @csrf @method('delete')
+                <a class="btn btn-danger" href="{{route('anuncios.edit', $id)}}">Eliminar</a>
+            </form>
+            @endif
+            @endauth
 
         </div>
 </div>

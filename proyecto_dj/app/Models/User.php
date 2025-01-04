@@ -29,7 +29,7 @@ class User extends Authenticatable
     // Relación n:n con Anuncio
     public function anuncios()
     {
-        return $this->belongsToMany(Anuncio::class, 'anuncio_user');
+        return $this->belongsToMany(Anuncio::class, 'anuncio_users');
     }
 
     //relación 1:1 un usuario solo puede comprar una suscripcion

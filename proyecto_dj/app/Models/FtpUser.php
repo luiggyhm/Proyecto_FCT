@@ -32,4 +32,10 @@ class FtpUser extends Model
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public static function createEmpty()
+    {
+        $usuario = new FtpUser();
+        return $usuario;
+    }
 }

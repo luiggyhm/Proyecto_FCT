@@ -11,6 +11,7 @@
 @section('mostrarDetalle')
 @component('_components.anuncios.mostrarDetalleAnuncio')
 @slot('id', $anuncio->id)
+@slot('creadorAnuncio', $creadorAnuncio)
 @slot('precio', $anuncio->precio)
 @slot('descripcion', $anuncio->descripcion)
 @slot('telefono', $anuncio->telefono)

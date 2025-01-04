@@ -13,6 +13,7 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+    restart: always
 
   #framework laravel
   myapp:
@@ -34,10 +35,11 @@ services:
       - './proyecto_dj:/app'
     depends_on:
       - mariadb
+    restart: always
 
   #servidor ftp
   pure-ftp:
-    image: stilliard/pure-ftpd
+    image: humpedli/docker-pure-ftpd-mysql
     ports:
       - "21:21"
       - "30000-30009:30000-30009"  # Active mode FTP ports
@@ -45,14 +47,18 @@ services:
       - MYSQL_USER=${MARIADB_USER}
       - MYSQL_PASSWORD=${MARIADB_PASSWORD}
       - MYSQL_HOST=mariadb
-      - MYSQL_DB=ftp_db
+      - MYSQL_DB=bitnami_myapp
       - PURE_FTPD_USERS_DB=ftp_users
       - FTP_USER_ALIAS_FIELD=alias
       - FTP_USER_PASSWORD_FIELD=password
       - FTP_USER_HOME_FIELD=directorio_raiz
       - FTP_USER_STATUS_FIELD=estado
       - FTP_USER_TYPE_FIELD=tipo_user
+      - PUBLICHOST=127.0.0.1  # Reemplaza con la IP pública o dominio del servidor
+      - PASSIVE_PORTS=30000:30009
     volumes:
-      - './ftp/ftp_data:/home/ftpusers'
+      - './ftp/ftp_data:/home/musica'
+      - './pureftpd/mysql.conf:/etc/pure-ftpd/db/mysql.conf:ro'
     depends_on:
       - mariadb
+    restart: always

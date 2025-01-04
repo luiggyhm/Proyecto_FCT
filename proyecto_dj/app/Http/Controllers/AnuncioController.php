@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
+use App\Models\AnuncioUser;
 use App\Models\Genero;
 use App\Models\Local;
 use Illuminate\Http\Request;
@@ -140,7 +141,8 @@ class AnuncioController extends Controller
     public function show($id)
     {
         $anuncio = Anuncio::find($id);
-        return view('anuncios.show', compact('anuncio'));
+        $creadorAnuncio = $anuncio->users->first();  // Devuelve el usuario asociado al anuncio
+        return view('anuncios.show', compact('anuncio', 'creadorAnuncio'));
     }
 
 
@@ -202,9 +204,10 @@ class AnuncioController extends Controller
 
 
     //eliminar un anuncio
-    public function destroy(Anuncio $anuncio)
+    public function destroy($id)
     {
+        $anuncio = Anuncio::find($id);
         $anuncio->delete();
-        return redirect()->back()->with('status', 'Anuncio eliminado');
+        return redirect()->intended('/')->with('status', 'Anuncio eliminado');
     }
 }

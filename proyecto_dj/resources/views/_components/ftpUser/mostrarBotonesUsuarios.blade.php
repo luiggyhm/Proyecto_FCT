@@ -13,9 +13,9 @@
         <div class="col-12 mb-4">
             <nav>
                 <ul class="list-unstyled text-center m-0 p-0">
-                    <li class="bg-dark text-white mb-2 p-3 rounded">
+                    <!--<li class="bg-dark text-white mb-2 p-3 rounded">
                         <a class="text-decoration-none text-white" href="{{route('ftpUser.formAnuncio')}}">Crear Usuario</a>
-                    </li>
+                    </li> -->
 
                     <li class="bg-dark text-white mb-2 p-3 rounded">
                         <a class="text-decoration-none text-white" href="{{route('ftpUser.formActivar')}}">Activar Usuario</a>
@@ -26,7 +26,7 @@
                     </li>
 
                     <li class="bg-dark text-white p-3 rounded">
-                        <a class="text-decoration-none text-white" href="#">Eliminar Usuario</a>
+                        <a class="text-decoration-none text-white" href="{{route('ftpUser.datosFormEliminar')}}">Eliminar Usuario</a>
                     </li>
                     
                 </ul>

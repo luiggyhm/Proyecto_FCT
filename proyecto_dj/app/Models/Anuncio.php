@@ -45,7 +45,7 @@ class Anuncio extends Model
     // Relación n:n con User
     public function users()
     {
-        return $this->belongsToMany(User::class, 'anuncio_user');
+        return $this->belongsToMany(User::class, 'anuncio_users');
     }
 
     public static function createEmpty()

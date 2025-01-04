@@ -21,14 +21,23 @@ class FtpUserController extends Controller
     public function datosFormActivar()
     {
         $ruta = route('ftpUser.activar');
-        return view('ftpUser.cambiarEstadoActivo', compact('ruta'));
+        $eliminar = false;
+        return view('ftpUser.cambiarEstadoActivo', compact('ruta', 'eliminar'));
     }
 
     public function datosFormDesactivar()
     {
         $ruta = route('ftpUser.desactivar');
+        $eliminar = false;
 
-        return view('ftpUser.cambiarEstadoInactivo', compact('ruta'));
+        return view('ftpUser.cambiarEstadoInactivo', compact('ruta','eliminar'));
+    }
+    public function datosFormEliminar()
+    {
+        $ruta = route('ftpUser.eliminar');
+        $eliminar = true;
+
+        return view('ftpUser.eliminarUserFtp', compact('ruta', 'eliminar'));
     }
 
     public function activarUserFtp(Request $request)
@@ -152,6 +161,20 @@ class FtpUserController extends Controller
         $ftpUser->save(); //guarda el usuario en la BDD
 
         return redirect()->route('ftpUser.show', $ftpUser->id)->with('success', 'Usuario FTP modificado con éxito');
+    }
+
+    public function destroy(Request $request )
+    {
+        
+        $usuario = FtpUser::where('alias', $request->alias)->first();
+
+        if (!$usuario) {
+            // Si el usuario no existe, redirigir con un mensaje de error
+            return redirect()->route('ftpUser.elecccion')->with('status', 'El usuario no existe.');
+        }
+
+        $usuario->delete();
+        return redirect()->intended('/')->with('status', 'Usuario eliminado');
     }
 
     
