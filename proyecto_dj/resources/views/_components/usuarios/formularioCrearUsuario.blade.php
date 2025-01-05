@@ -1,72 +1,62 @@
 @php
-$modoCreacion =true;
+$modoCreacion = true;
 if(isset($usuario->nombre)) {
-$modoCreacion =false;
+    $modoCreacion = false;
 }
 
 $rutaAction = route('usuario.store');
 if(!$modoCreacion){
-$rutaAction = route('usuario.actualizar', $usuario);
+    $rutaAction = route('usuario.actualizar', $usuario);
 }
 @endphp
 
-<form action="{{ $rutaAction }}" method="post" style="width: 3000px;">
+<form action="{{ $rutaAction }}" method="post" class="container py-5">
 
-    <!--Se añade @csrf para darleseguridad al formulario y protegerlo -->
     @csrf
 
     @if(!$modoCreacion)
         @method('put')
     @endif
 
-    <article>
-        <!--Formulario-->
-        <form class="datos">
+    <div class="row">
+        <!-- Nombre -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="nombre">Nombre:<span>*</span></label>
+            <input class="form-control" type="text" name="nombre" value="{{ $usuario->nombre }}" maxlength="20" placeholder="Nombre" required>
+        </div>
 
-            <label>Nombre:<span>*</span>
-                <br>
-                <input class="inputs" type="text" name="nombre" value=" {{$usuario->nombre}} " maxlength="20" placeholder="Nombre"
-                    required>
-            </label>
+        <!-- Apellidos -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="apellidos">Apellidos:<span>*</span></label>
+            <input class="form-control" type="text" name="apellidos" value="{{ $usuario->apellidos }}" placeholder="Apellidos" required maxlength="50">
+        </div>
 
+        <!-- E-mail -->
+        <div class="col-12 mb-3">
+            <label for="email">E-mail:<span>*</span></label>
+            <input class="form-control" type="email" name="email" value="{{ $usuario->email }}" placeholder="tucorreo@tucorreo.es" required>
+        </div>
 
-            <label>Apellidos:<span>*</span>
-                <br>
-                <input class="inputs" type="text" name="apellidos" value=" {{$usuario->apellidos}}" placeholder="Apellidos" required
-                    maxlength="50">
-            </label>
-            <br>
+        <!-- Contraseña -->
+        <div class="col-12 mb-3">
+            <label for="password">Contraseña:<span>*</span></label>
+            <input class="form-control" type="password" name="password" value="{{ $usuario->password }}" placeholder="máx 10 caracteres" required maxlength="10">
+        </div>
 
-
-            <label>E-mail::&nbsp;&nbsp;&nbsp;<span>*</span>
-                <br>
-                <input class="inputs" type="email" name="email"value=" {{$usuario->email}}" placeholder="tucorreo@tucorreo.es">
-            </label>
-
-
-            <label>Contraseña:<span>*</span>
-                <br>
-                <input class="inputs" type="password" name="password" {{$usuario->password}} placeholder="máx 10 caracteres" required
-                    maxlength="10">
-            </label>
-            <br>
-
-
-            <article>
-                <label for="tipo_acceso">Tipo de Usuario:</label>
-                <br>
-                <select class="inputs" name="tipo_acceso" id="tipo_acceso" placeholder="tipo_acceso" required>
-                @foreach ($tipos_accesos as $tipo_acceso )
-                    <option id ="{{$tipo_acceso}}" value="{{$tipo_acceso}}">{{$tipo_acceso}}</option>
+        <!-- Tipo de Usuario -->
+        <div class="col-12 mb-3">
+            <label for="tipo_acceso">Tipo de Usuario:</label>
+            <select class="form-control" name="tipo_acceso" id="tipo_acceso" required>
+                @foreach ($tipos_accesos as $tipo_acceso)
+                    <option value="{{ $tipo_acceso }}" @selected($usuario->tipo_acceso == $tipo_acceso)>{{ $tipo_acceso }}</option>
                 @endforeach    
-                
-                    </label>
-            </article>
-            <br>
+            </select>
+        </div>
 
-            <article>
-                <input class="inputs" type="submit" value="{{$nombreBoton}}"></input>
-            </article>
+        <!-- Botón de Envío -->
+        <div class="col-12">
+            <input class="btn btn-primary w-100" type="submit" value="{{ $nombreBoton }}">
+        </div>
+    </div>
 
-        </form>
-    </article>
+</form>

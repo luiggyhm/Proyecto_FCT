@@ -4,7 +4,20 @@ window.onload = function () {
     let botonTamanio = document.getElementById("cambiarTamanio");
     let p =document.getElementsByTagName("p");
     let li =document.getElementsByTagName("li");
+    let titulos = document.querySelectorAll("h1, h2, h3");
     var main = document.getElementById("main");
+
+function recorrerPosicion (posiciones){
+    for (let i = 0; i < posiciones.length; i++) {
+        if(posiciones[i].getAttribute('class') == ""){
+            posiciones[i].setAttribute('class', 'fuente_grande');
+        }else if(p[i].getAttribute('class')== 'fuente_grande'){
+            posiciones[i].setAttribute('class', 'fuente_mas_grande');
+        }else{
+            posiciones[i].setAttribute('class', '');
+        }
+    }
+}
 
 
     botonFondo.addEventListener("click", function (event) {
@@ -19,29 +32,9 @@ window.onload = function () {
     });
 
     botonTamanio.addEventListener("click", function (event) {
-        for (let i = 0; i < p.length; i++) {
-            if(p[i].getAttribute('class') == ""){
-                p[i].setAttribute('class', 'fuente_grande');
-            }else if(p[i].getAttribute('class')== 'fuente_grande'){
-                p[i].setAttribute('class', 'fuente_mas_grande');
-            }else{
-                p[i].setAttribute('class', '');
-            }
-            
-        }
-    });
-
-    botonTamanio.addEventListener("click", function (event) {
-        for (let i = 0; i < p.length; i++) {
-            if(li[i].getAttribute('class') == ""){
-                li[i].setAttribute('class', 'fuente_grande');
-            }else if(p[i].getAttribute('class')== 'fuente_grande'){
-                li[i].setAttribute('class', 'fuente_mas_grande');
-            }else{
-                li[i].setAttribute('class', '');
-            }
-            
-        }
+        recorrerPosicion(p);
+        recorrerPosicion(li);
+        recorrerPosicion(titulos);
     });
 
     }

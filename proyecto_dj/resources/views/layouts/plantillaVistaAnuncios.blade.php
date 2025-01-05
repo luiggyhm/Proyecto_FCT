@@ -3,7 +3,7 @@
 
 @include('layouts._partials.head')
 
-<body id="body" class="fondo_negro">
+<body id="body" class="bg-dark text-white">
     <!-- Nav Barra principal-->
     @include('layouts._partials.menu')
 
@@ -15,7 +15,7 @@
         @yield('nombreGenero')
 
     </header>
-    <main>
+    <main id="main" class="parrafo-blanco">
         @yield('mostrarAnuncios')
 
         @include('layouts._partials.accesosRapidos')

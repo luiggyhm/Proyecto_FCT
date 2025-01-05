@@ -616,3 +616,31 @@ span {
     background-color: var(--morado);
     color: var(--blanco);
 }
+
+
+
+/**********Boostrap ***********/
+
+body.bg-dark {
+    background: linear-gradient(to bottom, var(--negro), var(--grisIntenso), var(--grisOscuro), var(--grisIntermedio));
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Architects Daughter', cursive;
+}
+
+.list-group-item {
+    background-color: transparent; /* Fondo transparente */
+    color: #fff; /* Texto blanco si tienes un fondo oscuro */
+}
+
+footer h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+footer ul li img {
+    max-width: 100px;
+    margin: 5px 0;
+}
+
+
+

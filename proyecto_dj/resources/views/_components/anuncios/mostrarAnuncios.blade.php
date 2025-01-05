@@ -19,7 +19,6 @@
                             <label class="form-label d-flex justify-content-center">Descripción: {{ $anuncio->descripcion }}</label>
                             <label class="form-label d-flex justify-content-center">Precio: {{ $anuncio->precio }} €</label>
                             <label class="form-label d-flex justify-content-center">Género Principal: {{ $anuncio->genero->nombre }}</label>
-                            <label class="form-label d-flex justify-content-center">Otros Géneros: {{ $anuncio->otros_generos }}</label>
                         </div>
                         <a href="{{ route('anuncios.show', $anuncio->id) }}">Ver detalle del anuncio</a>
                     </div>
