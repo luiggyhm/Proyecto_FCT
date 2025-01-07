@@ -5,7 +5,7 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
-    'asset_url' => env('ASSET_URL', 'https://equipped-coyote-moving.ngrok-free.app'),
+    //'asset_url' => env('ASSET_URL', 'https://equipped-coyote-moving.ngrok-free.app'),
 
 
 
@@ -87,7 +87,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------

@@ -141,7 +141,7 @@ html {
     /* Cambia el color del texto a negro cuando se hace clic en el botón */
 }
 
-/*Cambio de fondo*/
+/**********Cambio de fondo**********/
 
 .fondo_blanco {
     background-color: var(--blanco);
@@ -239,6 +239,41 @@ span {
 }
 
 .boton-neon:hover::before {
+    transform: scaleX(1);
+}
+
+.boton-cambio-colores {
+    background-color: transparent;
+    color: var(--negro);
+    /* Color del texto */
+    font-size: 2rem;
+    border: 2px solid var(--morado);
+    /* Borde del botón */
+    border-radius: 1rem;
+    /* Borde redondeado */
+    padding: 1rem 2rem;
+    /* Espaciado del botón */
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.boton-cambio-colores::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--morado);
+    /* Color del borde neon */
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.3s ease-in-out;
+    z-index: -1;
+}
+
+.boton-cambio-colores:hover::before {
     transform: scaleX(1);
 }
 
@@ -412,7 +447,7 @@ span {
 }
 
 .slider-img:nth-child(3) {
-    animation-delay: 6s;
+    animation-delay: 5s;
     /* Retrasa la tercera imagen 6 segundos */
 }
 
@@ -642,5 +677,8 @@ footer ul li img {
     margin: 5px 0;
 }
 
+.bg-gris-oscuro {
+    background-color: #8862d4
+}
 
 

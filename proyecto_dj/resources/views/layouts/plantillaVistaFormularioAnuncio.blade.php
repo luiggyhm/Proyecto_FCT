@@ -3,7 +3,7 @@
 
 @include('layouts._partials.head')
 
-<body id="body" class="fondo_negro">
+<body id="body" class="bg-dark text-white">
 
     @include('layouts._partials.menu')
 
@@ -16,7 +16,7 @@
         @yield('formularioCrearAnuncio')
         @else
         <section class="section_titulo">
-            <h1><strong>Inicia sesion o registrate para crear Anuncios</h1></strong>
+            <h1><strong>Inicia sesion o registrate para continuar</h1></strong>
             <p><a href="{{ route('login') }}" class="boton-neon">
                     <i class="bi bi-person"></i>Login
                 </a>

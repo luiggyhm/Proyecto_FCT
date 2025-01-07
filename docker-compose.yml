@@ -54,11 +54,12 @@ services:
       - FTP_USER_HOME_FIELD=directorio_raiz
       - FTP_USER_STATUS_FIELD=estado
       - FTP_USER_TYPE_FIELD=tipo_user
-      - PUBLICHOST=127.0.0.1  # Reemplaza con la IP pública o dominio del servidor
+      #- PUBLICHOST=127.0.0.1  # Reemplaza con la IP pública o dominio del servidor
       - PASSIVE_PORTS=30000:30009
     volumes:
       - './ftp/ftp_data:/home/musica'
       - './pureftpd/mysql.conf:/etc/pure-ftpd/db/mysql.conf:ro'
+      - './pureftpd/pure-ftpd.conf:/etc/pure-ftpd/pure-ftpd.conf:ro'
     depends_on:
       - mariadb
     restart: always

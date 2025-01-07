@@ -80,12 +80,13 @@ class FtpUserController extends Controller
     {
         // Consulta con join entre ftp_users y suscripcions
         $inconsistentes = DB::table('ftp_users')
-            ->join('suscripcions', 'ftp_users.alias', '=', 'suscripcions.email')
-            ->where('ftp_users.estado', '!=', 'suscripcions.estado')
-            ->select('ftp_users.alias', 'ftp_users.estado as estado_ftp', 'suscripcions.email', 'suscripcions.estado as estado_suscripcion')
-            ->get();
+        ->join('suscripcions', 'ftp_users.alias', '=', 'suscripcions.email')
+        ->whereColumn('ftp_users.estado', '!=', 'suscripcions.estado')
+        ->select('ftp_users.alias', 'ftp_users.estado as estado_ftp', 'suscripcions.email', 'suscripcions.estado as estado_suscripcion')
+        ->get();
+    
 
-        $titulo_view = "Usuarios con inconsistencias";
+        $titulo_view = "Usuarios con pago realizado";
 
         return view('ftpUser.inconsistentes', compact('inconsistentes', 'titulo_view', 'request'));
     }
@@ -174,7 +175,7 @@ class FtpUserController extends Controller
         }
 
         $usuario->delete();
-        return redirect()->intended('/')->with('status', 'Usuario eliminado');
+        return redirect()->route('ftpUser.elecccion')->with('status', 'Usuario FTP eliminado');
     }
 
     

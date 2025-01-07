@@ -5,22 +5,35 @@
             <nav class="navbar navbar-expand-lg bg-white">
                 <div class="collapse navbar-collapse justify-content-center">
                     <ul class="navbar-nav">
-                        <li class="nav-item mb-2">
-                            <a class="nav-link text-dark" href="{{route('ftpUser.inconsistentes') }}">Usuarios para crear en FTP</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{ route('ftpUser.inconsistentes') }}">
+                                Usuarios para crear en FTP
+                            </a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
 
-        <!-- Espacio central vacío -->
-        <div class="col-md-4 d-flex justify-content-center"></div>
+        <!-- Botón "Volver" -->
+        <div class="col-md-4 d-flex justify-content-center">
+            <nav class="navbar bg-white">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ route('ftpUser.elecccion') }}" class="nav-link text-dark">
+                            Volver a opciones
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-        <!-- Segundo bloque: Navbar lateral derecho -->
+        <!-- Botones de estado -->
         <div class="col-md-4 d-flex justify-content-center">
             <nav class="navbar navbar-expand-lg bg-white">
-                <!-- Incluye tus botones aquí -->
-                @include('_components.ftpUser.botonesEstados')
+                <ul class="navbar-nav d-flex flex-row">
+                    @include('_components.ftpUser.botonesEstados')
+                </ul>
             </nav>
         </div>
     </div>

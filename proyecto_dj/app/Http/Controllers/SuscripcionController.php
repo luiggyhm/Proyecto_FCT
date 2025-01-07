@@ -41,7 +41,7 @@ class SuscripcionController extends Controller
                         'product_data' => [
                             'name' => $request->nombre,
                         ],
-                        'unit_amount' => $request->precio * 100, // Stripe maneja los importes en centimos
+                        'unit_amount' => round($request->precio * 100), // Stripe maneja los importes en centimos
                     ],
                     'quantity' => 1,
                 ]],
@@ -97,7 +97,7 @@ class SuscripcionController extends Controller
                     'descripcion_transacccion' => $session->display_items[0]->custom->name ?? 'Descripción no disponible',
                 ]);
 
-                //Log::debug('Debug: Suscripción creada en la base de datos');
+                Log::debug('Debug: Suscripción creada en la base de datos');
                 $status = 'Gracias! El pago a través de Stripe se ha realizado correctamente.';
                 return redirect('/')->with(compact('status'));
             } else {

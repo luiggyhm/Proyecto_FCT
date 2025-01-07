@@ -39,7 +39,7 @@ $rutaAction = route('ftpUser.actualizar', $ftpUser);
                 <br>
                 <select class="inputs" name="directorio_raiz" required>
                     @foreach ($directorios as $directorio )
-                    <option id="{{$directorio}}" @checked($ftpUser->directorio_raiz == $directorio) value="{{$directorio}}">{{$directorio}}</option>
+                    <option value="{{ $directorio }}" {{ $ftpUser->directorio_raiz == $directorio ? 'selected' : '' }}>{{ $directorio }}</option>
                     @endforeach
                 </select>
             </label>
@@ -52,7 +52,7 @@ $rutaAction = route('ftpUser.actualizar', $ftpUser);
                 <br>
                 <select class="inputs" name="tipo_user" required>
                     @foreach ($tipo_users as $user )
-                    <option @checked($ftpUser->tipo_user == $user) id="{{$user}}" value="{{$user}}">{{$user}}</option>
+                    <option value="{{ $user }}" {{ $ftpUser->tipo_user == $user ? 'selected' : '' }}>{{ $user }}</option>
                     @endforeach
                 </select>
             </label>
@@ -61,7 +61,7 @@ $rutaAction = route('ftpUser.actualizar', $ftpUser);
                 <br>
                 <select class="inputs" name="estado" required>
                     @foreach ($estados as $estado )
-                    <option id="{{$estado}}" @checked($ftpUser->estado == $estado) value="{{$estado}}">{{$estado}}</option>
+                    <option value="{{ $estado }}" {{ $ftpUser->estado == $estado ? 'selected' : '' }}>{{ $estado }}</option>
                     @endforeach
                 </select>
             </label>

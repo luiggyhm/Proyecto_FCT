@@ -12,7 +12,7 @@
 <section class="container py-5">
     <h2>{{$ventajas}}</h2>
 
-    <ul class="list-unstyled">
+    <ul class="list">
         <li class="mb-3">
             <strong>- Poner un Anuncio en tu zona:</strong> Puedes
             registrarte como DJ o como Negocio de Ocio, lo que te

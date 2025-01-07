@@ -68,13 +68,7 @@
         </div>
 
         <!-- Imagen con pie de foto -->
-        <div class="col-md-4 d-flex justify-content-center">
-            <figure>
-                <img id="img_ventura" src="{{ asset('img/Ventura.JPG') }}" class="img-fluid rounded shadow" alt="Dj trabajando">
-                <figcaption class="text-center mt-2">Dj trabajando en discoteca</figcaption>
-            </figure>
-        </div>
-    </div>
+        @include('layouts._partials.bateriaImg')
 </section>
 
 

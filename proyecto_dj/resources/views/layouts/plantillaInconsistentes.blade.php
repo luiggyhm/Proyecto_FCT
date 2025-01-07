@@ -3,10 +3,11 @@
 
 @include('layouts._partials.head')
 
-<body id="body" class="fondo_negro">
+<body id="body" class="bg-dark text-white"></body>
     <!-- Nav Barra principal-->
     @include('layouts._partials.menu')
 
+    <main></main>
     @yield('botonesGenero')
 
 

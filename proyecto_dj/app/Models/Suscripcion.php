@@ -18,6 +18,7 @@ class Suscripcion extends Model
         'cantidad_cobro',
         'tipo_moneda',
         'descripcion_transacccion',
+        'estado'
     ];
 
     //relación 1:n una suscripción puede ser comprada por varios usuarios

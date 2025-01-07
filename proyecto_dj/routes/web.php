@@ -60,7 +60,7 @@ Route::controller(AnuncioController::class)->group(function () {
     Route::put('/anuncio/{anuncio}', 'update')->name('anuncios.actualizar');
 
     //Eliminar anuncio
-    Route::delete('/anuncio/{anuncio}', 'destroy')->name('anuncio.eliminar');
+    Route::delete('/anuncio/{id}', 'destroy')->name('anuncio.eliminar');
 });
 
 //Usuarios
@@ -73,6 +73,9 @@ Route::controller(UserController::class)->group(function () {
     //modificar usuario
     Route::get('/usuario/{usuario}/editar', 'edit')->name('usuario.edit');
     Route::put('/registro/{usuario}', 'update')->name('usuario.actualizar');
+
+    //eliminar usuario
+    Route::delete('/usuario/{usuario}', 'destroy')->name('usuario.eliminar');
 });
 
 
@@ -99,8 +102,8 @@ Route::controller(FtpUserController::class)->middleware(['auth', 'role:administr
     Route::post('/registroFtp', 'store')->name('ftpUser.store');
 
     //modificar Usuario FTP
-    Route::get('/ftpUsers/ {ftpUser}/editar', 'edit')->name('ftpUser.edit');
-    Route::put('/ftpUsers/{ftpUser}', 'update');
+    Route::get('/ftpUsers/ {ftpUser}/editar', 'edit')->name('ftpUser.editar');
+    Route::put('/ftpUsers/{ftpUser}', 'update')->name('ftpUser.actualizar');
 
     //Eliminar Usuario FTP
     Route::delete('/ftpUsers/eliminado', 'destroy')->name('ftpUser.eliminar');

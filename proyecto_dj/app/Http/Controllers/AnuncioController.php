@@ -68,7 +68,7 @@ class AnuncioController extends Controller
         $generos = Genero::all();
         $anuncios = Anuncio::where('genero_id', $genero->id)->get();
         $nombre_genero = $genero->nombre;
-        $tituloPag = 'Anuncios de Djs';
+        $tituloPag = 'Anuncios de Negocios';
 
         return view('anuncios.soloNegocios', compact('anunciosNegocios', 'request', 'generos', 'nombre_genero', 'tituloPag', 'anuncios'));
     }

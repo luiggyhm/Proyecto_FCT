@@ -15,8 +15,6 @@
             <br>
             <label id="">Género Principal: {{ $genero }}</label>
             <br>
-            <label id="">Descripción: {{ $descripcion }}</label>
-            <br>
             <label id="">Ciudad: {{ $ciudad }}</label>
             <br>
             <label id="">Localidad: {{ $localidad }}</label>
@@ -53,7 +51,7 @@
             <br>
 
             @auth
-            @if (Auth::user()->id == $creadorAnuncio->id)
+            @if (Auth::user()->id == $creadorAnuncio->id || Auth::user()->hasRole('administrador'))
 
             <a class="btn btn-success" href="{{route('anuncios.edit', $id)}}">Modificar</a>
 
@@ -61,8 +59,9 @@
             <br>
 
             <form action="{{route('anuncio.eliminar', $id)}}" method="post">
-                @csrf @method('delete')
-                <a class="btn btn-danger" href="{{route('anuncios.edit', $id)}}">Eliminar</a>
+                @csrf
+                @method('delete')
+                <button class="btn btn-danger" href="{{route('anuncio.eliminar', $id)}}">Eliminar</button>
             </form>
             @endif
             @endauth

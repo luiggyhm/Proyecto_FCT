@@ -37,49 +37,50 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-        $usuario = new User();
-        $usuario->nombre = $request->nombre;
-        $usuario->apellidos = $request->apellidos;
-        $usuario->email = $request->email;
-        $usuario->password =  Hash::make($request->password);
-        $usuario->tipo_acceso = $request->tipo_acceso;
+            $usuario = new User();
+            $usuario->nombre = $request->nombre;
+            $usuario->apellidos = $request->apellidos;
+            $usuario->email = $request->email;
+            $usuario->password =  Hash::make($request->password);
+            $usuario->tipo_acceso = $request->tipo_acceso;
 
-        $usuario->save();
+            $usuario->save();
 
-        // Asignar el rol "cliente"
-        if($usuario->tipo_acceso == "dj"){
-            $usuario->assignRole('dj');
-        }else{
-            $usuario->assignRole('negocio');
-        }
+            // Asignar el rol "cliente"
+            if ($usuario->tipo_acceso == "dj") {
+                $usuario->assignRole('dj');
+            } else {
+                $usuario->assignRole('negocio');
+            }
 
-       // Contar los usuarios en FtpUser
-       $numeroUsuarios = FtpUser::count();
+            // Contar los usuarios en FtpUser
+            $numeroUsuarios = FtpUser::count();
 
-        FtpUser::create([
-            'id'=> 1000 + $numeroUsuarios,
-            'user_id' => $usuario->id,
-            'alias' => $usuario->email,
-            'password' =>  $request->password,
-            'directorio_raiz' => '/home/musica/mensual',
-            'tipo_user' => 'cliente',
-            'estado' => 'inactivo'
-        ]);
-
-
-         // Lanzar el evento de registro
-         event(new Registered($usuario));
-
-         // Autenticar al usuario automáticamente
-         Auth::login($usuario);
+            FtpUser::create([
+                'id' => 1000 + $numeroUsuarios,
+                'user_id' => $usuario->id,
+                'alias' => $usuario->email,
+                'password' =>  $request->password,
+                'directorio_raiz' => '/home/musica',
+                'tipo_user' => 'cliente',
+                'estado' => 'inactivo'
+            ]);
 
 
+            // Lanzar el evento de registro
+            event(new Registered($usuario));
 
-         return redirect()->back()->with('status', 'Usuario creado con éxito.');
+            // Autenticar al usuario automáticamente
+            Auth::login($usuario);
+
+
+
+            $status = 'Usuario creado exitosamente.';
+            return redirect('/')->with(compact('status'));
         } catch (QueryException $e) {
             if ($e->getCode() == '23000') {
                 $status = 'Lo sentimos! Este correo ya está registrado.';
-            return redirect('/')->with(compact('status'));
+                return redirect('/')->with(compact('status'));
             }
             throw $e;
         }
@@ -98,12 +99,12 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      */
 
-     public function edit(User $usuario)
-     {
+    public function edit(User $usuario)
+    {
         $tipos_accesos = ['dj', 'Negocio de Ocio'];
-         return view('usuarios.edit', compact('usuario', 'tipos_accesos'));
-     }
- 
+        return view('usuarios.edit', compact('usuario', 'tipos_accesos'));
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -120,14 +121,15 @@ class UserController extends Controller
 
         $usuario->save();
 
-       return redirect()->intended('/')->with('status', 'Usuario modificado');
+        return redirect()->intended('/')->with('status', 'Usuario modificado');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $usuario)
     {
-        //
+        $usuario->delete();
+        return redirect()->intended('/')->with('status', 'Usuario eliminado');
     }
 }

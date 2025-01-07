@@ -1,12 +1,13 @@
 @php
 $modoCreacion = true;
 if(isset($usuario->nombre)) {
-    $modoCreacion = false;
+$modoCreacion = false;
 }
 
 $rutaAction = route('usuario.store');
+
 if(!$modoCreacion){
-    $rutaAction = route('usuario.actualizar', $usuario);
+$rutaAction = route('usuario.actualizar', $usuario);
 }
 @endphp
 
@@ -15,7 +16,7 @@ if(!$modoCreacion){
     @csrf
 
     @if(!$modoCreacion)
-        @method('put')
+    @method('put')
     @endif
 
     <div class="row">
@@ -48,8 +49,8 @@ if(!$modoCreacion){
             <label for="tipo_acceso">Tipo de Usuario:</label>
             <select class="form-control" name="tipo_acceso" id="tipo_acceso" required>
                 @foreach ($tipos_accesos as $tipo_acceso)
-                    <option value="{{ $tipo_acceso }}" @selected($usuario->tipo_acceso == $tipo_acceso)>{{ $tipo_acceso }}</option>
-                @endforeach    
+                <option value="{{ $tipo_acceso }}" @selected($usuario->tipo_acceso == $tipo_acceso)>{{ $tipo_acceso }}</option>
+                @endforeach
             </select>
         </div>
 
@@ -57,6 +58,21 @@ if(!$modoCreacion){
         <div class="col-12">
             <input class="btn btn-primary w-100" type="submit" value="{{ $nombreBoton }}">
         </div>
+        <br>
     </div>
-
 </form>
+
+
+@auth
+@if (Auth::user()->id == $usuario ->id || Auth::user()->hasRole('administrador'))
+<form action="{{route('usuario.eliminar', $usuario)}}" method="post" class ="container py-5">
+    @csrf
+    @method('delete')
+    <section class="row">
+    <article class="col-12">
+        <button class="btn btn-danger w-100" href="{{route('usuario.eliminar', $usuario)}}">Dar Usuario de Baja</button>
+    </article>
+    </section>
+</form>
+@endif
+@endauth
