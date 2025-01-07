@@ -2,14 +2,14 @@
 Proyecto de FCT de DAW - Aplicación Web Dj
 
 ## Descripción
-Esta aplicación web está diseñada para facilitar a los DJs la descarga de contenido musical a través de un sistema de FTP, implementando un modelo de suscripción mensual o anual mediante la pasarela de pago PayPal.
+Esta aplicación web está diseñada para facilitar a los DJs la descarga de contenido musical a través de un sistema de FTP, implementando un modelo de suscripción mensual o anual mediante la pasarela de pago Stripe.
 
 La plataforma tambien ofrece a los DJs un espacio personalizado para promocionar sus servicios, así como a bares y discotecas para anunciar sus eventos y ofertas.
 
 ## Características
 - Descarga de Contenido: Acceso a una amplia biblioteca de música y contenido relacionado, disponible para los suscriptores mediante FTP.
 
-- Suscripción Mensual: Gestión de pagos recurrentes a través de PayPal, asegurando una experiencia de usuario fluida y segura.
+- Suscripción Mensual: Gestión de pagos a través de Stripe, asegurando una experiencia de usuario fluida y segura.
 
 - Perfiles Personalizados: Creación de espacios personalizados para DJs, donde pueden mostrar su información, estilo musical y servicios ofrecidos.
 
@@ -21,10 +21,9 @@ La plataforma tambien ofrece a los DJs un espacio personalizado para promocionar
 - Lenguaje de programación PHP
 - Framework boostrap para el front-end
 - Framework Laravel
-- Servidor FTP
+- Servidor Pure-FTP
 - MariaDB como BBDD
-- Pasarela de pago
-- Autenticación por LDAP
+- Pasarela de pago con Stripe
 - Docker como herramienta para ejecutar todo en contenedores
 - Git con Git Flow como control de versiones
 
