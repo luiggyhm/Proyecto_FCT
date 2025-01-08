@@ -29,7 +29,7 @@ La plataforma tambien ofrece a los DJs un espacio personalizado para promocionar
 
 ### Instalación
 Clona este repositorio.
-Configura las variables de entorno para la conexión FTP y PayPal.
+Configura las variables de entorno para la conexión FTP y Stripe.
 Ejecuta la aplicación visual studio code y docker.
 
 ### Contribuciones
