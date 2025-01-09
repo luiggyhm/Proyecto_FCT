@@ -73,7 +73,7 @@ class AnuncioSeeder extends Seeder
         ]);
 
         Anuncio::create([
-            'titulo' => 'apeadero',
+            'titulo' => 'Apeadero',
             'precio'=> '100',
             'descripcion' => 'Discoteca pequeña en Madrid',
             'telefono' => '633633633',
@@ -87,7 +87,7 @@ class AnuncioSeeder extends Seeder
         ]);
 
         Anuncio::create([
-            'titulo' => 'chelsea',
+            'titulo' => 'Chelsea',
             'precio'=> '100',
             'descripcion' => 'Discoteca pequeña en Madrid',
             'telefono' => '111111111',

@@ -42,7 +42,7 @@ services:
     image: humpedli/docker-pure-ftpd-mysql
     ports:
       - "21:21"
-      - "30000-30009:30000-30009"  # Active mode FTP ports
+      - "30000-30050:30000-30050"  # Active mode FTP ports
     environment:
       - MYSQL_USER=${MARIADB_USER}
       - MYSQL_PASSWORD=${MARIADB_PASSWORD}
@@ -54,10 +54,10 @@ services:
       - FTP_USER_HOME_FIELD=directorio_raiz
       - FTP_USER_STATUS_FIELD=estado
       - FTP_USER_TYPE_FIELD=tipo_user
-      #- PUBLICHOST=127.0.0.1  # Reemplaza con la IP pública o dominio del servidor
-      - PASSIVE_PORTS=30000:30009
+      - PUBLICHOST=127.0.0.1  # Reemplaza con la IP pública o dominio del servidor
+      - PASSIVE_PORTS=30000:30050
     volumes:
-      - './ftp/ftp_data:/home/musica'
+      - './ftp/ftp_data:/home'
       - './pureftpd/mysql.conf:/etc/pure-ftpd/db/mysql.conf:ro'
       - './pureftpd/pure-ftpd.conf:/etc/pure-ftpd/pure-ftpd.conf:ro'
     depends_on:

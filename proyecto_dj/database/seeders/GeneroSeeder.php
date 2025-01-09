@@ -44,7 +44,7 @@ class GeneroSeeder extends Seeder
 
 
         Genero::create([
-            "nombre" => "latino",
+            "nombre" => "Latino",
             "posicion" => "35",
         ]);
 

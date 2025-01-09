@@ -61,7 +61,7 @@ class UserController extends Controller
                 'user_id' => $usuario->id,
                 'alias' => $usuario->email,
                 'password' =>  $request->password,
-                'directorio_raiz' => '/home/musica',
+                'directorio_raiz' => '/home/musica/',
                 'tipo_user' => 'cliente',
                 'estado' => 'inactivo'
             ]);
