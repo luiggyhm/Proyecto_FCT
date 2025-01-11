@@ -1,2 +1,0 @@
-auth    required    pam_mysql.so user=YOUR_DB_USER passwd=YOUR_DB_PASSWORD host=YOUR_DB_HOST db=YOUR_DB_NAME table=ftp_users usercolumn=alias passwdcolumn=password crypt=2
-account required    pam_mysql.so user=YOUR_DB_USER passwd=YOUR_DB_PASSWORD host=YOUR_DB_HOST db=YOUR_DB_NAME table=ftp_users usercolumn=alias passwdcolumn=password crypt=2
